@@ -1,0 +1,1073 @@
+ <!DOCTYPE html>
+<html lang="so">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="La xiriir Caabi Academy - Somali technology learning platform.">
+  <title>Contact | Caabi Academy</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --green:#00C896;
+      --green-light:#10D5A5;
+      --navy:#001B2E;
+      --navy-2:#00243D;
+      --navy-3:#00314F;
+      --white:#fff;
+      --text:#F5FFFC;
+      --muted:#AFC2D0;
+      --border:rgba(255,255,255,.10);
+      --container:1180px;
+      --shadow:0 25px 70px rgba(0,0,0,.28);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:"Inter",sans-serif;
+      background:var(--navy);
+      color:var(--text);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit}
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+    .container{width:min(100% - 40px,var(--container));margin:auto}
+
+    /* NAVBAR */
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(0,27,46,.88);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      gap:22px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:11px;
+      flex-shrink:0;
+    }
+    .brand img{
+      width:45px;height:45px;
+      object-fit:cover;
+      border-radius:11px;
+      background:#fff;
+      border:1px solid rgba(0,200,150,.25);
+      transition:.3s;
+    }
+    .brand:hover img{
+      transform:scale(1.05);
+      border-color:var(--green);
+      box-shadow:0 0 25px rgba(0,200,150,.18);
+    }
+    .brand-text{display:flex;flex-direction:column;line-height:1}
+    .brand-text strong{font-size:18px;font-weight:800;letter-spacing:1px}
+    .brand-text span{
+      color:var(--green);
+      font-size:8px;
+      font-weight:800;
+      letter-spacing:3px;
+      margin-top:4px;
+    }
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:4px;
+      margin-left:auto;
+    }
+    .nav-links a{
+      position:relative;
+      min-height:42px;
+      padding:0 11px;
+      display:flex;
+      align-items:center;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:600;
+      border-radius:9px;
+      transition:.25s;
+    }
+    .nav-links a:hover{
+      color:var(--white);
+      background:rgba(0,200,150,.07);
+    }
+    .nav-links a.active{
+      color:var(--green);
+      background:rgba(0,200,150,.09);
+    }
+    .nav-links a.active::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      bottom:3px;
+      width:18px;height:2px;
+      transform:translateX(-50%);
+      background:var(--green);
+      border-radius:20px;
+    }
+    .nav-actions{display:flex;align-items:center;gap:9px;margin-left:4px}
+    .btn{
+      min-height:42px;
+      padding:0 17px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      border-radius:10px;
+      font-size:13px;
+      font-weight:700;
+      transition:.25s;
+      border:1px solid transparent;
+    }
+    .btn-ghost{
+      color:var(--white);
+      background:transparent;
+      border-color:rgba(255,255,255,.12);
+    }
+    .btn-ghost:hover{
+      color:var(--green);
+      border-color:rgba(0,200,150,.4);
+      background:rgba(0,200,150,.07);
+    }
+    .btn-primary{
+      color:var(--navy);
+      background:var(--green);
+      border-color:var(--green);
+      box-shadow:0 10px 25px rgba(0,200,150,.15);
+    }
+    .btn-primary:hover{
+      background:var(--green-light);
+      border-color:var(--green-light);
+      transform:translateY(-2px);
+      box-shadow:0 15px 35px rgba(0,200,150,.25);
+    }
+    .menu{
+      display:none;
+      width:43px;height:43px;
+      margin-left:auto;
+      align-items:center;
+      justify-content:center;
+      color:var(--white);
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:10px;
+      font-size:21px;
+    }
+
+    /* HERO */
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:105px 0 85px;
+      background:
+        radial-gradient(circle at 80% 15%,rgba(0,200,150,.16),transparent 30%),
+        radial-gradient(circle at 5% 90%,rgba(0,200,150,.08),transparent 28%),
+        var(--navy);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      align-items:center;
+      gap:70px;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      color:var(--green);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:18px;
+    }
+    .eyebrow::before{
+      content:"";
+      width:28px;height:2px;
+      background:var(--green);
+      border-radius:10px;
+    }
+    .hero h1{
+      max-width:700px;
+      font-size:clamp(44px,6vw,70px);
+      line-height:1.04;
+      letter-spacing:-3px;
+      margin-bottom:22px;
+    }
+    .hero h1 span{color:var(--green)}
+    .hero-lead{
+      max-width:650px;
+      color:var(--muted);
+      font-size:17px;
+      line-height:1.85;
+      margin-bottom:30px;
+    }
+    .hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
+    .hero-btn{min-height:50px;padding:0 21px}
+    .trust-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:28px;
+    }
+    .trust{
+      padding:9px 12px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.025);
+      border-radius:9px;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:600;
+    }
+    .trust strong{color:var(--green);margin-right:5px}
+
+    /* HERO VISUAL */
+    .hero-card{
+      position:relative;
+      min-height:390px;
+      padding:34px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      border-radius:28px;
+      border:1px solid rgba(0,200,150,.2);
+      background:
+        linear-gradient(145deg,rgba(0,200,150,.10),rgba(255,255,255,.025));
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .hero-card::before,
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      border:1px solid rgba(0,200,150,.16);
+      border-radius:50%;
+      pointer-events:none;
+    }
+    .hero-card::before{width:260px;height:260px;right:-105px;top:-105px}
+    .hero-card::after{width:150px;height:150px;left:-70px;bottom:-70px}
+    .mail-icon{
+      position:relative;
+      z-index:1;
+      width:66px;height:66px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--green);
+      background:rgba(0,200,150,.10);
+      border:1px solid rgba(0,200,150,.14);
+      border-radius:17px;
+      margin-bottom:23px;
+    }
+    .mail-icon svg{width:31px;height:31px}
+    .hero-card h2{position:relative;z-index:1;font-size:27px;margin-bottom:11px}
+    .hero-card p{
+      position:relative;
+      z-index:1;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.8;
+      margin-bottom:25px;
+    }
+    .status{
+      position:relative;
+      z-index:1;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding-top:18px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:12px;
+    }
+    .status-dot{
+      width:9px;height:9px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 0 5px rgba(0,200,150,.10);
+    }
+
+    /* CONTACT SECTION */
+    .contact-section{
+      padding:105px 0;
+      background:#001E33;
+    }
+    .section-heading{
+      max-width:720px;
+      margin:0 auto 52px;
+      text-align:center;
+    }
+    .section-label{
+      color:var(--green);
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+      margin-bottom:13px;
+    }
+    .section-heading h2{
+      font-size:clamp(32px,4vw,50px);
+      line-height:1.1;
+      letter-spacing:-2px;
+      margin-bottom:15px;
+    }
+    .section-heading h2 span{color:var(--green)}
+    .section-heading p{color:var(--muted);font-size:14px;line-height:1.8}
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns:.82fr 1.18fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    .info-stack{display:grid;gap:14px}
+    .info-card{
+      display:flex;
+      align-items:flex-start;
+      gap:16px;
+      padding:23px;
+      border:1px solid var(--border);
+      border-radius:17px;
+      background:rgba(255,255,255,.025);
+      transition:.3s;
+    }
+    .info-card:hover{
+      transform:translateY(-3px);
+      border-color:rgba(0,200,150,.3);
+      background:rgba(0,200,150,.035);
+    }
+    .info-icon{
+      flex:0 0 48px;
+      width:48px;height:48px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--green);
+      background:rgba(0,200,150,.09);
+      border-radius:13px;
+    }
+    .info-icon svg{width:22px;height:22px}
+    .info-card h3{font-size:15px;margin-bottom:3px}
+    .info-card p,.info-card a{color:var(--muted);font-size:12px;line-height:1.7}
+    .info-card a:hover{color:var(--green)}
+    .support-note{
+      padding:23px;
+      border-radius:17px;
+      border:1px solid rgba(0,200,150,.18);
+      background:linear-gradient(145deg,rgba(0,200,150,.08),rgba(255,255,255,.02));
+    }
+    .support-note strong{display:block;font-size:14px;margin-bottom:7px}
+    .support-note p{color:var(--muted);font-size:12px;line-height:1.8}
+
+    /* FORM */
+    .form-card{
+      padding:32px;
+      border:1px solid var(--border);
+      border-radius:22px;
+      background:rgba(0,27,46,.72);
+      box-shadow:0 25px 70px rgba(0,0,0,.2);
+    }
+    .form-head{margin-bottom:25px}
+    .form-head h3{font-size:24px;margin-bottom:7px}
+    .form-head p{color:var(--muted);font-size:13px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .form-group{margin-bottom:16px}
+    .form-group label{
+      display:block;
+      margin-bottom:7px;
+      font-size:12px;
+      font-weight:700;
+      color:#DCE9EE;
+    }
+    .form-control{
+      width:100%;
+      min-height:48px;
+      padding:0 14px;
+      color:var(--white);
+      background:#00243D;
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:10px;
+      outline:none;
+      transition:.25s;
+    }
+    textarea.form-control{
+      min-height:145px;
+      padding:13px 14px;
+      resize:vertical;
+    }
+    .form-control::placeholder{color:#708995}
+    .form-control:focus{
+      border-color:rgba(0,200,150,.6);
+      box-shadow:0 0 0 3px rgba(0,200,150,.08);
+    }
+    select.form-control{cursor:pointer}
+    .submit{
+      width:100%;
+      min-height:52px;
+      margin-top:2px;
+    }
+    .form-status{
+      display:none;
+      margin-top:13px;
+      padding:12px 14px;
+      border:1px solid rgba(0,200,150,.25);
+      border-radius:10px;
+      color:#BDEFE4;
+      background:rgba(0,200,150,.07);
+      font-size:12px;
+    }
+    .form-status.show{display:block}
+
+    /* FAQ */
+    .faq-section{padding:105px 0;background:var(--navy)}
+    .faq-grid{max-width:850px;margin:auto;display:grid;gap:11px}
+    .faq-item{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:rgba(255,255,255,.025);
+      overflow:hidden;
+      transition:.25s;
+    }
+    .faq-item[open]{border-color:rgba(0,200,150,.28)}
+    .faq-item summary{
+      list-style:none;
+      cursor:pointer;
+      padding:20px 22px;
+      font-size:14px;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{
+      content:"+";
+      color:var(--green);
+      font-size:21px;
+      font-weight:400;
+      line-height:1;
+    }
+    .faq-item[open] summary::after{content:"−"}
+    .faq-answer{
+      padding:0 22px 20px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.8;
+    }
+
+    /* CTA */
+    .cta{padding:0 0 95px;background:var(--navy)}
+    .cta-box{
+      padding:68px 30px;
+      text-align:center;
+      border-radius:27px;
+      border:1px solid rgba(0,200,150,.2);
+      background:
+        radial-gradient(circle at center,rgba(0,200,150,.12),transparent 55%),
+        rgba(255,255,255,.025);
+    }
+    .cta-box h2{
+      font-size:clamp(32px,4.5vw,51px);
+      line-height:1.1;
+      letter-spacing:-2px;
+      margin-bottom:14px;
+    }
+    .cta-box h2 span{color:var(--green)}
+    .cta-box p{
+      max-width:620px;
+      margin:0 auto 25px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.8;
+    }
+
+    /* FOOTER */
+    footer{
+      padding:68px 0 24px;
+      background:#001522;
+      border-top:1px solid var(--border);
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.6fr 1fr 1fr 1fr;
+      gap:42px;
+      padding-bottom:45px;
+    }
+    .footer-brand{max-width:340px}
+    .footer-logo{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:18px;
+    }
+    .footer-logo-mark{
+      width:43px;height:43px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--navy);
+      background:var(--green);
+      border-radius:11px;
+      font-size:21px;
+      font-weight:900;
+    }
+    .footer-logo strong{display:block;font-size:18px}
+    .footer-logo span{
+      display:block;
+      color:var(--green);
+      font-size:8px;
+      font-weight:800;
+      letter-spacing:3px;
+    }
+    .footer-brand p{color:var(--muted);font-size:12px;line-height:1.8;margin-bottom:18px}
+    .socials{display:flex;gap:8px}
+    .social{
+      width:37px;height:37px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--muted);
+      border:1px solid var(--border);
+      border-radius:9px;
+      font-size:10px;
+      font-weight:700;
+      transition:.25s;
+    }
+    .social:hover{color:var(--green);border-color:rgba(0,200,150,.4);transform:translateY(-3px)}
+    .footer-column h4{font-size:13px;margin-bottom:17px}
+    .footer-column a{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      margin-bottom:10px;
+      transition:.2s;
+    }
+    .footer-column a:hover{color:var(--green);transform:translateX(3px)}
+    .footer-bottom{
+      display:flex;
+      justify-content:space-between;
+      gap:15px;
+      padding-top:22px;
+      border-top:1px solid var(--border);
+      color:#7890A0;
+      font-size:11px;
+    }
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(22px);transition:.7s ease}
+    .reveal.show{opacity:1;transform:translateY(0)}
+
+    /* RESPONSIVE */
+    @media(max-width:1050px){
+      .nav-links a{padding:0 7px;font-size:12px}
+      .hero-grid{grid-template-columns:1fr;gap:40px}
+      .hero-card{max-width:680px}
+      .contact-grid{grid-template-columns:1fr}
+      .info-stack{grid-template-columns:1fr 1fr}
+      .support-note{grid-column:1/-1}
+      .footer-grid{grid-template-columns:1.5fr 1fr 1fr}
+    }
+
+    @media(max-width:850px){
+      .container{width:min(100% - 28px,var(--container))}
+      .nav-inner{min-height:70px}
+      .nav-links{
+        position:absolute;
+        top:calc(100% + 8px);
+        left:14px;right:14px;
+        flex-direction:column;
+        align-items:stretch;
+        gap:5px;
+        padding:12px;
+        background:rgba(0,27,46,.98);
+        border:1px solid rgba(255,255,255,.1);
+        border-radius:17px;
+        box-shadow:0 20px 50px rgba(0,0,0,.35);
+        opacity:0;
+        visibility:hidden;
+        transform:translateY(-10px);
+        transition:.25s;
+      }
+      .nav-links.open{opacity:1;visibility:visible;transform:translateY(0)}
+      .nav-links a{width:100%;min-height:46px;padding:0 15px;font-size:14px}
+      .nav-links a.active::after{display:none}
+      .menu{display:flex}
+      .nav-actions{margin-left:auto}
+      .hero{padding:78px 0 65px}
+      .hero h1{font-size:47px}
+      .info-stack{grid-template-columns:1fr}
+      .support-note{grid-column:auto}
+      .footer-grid{grid-template-columns:1fr 1fr}
+      .footer-brand{grid-column:1/-1}
+    }
+
+    @media(max-width:560px){
+      .brand img{width:40px;height:40px}
+      .brand-text strong{font-size:16px}
+      .brand-text span{font-size:7px;letter-spacing:2px}
+      .nav-actions{display:none}
+      .hero h1{font-size:39px;letter-spacing:-2px}
+      .hero-lead{font-size:15px}
+      .hero-buttons{flex-direction:column}
+      .hero-btn{width:100%}
+      .hero-card{padding:26px;min-height:340px}
+      .form-row{grid-template-columns:1fr}
+      .form-card{padding:23px}
+      .contact-section,.faq-section{padding:78px 0}
+      .cta{padding-bottom:75px}
+      .cta-box{padding:52px 20px}
+      .footer-grid{grid-template-columns:1fr}
+      .footer-brand{grid-column:auto}
+      .footer-bottom{flex-direction:column;text-align:center}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{transition:none!important;animation:none!important}
+      .reveal{opacity:1;transform:none}
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header class="nav">
+    <div class="container nav-inner">
+
+      <a class="brand" href="INDEX.HTML" aria-label="Caabi Academy Home">
+        <img src="./Images/LOGO.jpeg" alt="Caabi Academy Logo">
+        <div class="brand-text">
+          <strong>CAABI</strong>
+          <span>ACADEMY</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="INDEX.HTML">Home</a>
+        <a href="Course.html">Courses</a>
+        <a href="Ambassador.html">Ambassador</a>
+        <a href="League.html">League</a>
+        <a href="Blog.html">Blog</a>
+        <a href="Community.html">Mentorship</a>
+        <a href="About.html">About</a>
+        <a href="Contact.html" class="active">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="login.html">Login</a>
+        <a class="btn btn-primary" href="signup.html">Bilow Hadda</a>
+      </div>
+
+      <button class="menu" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+
+        <div class="reveal">
+          <div class="eyebrow">Contact Caabi Academy</div>
+
+          <h1>
+            Aan ka wada hadalno
+            <span>technology.</span>
+          </h1>
+
+          <p class="hero-lead">
+            Su'aal ayaad qabtaa, course ayaad rabtaa inaad wax ka ogaato,
+            ama waxaad u baahan tahay student support? Fariintaada noo soo dir.
+            Waxaan isku dayeynaa inaan kuu fududeyno tallaabada xigta.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#contact-form" class="btn btn-primary hero-btn">
+              Dir Fariin
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a href="Course.html" class="btn btn-ghost hero-btn">Eeg Courses</a>
+          </div>
+
+          <div class="trust-row">
+            <div class="trust"><strong>01</strong> Somali Support</div>
+            <div class="trust"><strong>02</strong> Student First</div>
+            <div class="trust"><strong>03</strong> Direct Contact</div>
+          </div>
+        </div>
+
+        <div class="hero-card reveal">
+          <div class="mail-icon">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/>
+              <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <h2>Waxaan joognaa halkan.</h2>
+          <p>
+            Contact-kaaga ku saabsan courses, mentorship, account,
+            payment ama wax kasta oo la xiriira Caabi Academy halkaan ka bilow.
+          </p>
+
+          <div class="status">
+            <span class="status-dot"></span>
+            <span>Ready to hear from you</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-section" id="contact-form">
+      <div class="container">
+
+        <div class="section-heading reveal">
+          <div class="section-label">Get in touch</div>
+          <h2>Waxaad u baahan tahay? <span>Nala soo xiriir.</span></h2>
+          <p>
+            Dooro habka kuugu fudud ama si toos ah u buuxi foomka.
+            Dadku waxay jecel yihiin foomamka, sabab aan weli si fiican loo fahmin.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+
+          <div class="info-stack">
+
+            <div class="info-card reveal">
+              <div class="info-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/>
+                  <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.7"/>
+                </svg>
+              </div>
+              <div>
+                <h3>Email</h3>
+                <a href="mailto:hello@caabiacademy.com">hello@caabiacademy.com</a>
+                <p>Su'aalo iyo support guud.</p>
+              </div>
+            </div>
+
+            <div class="info-card reveal">
+              <div class="info-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3.1 5.2 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .8 2.9a2 2 0 0 1-.4 2.1L9.2 11a16 16 0 0 0 3.8 3.8l1.3-1.3a2 2 0 0 1 2.1-.4c.9.4 1.9.7 2.9.8A2 2 0 0 1 22 16.9z" stroke="currentColor" stroke-width="1.7"/>
+                </svg>
+              </div>
+              <div>
+                <h3>WhatsApp</h3>
+                <p>Support iyo su'aalo degdeg ah.</p>
+                <a href="https://wa.me/" target="_blank" rel="noopener">Chat on WhatsApp →</a>
+              </div>
+            </div>
+
+            <div class="info-card reveal">
+              <div class="info-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/>
+                  <path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div>
+                <h3>Response</h3>
+                <p>
+                  Waxaan isku dayeynaa inaan fariimaha uga jawaabno
+                  sida ugu dhakhsaha badan ee suurtagalka ah.
+                </p>
+              </div>
+            </div>
+
+            <div class="support-note reveal">
+              <strong>Student support</strong>
+              <p>
+                Haddii aad tahay arday oo aad leedahay dhibaato course,
+                account, payment ama access ah, ku dar magaca course-ka
+                iyo faahfaahinta dhibaatadaada.
+              </p>
+            </div>
+
+          </div>
+
+          <form class="form-card reveal" id="contactForm">
+            <div class="form-head">
+              <h3>Send us a message</h3>
+              <p>Buuxi xogta hoose, kadibna fariinta dir.</p>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Magacaaga</label>
+                <input class="form-control" id="name" name="name" type="text" placeholder="Magacaaga" autocomplete="name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email-ka</label>
+                <input class="form-control" id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="topic">Maxaad naga rabtaa?</label>
+              <select class="form-control" id="topic" name="topic" required>
+                <option value="">Dooro topic</option>
+                <option value="course">Course Information</option>
+                <option value="support">Student Support</option>
+                <option value="mentorship">Mentorship</option>
+                <option value="payment">Payment / Account</option>
+                <option value="partnership">Partnership</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Fariintaada</label>
+              <textarea class="form-control" id="message" name="message" placeholder="Qor fariintaada halkan..." required></textarea>
+            </div>
+
+            <button class="btn btn-primary submit" type="submit">
+              Send Message
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+
+            <div class="form-status" id="formStatus" role="status"></div>
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <div class="container">
+
+        <div class="section-heading reveal">
+          <div class="section-label">FAQ</div>
+          <h2>Su'aalo <span>badanaa la isweydiiyo.</span></h2>
+          <p>Jawaabaha su'aalaha ugu badan ee naga yimaada.</p>
+        </div>
+
+        <div class="faq-grid">
+
+          <details class="faq-item reveal">
+            <summary>Sideen ula xiriiri karaa Caabi Academy?</summary>
+            <div class="faq-answer">
+              Waxaad isticmaali kartaa contact form-ka, email-ka ama WhatsApp-ka
+              ku qoran qaybta contact information.
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Ma heli karaa caawimaad ku saabsan course?</summary>
+            <div class="faq-answer">
+              Haa. Marka aad fariin dirayso, ku dar magaca course-ka iyo
+              dhibaatada aad qabto si support-ku si fiican kuu fahmo.
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Wax ma ka weydiin karaa mentorship?</summary>
+            <div class="faq-answer">
+              Haa. Door topic-ka “Mentorship” ee foomka, kadibna sharax
+              waxa aad rabto inaad ogaato.
+            </div>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Foomkan ma leeyahay backend?</summary>
+            <div class="faq-answer">
+              Version-kan waa frontend-only. Foomku wuxuu muujinayaa confirmation,
+              laakiin fariinta si dhab ah email inbox uma dirayo ilaa backend
+              ama email service lagu xiro.
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="container">
+        <div class="cta-box reveal">
+          <div class="section-label">Keep learning</div>
+          <h2>Ready to start? <span>Explore the courses.</span></h2>
+          <p>
+            Baro technology-ga casriga ah, dhis projects dhab ah,
+            oo ku bilow safarkaaga Caabi Academy.
+          </p>
+          <a href="Course.html" class="btn btn-primary hero-btn">Explore Courses →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+
+          <a class="brand" href="INDEX.HTML">
+
+            <img
+              src="./Images/LOGO.jpeg"
+              alt="Caabi Academy Logo"
+            >
+
+            <div class="brand-text">
+              <strong>CAABI</strong>
+              <span>ACADEMY</span>
+            </div>
+
+          </a>
+
+          <p>
+            Baro xirfadaha technology-ga ee mustaqbalka.
+            Programming, AI, Web Development iyo Design
+            oo lagu baranayo Af-Soomaali.
+          </p>
+
+          <div class="socials">
+
+            <a href="#" aria-label="YouTube">YT</a>
+            <a href="#" aria-label="GitHub">GH</a>
+            <a href="#" aria-label="WhatsApp">WA</a>
+            <a href="#" aria-label="Facebook">FB</a>
+            <a href="#" aria-label="LinkedIn">IN</a>
+
+          </div>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h3>Product</h3>
+
+          <a href="Course.html">Courses</a>
+          <a href="Mentorship.html">Mentorship</a>
+          <a href="Blog.html">Blog</a>
+          <a href="Community.html">Community</a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h3>Company</h3>
+
+          <a href="About.html">About Us</a>
+          <a href="Contact.html">Contact</a>
+          <a href="Ambassador.html">Ambassador</a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h3>Legal</h3>
+
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+          <a href="#">Refund Policy</a>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span>
+          © 2026 Caabi Academy. All rights reserved.
+        </span>
+
+        <span>
+          Proudly built in Somalia
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <script>
+    // Mobile navigation
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuBtn.textContent = isOpen ? "✕" : "☰";
+      menuBtn.setAttribute("aria-expanded", isOpen);
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuBtn.textContent = "☰";
+        menuBtn.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    // Frontend contact form
+    const contactForm = document.getElementById("contactForm");
+    const formStatus = document.getElementById("formStatus");
+
+    contactForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+
+      formStatus.textContent =
+        `Mahadsanid ${name || "arday"}! Fariintaada waa la qabtay. ` +
+        `Backend/email service ayaa loo baahan yahay si fariinta dhab ahaan loogu diro inbox.`;
+
+      formStatus.classList.add("show");
+      contactForm.reset();
+    });
+
+    // Scroll reveal
+    const revealItems = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealItems.forEach(item => observer.observe(item));
+  </script>
+
+</body>
+</html>

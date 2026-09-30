@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up | Caabi Academy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green: #00C896;
+            --green-light: #00e6ad;
+            --bg: #050d11;
+            --card: #0b191f;
+            --border: rgba(255,255,255,.09);
+            --text: #ffffff;
+            --muted: #8196a1;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(0,200,150,.12), transparent 35%),
+                radial-gradient(circle at bottom right, rgba(0,200,150,.08), transparent 35%),
+                var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 18px;
+        }
+
+        .signup-container {
+            width: 100%;
+            max-width: 470px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo img {
+            width: 75px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid rgba(0,200,150,.35);
+            box-shadow: 0 0 35px rgba(0,200,150,.15);
+        }
+
+        .logo h1 {
+            margin-top: 12px;
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--green);
+        }
+
+        .signup-card {
+            background: rgba(11,25,31,.92);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 34px;
+            box-shadow:
+                0 25px 80px rgba(0,0,0,.35),
+                inset 0 1px 0 rgba(255,255,255,.03);
+            backdrop-filter: blur(20px);
+        }
+
+        .heading {
+            margin-bottom: 28px;
+        }
+
+        .heading h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #dce7eb;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            height: 52px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background: #071217;
+            color: white;
+            outline: none;
+            padding: 0 15px;
+            font-size: 14px;
+            transition: .25s ease;
+        }
+
+        .input-wrapper input:focus {
+            border-color: var(--green);
+            box-shadow: 0 0 0 4px rgba(0,200,150,.08);
+        }
+
+        .input-wrapper input::placeholder {
+            color: #526873;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            color: #718791;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .password-toggle:hover {
+            color: var(--green);
+        }
+
+        .terms {
+            display: flex;
+            gap: 9px;
+            align-items: flex-start;
+            margin: 4px 0 22px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .terms input {
+            accent-color: var(--green);
+            margin-top: 2px;
+        }
+
+        .terms a {
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        .signup-btn {
+            width: 100%;
+            height: 53px;
+            border: none;
+            border-radius: 13px;
+            background: var(--green);
+            color: #001c15;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .signup-btn:hover {
+            background: var(--green-light);
+            transform: translateY(-1px);
+            box-shadow: 0 12px 30px rgba(0,200,150,.18);
+        }
+
+        .signup-btn:disabled {
+            opacity: .7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .login-text {
+            text-align: center;
+            margin-top: 24px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .login-text a {
+            color: var(--green);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .message {
+            display: none;
+            padding: 12px 14px;
+            border-radius: 11px;
+            margin-bottom: 18px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .message.error {
+            display: block;
+            background: rgba(255,70,70,.08);
+            border: 1px solid rgba(255,70,70,.2);
+            color: #ff8d8d;
+        }
+
+        .message.success {
+            display: block;
+            background: rgba(0,200,150,.08);
+            border: 1px solid rgba(0,200,150,.2);
+            color: #6ff0c9;
+        }
+
+        .loader {
+            display: inline-block;
+            width: 17px;
+            height: 17px;
+            border: 2px solid rgba(0,0,0,.25);
+            border-top-color: #001c15;
+            border-radius: 50%;
+            animation: spin .7s linear infinite;
+            vertical-align: middle;
+            margin-right: 7px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 520px) {
+            body {
+                padding: 20px 14px;
+            }
+
+            .signup-card {
+                padding: 25px 20px;
+                border-radius: 20px;
+            }
+
+            .heading h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="signup-container">
+
+        <div class="logo">
+            <img src="./Images/LOGO.jpeg" alt="Caabi Academy Logo">
+            <h1>CAABI <span>ACADEMY</span></h1>
+        </div>
+
+        <div class="signup-card">
+
+            <div class="heading">
+                <h2>Create Account</h2>
+                <p>
+                    Samee account-kaaga Caabi Academy oo bilow
+                    safarkaaga waxbarasho.
+                </p>
+            </div>
+
+            <div id="message" class="message"></div>
+
+            <form id="signupForm">
+
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Geli magacaaga"
+                            autocomplete="name"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+
+                    <div class="input-wrapper">
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="example@email.com"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+
+                    <div class="input-wrapper">
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Samee password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="togglePassword"
+                        >
+                            Show
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+
+                    <div class="input-wrapper">
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Ku celi password-ka"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="toggleConfirmPassword"
+                        >
+                            Show
+                        </button>
+                    </div>
+                </div>
+
+                <label class="terms">
+                    <input type="checkbox" id="terms" required>
+
+                    <span>
+                        Waxaan aqbalay
+                        <a href="#">Terms & Conditions</a>
+                        iyo
+                        <a href="#">Privacy Policy</a>.
+                    </span>
+                </label>
+
+                <button
+                    type="submit"
+                    class="signup-btn"
+                    id="signupBtn"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+            <div class="login-text">
+                Hore account ma u leedahay?
+                <a href="Login.html">Login</a>
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        const signupForm = document.getElementById("signupForm");
+        const signupBtn = document.getElementById("signupBtn");
+        const message = document.getElementById("message");
+
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirmPassword");
+
+        // =========================
+        // PASSWORD SHOW / HIDE
+        // =========================
+
+        function togglePassword(input, button) {
+
+            if (input.type === "password") {
+                input.type = "text";
+                button.textContent = "Hide";
+            } else {
+                input.type = "password";
+                button.textContent = "Show";
+            }
+
+        }
+
+        document.getElementById("togglePassword").addEventListener("click", function () {
+            togglePassword(passwordInput, this);
+        });
+
+        document.getElementById("toggleConfirmPassword").addEventListener("click", function () {
+            togglePassword(confirmPasswordInput, this);
+        });
+
+
+        // =========================
+        // MESSAGE
+        // =========================
+
+        function showMessage(text, type) {
+
+            message.textContent = text;
+
+            message.className = "message " + type;
+
+        }
+
+
+        // =========================
+        // SIGN UP
+        // =========================
+
+        signupForm.addEventListener("submit", function (e) {
+
+            e.preventDefault();
+
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim().toLowerCase();
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            if (name.length < 2) {
+
+                showMessage(
+                    "Fadlan geli magacaaga oo dhamaystiran.",
+                    "error"
+                );
+
+                return;
+            }
+
+            if (password.length < 6) {
+
+                showMessage(
+                    "Password-ku waa inuu ahaadaa ugu yaraan 6 characters.",
+                    "error"
+                );
+
+                return;
+            }
+
+            if (password !== confirmPassword) {
+
+                showMessage(
+                    "Labada password isku mid ma aha.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            // Check existing account
+            const existingUser = localStorage.getItem("caabiUser");
+
+            if (existingUser) {
+
+                try {
+
+                    const user = JSON.parse(existingUser);
+
+                    if (user.email === email) {
+
+                        showMessage(
+                            "Email-kan account ayaa hore loogu sameeyay. Fadlan Login samee.",
+                            "error"
+                        );
+
+                        return;
+                    }
+
+                } catch (error) {
+                    console.log(error);
+                }
+
+            }
+
+
+            // =========================
+            // CREATE USER
+            // =========================
+
+            const user = {
+                name: name,
+                email: email,
+                password: password,
+                joinedAt: new Date().toISOString()
+            };
+
+
+            // Save registered user
+            localStorage.setItem(
+                "caabiUser",
+                JSON.stringify(user)
+            );
+
+
+            // Set current logged-in user
+            localStorage.setItem(
+                "caabiCurrentUser",
+                JSON.stringify({
+                    name: name,
+                    email: email
+                })
+            );
+
+
+            // Loading
+            signupBtn.disabled = true;
+
+            signupBtn.innerHTML =
+                '<span class="loader"></span> Creating Account...';
+
+
+            showMessage(
+                "Account-kaaga waa la sameeyay. Kusoo dhowow Caabi Academy!",
+                "success"
+            );
+
+
+            // =========================
+            // GO TO INDEX
+            // =========================
+
+            setTimeout(function () {
+
+                window.location.href = "INDEX.HTML";
+
+            }, 1200);
+
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,5209 @@
+<!DOCTYPE html>
+<html lang="so">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description"
+    content="JavaScript Masterclass: ES6+, DOM & Async Patterns – Baro JavaScript Af-Soomaali oo dhis web applications dhab ah.">
+
+  <meta name="theme-color" content="#001B2E">
+
+  <title>JavaScript Masterclass · Caabi Academy</title>
+
+  <link rel="icon" href="./Images/LOGO.jpeg">
+
+  <style>
+    /* =====================================================
+       CAABI ACADEMY — JAVASCRIPT COURSE
+    ===================================================== */
+
+    :root {
+      --green: #00C896;
+      --green-dark: #00A77D;
+      --white: #FFFFFF;
+      --navy: #001B2E;
+      --navy-2: #00243D;
+      --navy-3: #06324B;
+      --muted: #AFC2D0;
+      --line: rgba(255, 255, 255, .09);
+      --soft: rgba(255, 255, 255, .045);
+      --yellow: #F7DF1E;
+      --max: 1180px;
+      --radius: 18px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+        "Segoe UI", sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* =====================================================
+       PROMO
+    ===================================================== */
+
+    .promo {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding: 7px 15px;
+      background: var(--green);
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .promo strong {
+      font-weight: 950;
+    }
+
+    .promo a {
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 11px;
+    }
+
+    /* =====================================================
+       NAVBAR
+    ===================================================== */
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      width: 100%;
+      background: rgba(0, 27, 46, .90);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      flex-shrink: 0;
+    }
+
+    .brand img {
+      width: 43px;
+      height: 43px;
+      object-fit: cover;
+      border-radius: 11px;
+      background: var(--white);
+      border: 1px solid rgba(0, 200, 150, .25);
+      transition: .25s;
+    }
+
+    .brand:hover img {
+      transform: scale(1.04);
+      border-color: var(--green);
+      box-shadow:
+        0 0 0 4px rgba(0, 200, 150, .07),
+        0 10px 25px rgba(0, 200, 150, .12);
+    }
+
+    .brand-text {
+      line-height: 1;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .brand-text span {
+      display: block;
+      margin-top: 4px;
+      color: var(--green);
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      margin-left: auto;
+    }
+
+    .nav-links a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 0 10px;
+      border-radius: 9px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+      background: rgba(0, 200, 150, .07);
+    }
+
+    .nav-links a.active {
+      color: var(--green);
+      background: rgba(0, 200, 150, .08);
+    }
+
+    .nav-links a.active::after {
+      content: "";
+      position: absolute;
+      bottom: 3px;
+      left: 50%;
+      width: 18px;
+      height: 2px;
+      transform: translateX(-50%);
+      border-radius: 99px;
+      background: var(--green);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      height: 41px;
+      padding: 0 15px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 800;
+      transition: .2s;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255, 255, 255, .12);
+    }
+
+    .btn-ghost:hover {
+      color: var(--green);
+      border-color: rgba(0, 200, 150, .4);
+      background: rgba(0, 200, 150, .07);
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: var(--navy);
+      box-shadow: 0 8px 25px rgba(0, 200, 150, .13);
+    }
+
+    .btn-primary:hover {
+      background: #10D5A5;
+      transform: translateY(-2px);
+    }
+
+    .menu {
+      display: none;
+      width: 42px;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--soft);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+
+    .hero {
+      position: relative;
+      padding: 55px 0 75px;
+      overflow: hidden;
+
+      background:
+        radial-gradient(circle at 10% 20%,
+          rgba(0, 200, 150, .10),
+          transparent 32%),
+        radial-gradient(circle at 90% 75%,
+          rgba(6, 50, 75, .95),
+          transparent 38%);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--green);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) 390px;
+      gap: 55px;
+      align-items: center;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 200, 150, .18);
+      background: rgba(0, 200, 150, .08);
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .tag.yellow {
+      border-color: rgba(247, 223, 30, .25);
+      background: rgba(247, 223, 30, .08);
+      color: var(--yellow);
+    }
+
+    .hero h1 {
+      max-width: 800px;
+      font-size: clamp(39px, 5vw, 65px);
+      line-height: 1.04;
+      letter-spacing: -2.8px;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: var(--green);
+    }
+
+    .hero-desc {
+      max-width: 720px;
+      margin: 22px 0 25px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .instructor-mini {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .instructor-mini img {
+      width: 43px;
+      height: 43px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid rgba(0, 200, 150, .35);
+    }
+
+    .instructor-mini strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .instructor-mini small {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .stat {
+      min-width: 105px;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--soft);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    /* =====================================================
+       PURCHASE CARD
+    ===================================================== */
+
+    .purchase {
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .11);
+      border-radius: 23px;
+      background: linear-gradient(180deg, #073751, #00243D);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .28);
+    }
+
+    .cover {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: var(--navy-3);
+    }
+
+    .cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cover::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg,
+          transparent 35%,
+          rgba(0, 27, 46, .88));
+    }
+
+    .javascript-badge {
+      position: absolute;
+      left: 18px;
+      bottom: 17px;
+      z-index: 4;
+
+      width: 52px;
+      height: 52px;
+
+      display: grid;
+      place-items: center;
+
+      background: var(--yellow);
+      color: #111;
+
+      font-size: 21px;
+      font-weight: 950;
+
+      border-radius: 7px;
+    }
+
+    .sale {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 3;
+      padding: 7px 10px;
+      border-radius: 8px;
+      background: var(--green);
+      color: var(--navy);
+      font-size: 10px;
+      font-weight: 950;
+    }
+
+    .play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 4;
+
+      width: 61px;
+      height: 61px;
+
+      transform: translate(-50%, -50%);
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid rgba(255, 255, 255, .40);
+      border-radius: 50%;
+
+      background: rgba(0, 27, 46, .72);
+      color: var(--white);
+
+      cursor: pointer;
+      font-size: 19px;
+
+      backdrop-filter: blur(10px);
+      transition: .25s;
+    }
+
+    .play:hover {
+      background: var(--green);
+      color: var(--navy);
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+
+    .purchase-body {
+      padding: 24px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 4px;
+    }
+
+    .price {
+      font-size: 36px;
+      font-weight: 950;
+      letter-spacing: -1px;
+    }
+
+    .old-price {
+      color: #76909F;
+      font-size: 14px;
+      text-decoration: line-through;
+    }
+
+    .discount {
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .access {
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .purchase-list {
+      display: grid;
+      gap: 9px;
+      margin: 18px 0;
+    }
+
+    .purchase-list div {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: #DCE8EE;
+      font-size: 11px;
+    }
+
+    .purchase-list b {
+      color: var(--green);
+    }
+
+    .enroll {
+      width: 100%;
+      padding: 14px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--green);
+      color: var(--navy);
+      cursor: pointer;
+      font-weight: 950;
+      transition: .2s;
+    }
+
+    .enroll:hover {
+      background: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .cart {
+      width: 100%;
+      margin-top: 9px;
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .04);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 800;
+      transition: .2s;
+    }
+
+    .cart:hover {
+      border-color: rgba(0, 200, 150, .35);
+      color: var(--green);
+    }
+
+    .secure {
+      margin-top: 12px;
+      color: #718C9C;
+      text-align: center;
+      font-size: 9px;
+    }
+
+    /* =====================================================
+       CONTENT
+    ===================================================== */
+
+    .content {
+      padding: 85px 0;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 55px;
+      align-items: start;
+    }
+
+    .section {
+      margin-bottom: 75px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 25px;
+      height: 2px;
+      border-radius: 20px;
+      background: var(--green);
+    }
+
+    .section h2 {
+      margin-bottom: 15px;
+      font-size: clamp(28px, 3vw, 40px);
+      line-height: 1.12;
+      letter-spacing: -1px;
+    }
+
+    .section-intro {
+      max-width: 730px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* =====================================================
+       WHAT YOU LEARN
+    ===================================================== */
+
+    .learn-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+      margin-top: 28px;
+    }
+
+    .learn-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-height: 100px;
+      padding: 20px;
+      overflow: hidden;
+
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: var(--navy-2);
+
+      transition: .25s;
+    }
+
+    .learn-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0, 200, 150, .30);
+      background: var(--navy-3);
+    }
+
+    .learn-card::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 18px;
+      bottom: 18px;
+      width: 3px;
+      border-radius: 0 5px 5px 0;
+      background: var(--green);
+      opacity: 0;
+      transition: .25s;
+    }
+
+    .learn-card:hover::after {
+      opacity: 1;
+    }
+
+    .learn-icon {
+      flex: 0 0 52px;
+      width: 52px;
+      height: 52px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid rgba(0, 200, 150, .17);
+      border-radius: 13px;
+
+      background: rgba(0, 200, 150, .08);
+      color: var(--green);
+
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .learn-icon.yellow {
+      border-color: rgba(247, 223, 30, .18);
+      background: rgba(247, 223, 30, .08);
+      color: var(--yellow);
+    }
+
+    .learn-content {
+      min-width: 0;
+    }
+
+    .learn-content h3 {
+      margin-bottom: 5px;
+      font-size: 15px;
+    }
+
+    .learn-content p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .learn-card:last-child {
+      grid-column: span 2;
+    }
+
+    /* =====================================================
+       AUDIENCE
+    ===================================================== */
+
+    .audience {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .audience-card {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--navy-2);
+      transition: .25s;
+    }
+
+    .audience-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0, 200, 150, .25);
+    }
+
+    .audience-card span {
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .audience-card h3 {
+      margin: 12px 0 5px;
+      font-size: 14px;
+    }
+
+    .audience-card p {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* =====================================================
+       CURRICULUM
+    ===================================================== */
+
+    .curriculum-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .curriculum-meta {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .expand {
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--soft);
+      color: var(--white);
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .expand:hover {
+      color: var(--green);
+      border-color: rgba(0, 200, 150, .30);
+    }
+
+    .modules {
+      display: grid;
+      gap: 9px;
+    }
+
+    .module {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .025);
+      transition: .2s;
+    }
+
+    .module:hover {
+      border-color: rgba(255, 255, 255, .14);
+    }
+
+    .module-head {
+      width: 100%;
+
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      align-items: center;
+      gap: 13px;
+
+      padding: 17px;
+
+      border: 0;
+      background: transparent;
+      color: var(--white);
+
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .module-number {
+      width: 34px;
+      height: 34px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 9px;
+      background: rgba(0, 200, 150, .09);
+      color: var(--green);
+
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .module-title strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .module-title small {
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .module-arrow {
+      color: var(--muted);
+      font-size: 18px;
+      transition: .2s;
+    }
+
+    .module.open .module-arrow {
+      transform: rotate(45deg);
+      color: var(--green);
+    }
+
+    .lessons {
+      display: none;
+      padding: 5px 18px 12px 72px;
+      border-top: 1px solid var(--line);
+    }
+
+    .module.open .lessons {
+      display: block;
+    }
+
+    .lesson {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+
+      padding: 12px 0;
+
+      border-bottom: 1px solid rgba(255, 255, 255, .05);
+
+      color: #D8E5EB;
+      font-size: 10px;
+    }
+
+    .lesson:last-child {
+      border-bottom: 0;
+    }
+
+    .free-lesson {
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .free-lesson:hover {
+      color: var(--green);
+      padding-left: 7px;
+    }
+
+    .free-lesson:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 3px;
+    }
+
+    .free {
+      display: inline-flex;
+      margin-left: 6px;
+      padding: 3px 7px;
+
+      border-radius: 999px;
+      background: rgba(0, 200, 150, .09);
+      color: var(--green);
+
+      font-size: 8px;
+      font-weight: 900;
+    }
+
+    .preview-label {
+      color: var(--green);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .locked {
+      cursor: pointer;
+      color: #7B919E;
+    }
+
+    .locked:hover {
+      color: var(--white);
+    }
+
+    .duration {
+      color: #718C9C;
+      white-space: nowrap;
+      font-size: 9px;
+    }
+
+    /* =====================================================
+       CODE PREVIEW
+    ===================================================== */
+
+    .code-box {
+      margin-top: 25px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .09);
+      border-radius: 17px;
+      background: #06141E;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .20);
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 13px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      background: #0A1C28;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .2);
+    }
+
+    .code-title {
+      margin-left: 8px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    pre {
+      overflow-x: auto;
+      padding: 22px;
+      color: #DDEAF0;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .keyword {
+      color: #C792EA;
+    }
+
+    .string {
+      color: #C3E88D;
+    }
+
+    .function {
+      color: #82AAFF;
+    }
+
+    .comment {
+      color: #617C89;
+    }
+
+    /* =====================================================
+       INSTRUCTOR
+    ===================================================== */
+
+    .about {
+      padding: 27px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background:
+        linear-gradient(135deg,
+          rgba(6, 50, 75, .80),
+          rgba(0, 36, 61, .70));
+    }
+
+    .instructor-profile {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .instructor-profile img {
+      width: 85px;
+      height: 85px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid rgba(0, 200, 150, .30);
+    }
+
+    .instructor-profile strong {
+      font-size: 18px;
+    }
+
+    .role {
+      margin-top: 2px;
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 900;
+    }
+
+    .students {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .about p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.85;
+    }
+
+    .about p+p {
+      margin-top: 13px;
+    }
+
+    /* =====================================================
+       SIDEBAR
+    ===================================================== */
+
+    .sidebar {
+      position: sticky;
+      top: 98px;
+      display: grid;
+      gap: 15px;
+    }
+
+    .side-card {
+      padding: 21px;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: var(--navy-2);
+    }
+
+    .side-card h3 {
+      margin-bottom: 14px;
+      font-size: 14px;
+    }
+
+    .included {
+      display: grid;
+      gap: 11px;
+    }
+
+    .included div {
+      display: flex;
+      gap: 9px;
+      color: #DCE7EC;
+      font-size: 10px;
+    }
+
+    .included b {
+      color: var(--green);
+    }
+
+    .plan {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+      margin-top: 8px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+
+    .plan strong {
+      font-size: 11px;
+    }
+
+    .plan span {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .side-instructor {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 13px;
+    }
+
+    .side-instructor img {
+      width: 62px;
+      height: 62px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid rgba(0, 200, 150, .25);
+    }
+
+    .side-instructor strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .side-instructor span {
+      color: var(--green);
+      font-size: 8px;
+      font-weight: 900;
+    }
+
+    .side-card p {
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    .socials {
+      display: flex;
+      gap: 7px;
+      margin-top: 13px;
+    }
+
+    .socials a {
+      width: 31px;
+      height: 31px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid var(--line);
+      border-radius: 8px;
+
+      color: var(--muted);
+      font-size: 9px;
+
+      transition: .2s;
+    }
+
+    .socials a:hover {
+      color: var(--green);
+      border-color: rgba(0, 200, 150, .35);
+      background: rgba(0, 200, 150, .07);
+    }
+
+    /* =====================================================
+       RELATED COURSES
+    ===================================================== */
+
+    .related {
+      position: relative;
+      padding: 95px 0;
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      background: #00182A;
+    }
+
+    .related::before {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      top: -250px;
+      right: -180px;
+      border-radius: 50%;
+      background: rgba(0, 200, 150, .07);
+      filter: blur(100px);
+    }
+
+    .related-head {
+      position: relative;
+      z-index: 2;
+
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+
+      gap: 25px;
+      margin-bottom: 38px;
+    }
+
+    .related-title {
+      max-width: 700px;
+    }
+
+    .related-title h2 {
+      margin: 8px 0 11px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.12;
+      letter-spacing: -1.2px;
+    }
+
+    .related-title p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .related-view-all {
+      flex-shrink: 0;
+
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      padding: 12px 17px;
+
+      border: 1px solid var(--line);
+      border-radius: 11px;
+
+      background: rgba(255, 255, 255, .035);
+      color: var(--white);
+
+      font-size: 11px;
+      font-weight: 800;
+
+      transition: .2s;
+    }
+
+    .related-view-all span {
+      color: var(--green);
+      font-size: 17px;
+    }
+
+    .related-view-all:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0, 200, 150, .35);
+      background: rgba(0, 200, 150, .07);
+    }
+
+    .related-grid {
+      position: relative;
+      z-index: 2;
+
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .course-card {
+      overflow: hidden;
+
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 17px;
+
+      background: var(--navy-2);
+
+      box-shadow: 0 18px 50px rgba(0, 0, 0, .18);
+
+      transition:
+        transform .3s ease,
+        border-color .3s ease;
+    }
+
+    .course-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(0, 200, 150, .32);
+    }
+
+    .course-image {
+      position: relative;
+      display: block;
+      height: 215px;
+      overflow: hidden;
+      background: var(--navy-3);
+    }
+
+    .course-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s ease;
+    }
+
+    .course-card:hover .course-image img {
+      transform: scale(1.06);
+    }
+
+    .image-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg,
+          transparent 25%,
+          rgba(0, 27, 46, .80));
+    }
+
+    .course-number {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+
+      width: 36px;
+      height: 36px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: 9px;
+
+      background: rgba(0, 27, 46, .72);
+
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .course-level {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+
+      padding: 6px 9px;
+      border-radius: 8px;
+
+      font-size: 8px;
+      font-weight: 900;
+    }
+
+    .advanced {
+      background: var(--green);
+      color: var(--navy);
+    }
+
+    .intermediate {
+      background: rgba(6, 50, 75, .90);
+      border: 1px solid rgba(255, 255, 255, .13);
+    }
+
+    .course-arrow {
+      position: absolute;
+      right: 15px;
+      bottom: 14px;
+
+      width: 37px;
+      height: 37px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+      background: var(--green);
+      color: var(--navy);
+
+      font-size: 18px;
+
+      opacity: 0;
+      transform: translateY(8px);
+
+      transition: .25s;
+    }
+
+    .course-card:hover .course-arrow {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .course-body {
+      padding: 20px;
+    }
+
+    .course-meta {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 10px;
+
+      color: var(--green);
+
+      font-size: 9px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+    }
+
+    .course-body h3 {
+      min-height: 52px;
+      margin-bottom: 9px;
+      font-size: 17px;
+      line-height: 1.4;
+    }
+
+    .course-body p {
+      min-height: 42px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .course-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 10px;
+      margin-top: 18px;
+      padding-top: 15px;
+
+      border-top: 1px solid var(--line);
+    }
+
+    .course-price strong {
+      color: var(--green);
+      font-size: 19px;
+    }
+
+    .course-price del {
+      margin-left: 5px;
+      color: #718C9C;
+      font-size: 10px;
+    }
+
+    .learn-btn {
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .learn-btn span {
+      color: var(--green);
+      font-size: 15px;
+    }
+
+    .learn-btn:hover {
+      color: var(--green);
+    }
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    .site-footer {
+      background: #001B2E;
+      color: #FFFFFF;
+      padding: 80px 0 28px;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(0, 200, 150, 0.12);
+    }
+
+    .site-footer::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      top: -220px;
+      right: -160px;
+
+      background: rgba(0, 200, 150, 0.08);
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .footer-main {
+      display: grid;
+      grid-template-columns: 1.8fr repeat(4, 1fr);
+      gap: 45px;
+      padding-bottom: 60px;
+    }
+
+    .footer-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .footer-logo img {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .footer-brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .footer-brand-text strong {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+    }
+
+    .footer-brand-text span {
+      margin-top: 5px;
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+
+    .footer-description {
+      max-width: 320px;
+      margin: 22px 0 25px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 10px;
+    }
+
+    .footer-socials a {
+      width: 38px;
+      height: 38px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid rgba(175, 194, 208, 0.18);
+      border-radius: 10px;
+
+      color: var(--muted);
+
+      font-size: 15px;
+      font-weight: 700;
+
+      transition: .25s;
+    }
+
+    .footer-socials a:hover {
+      background: var(--green);
+      border-color: var(--green);
+      color: var(--navy);
+      transform: translateY(-3px);
+    }
+
+    .footer-column h4 {
+      margin: 3px 0 20px;
+
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-column li {
+      margin-bottom: 13px;
+    }
+
+    .footer-column a {
+      color: var(--muted);
+      font-size: 14px;
+      transition: .25s;
+    }
+
+    .footer-column a:hover {
+      color: var(--green);
+      padding-left: 4px;
+    }
+
+    .footer-newsletter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 35px;
+      padding: 28px 0;
+
+      border-top: 1px solid rgba(175, 194, 208, 0.12);
+      border-bottom: 1px solid rgba(175, 194, 208, 0.12);
+    }
+
+    .newsletter-label {
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .footer-newsletter h3 {
+      margin: 7px 0 0;
+      font-size: 22px;
+      line-height: 1.3;
+      font-weight: 700;
+    }
+
+    .footer-newsletter h3 span {
+      color: var(--green);
+    }
+
+    .newsletter-form {
+      display: flex;
+      width: min(100%, 430px);
+      gap: 8px;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      min-width: 0;
+
+      height: 48px;
+      padding: 0 16px;
+
+      background: #00243D;
+
+      border: 1px solid rgba(175, 194, 208, 0.15);
+      border-radius: 10px;
+
+      outline: none;
+
+      color: var(--white);
+      font-size: 13px;
+    }
+
+    .newsletter-form input:focus {
+      border-color: var(--green);
+    }
+
+    .newsletter-form button {
+      height: 48px;
+      padding: 0 18px;
+
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      border: none;
+      border-radius: 10px;
+
+      background: var(--green);
+      color: var(--navy);
+
+      font-size: 13px;
+      font-weight: 800;
+
+      cursor: pointer;
+      transition: .25s;
+    }
+
+    .newsletter-form button:hover {
+      background: var(--green-dark);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+      padding-top: 25px;
+
+      color: #718B9B;
+      font-size: 12px;
+    }
+
+    .footer-bottom strong {
+      color: var(--muted);
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-legal a {
+      color: #718B9B;
+    }
+
+    .footer-legal a:hover {
+      color: var(--green);
+    }
+
+    /* =====================================================
+       MODAL
+    ===================================================== */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 20000;
+
+      display: none;
+      place-items: center;
+
+      padding: 20px;
+
+      background: rgba(0, 0, 0, .86);
+
+      backdrop-filter: blur(9px);
+    }
+
+    .modal.show {
+      display: grid;
+    }
+
+    .modal-box {
+      position: relative;
+
+      width: min(920px, 100%);
+      overflow: hidden;
+
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 18px;
+
+      background: #000;
+
+      box-shadow: 0 30px 100px rgba(0, 0, 0, .65);
+    }
+
+    .preview-video {
+      display: block;
+      width: 100%;
+      max-height: 78vh;
+      background: #000;
+    }
+
+    .close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 5;
+
+      width: 39px;
+      height: 39px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 50%;
+
+      background: rgba(0, 27, 46, .80);
+      color: var(--white);
+
+      cursor: pointer;
+      font-size: 19px;
+    }
+
+    .close:hover {
+      background: var(--green);
+      color: var(--navy);
+    }
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 30000;
+
+      max-width: 330px;
+
+      padding: 14px 17px;
+
+      border: 1px solid rgba(0, 200, 150, .25);
+      border-radius: 12px;
+
+      background: #00243D;
+      color: var(--white);
+
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .30);
+
+      font-size: 11px;
+      font-weight: 700;
+
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(15px);
+
+      transition: .25s;
+    }
+
+    .toast.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .toast b {
+      color: var(--green);
+    }
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 1050px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .menu {
+        display: flex;
+      }
+
+      .nav-actions .btn-ghost {
+        display: none;
+      }
+
+      .hero-grid,
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .purchase {
+        max-width: 530px;
+      }
+
+      .sidebar {
+        position: static;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .sidebar .side-card:last-child {
+        grid-column: span 2;
+      }
+
+      .related-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 850px) {
+
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 14px;
+        right: 14px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 4px;
+        padding: 10px;
+
+        border: 1px solid rgba(255, 255, 255, .10);
+        border-radius: 16px;
+
+        background: rgba(0, 27, 46, .98);
+
+        box-shadow: 0 20px 60px rgba(0, 0, 0, .35);
+
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+
+        transition: .25s;
+      }
+
+      .nav-links.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .nav-links a {
+        width: 100%;
+        min-height: 45px;
+        padding: 0 14px;
+        justify-content: flex-start;
+        font-size: 13px;
+      }
+
+      .nav-links a.active::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 760px) {
+
+      .container {
+        width: min(calc(100% - 28px), var(--max));
+      }
+
+      .promo {
+        flex-wrap: wrap;
+        gap: 6px;
+        font-size: 10px;
+      }
+
+      .nav-inner {
+        min-height: 69px;
+      }
+
+      .hero {
+        padding: 38px 0 55px;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+      }
+
+      .hero-desc {
+        font-size: 13px;
+      }
+
+      .content {
+        padding: 60px 0;
+      }
+
+      .learn-grid,
+      .audience {
+        grid-template-columns: 1fr;
+      }
+
+      .learn-card:last-child {
+        grid-column: auto;
+      }
+
+      .curriculum-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .lessons {
+        padding-left: 18px;
+      }
+
+      .related {
+        padding: 70px 0;
+      }
+
+      .related-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .related-view-all {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .related-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-main {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+
+      .footer-newsletter {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .newsletter-form {
+        width: 100%;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 560px) {
+
+      .nav-actions {
+        display: none;
+      }
+
+      .menu {
+        margin-left: auto;
+      }
+
+      .brand img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .brand-text strong {
+        font-size: 15px;
+      }
+
+      .hero h1 {
+        font-size: 35px;
+        letter-spacing: -1.8px;
+      }
+
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat {
+        min-width: 0;
+      }
+
+      .instructor-profile {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .sidebar {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar .side-card:last-child {
+        grid-column: auto;
+      }
+
+      .about {
+        padding: 20px;
+      }
+
+      .footer-main {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-brand {
+        grid-column: auto;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+      }
+
+      .newsletter-form input,
+      .newsletter-form button {
+        width: 100%;
+      }
+
+      .lesson {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .modal {
+        padding: 10px;
+      }
+
+      .modal-box {
+        border-radius: 12px;
+      }
+    }
+
+    @media (max-width: 360px) {
+
+      .brand-text {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- =====================================================
+       NAVBAR
+  ====================================================== -->
+
+  <header class="nav">
+
+    <div class="container nav-inner">
+
+      <a href="INDEX.HTML" class="brand">
+
+        <img src="./Images/LOGO.jpeg" alt="Caabi Academy Logo">
+
+        <div class="brand-text">
+          <strong>CAABI</strong>
+          <span>ACADEMY</span>
+        </div>
+
+      </a>
+
+
+      <nav class="nav-links" id="navLinks">
+
+        <a href="INDEX.HTML">Home</a>
+
+        <a href="Course.html" class="active">
+          Courses
+        </a>
+
+        <a href="Ambassador.html">
+          Ambassador
+        </a>
+
+        <a href="League.html">
+          League
+        </a>
+
+        <a href="Blog.html">
+          Blog
+        </a>
+
+        <a href="Community.html">
+          Community
+        </a>
+
+        <a href="About.html">
+          About
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+      </nav>
+
+
+      <div class="nav-actions">
+
+        <button class="btn btn-ghost" id="loginBtn" type="button">
+          Login
+        </button>
+
+        <button class="btn btn-primary" id="signupBtn" type="button">
+          Bilow Hadda
+        </button>
+
+      </div>
+
+
+      <button class="menu" id="menuBtn" aria-label="Open menu" type="button">
+        ☰
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main>
+
+
+    <!-- ===================================================
+         HERO
+    ==================================================== -->
+
+    <section class="hero">
+
+      <div class="container">
+
+        <div class="breadcrumb">
+
+          <a href="INDEX.HTML">
+            Home
+          </a>
+
+          <span>›</span>
+
+          <a href="Course.html">
+            Courses
+          </a>
+
+          <span>›</span>
+
+          <span>
+            JavaScript Masterclass
+          </span>
+
+        </div>
+
+
+        <div class="hero-grid">
+
+
+          <!-- HERO CONTENT -->
+
+          <div>
+
+            <div class="tags">
+
+              <span class="tag">
+                Intermediate
+              </span>
+
+              <span class="tag yellow">
+                JavaScript
+              </span>
+
+              <span class="tag">
+                Af-Soomaali
+              </span>
+              </span>
+
+            </div>
+
+
+            <h1>
+
+              JavaScript Masterclass:
+              ES6+, DOM & Async Patterns
+
+              <span>
+                Become a Strong JavaScript Developer
+              </span>
+
+            </h1>
+
+
+            <p class="hero-desc">
+
+              Baro JavaScript si qoto dheer laga bilaabo
+              ES6+, DOM manipulation, Events, APIs,
+              Promises iyo Async/Await. Dhis projects dhab ah
+              oo kuu diyaarinaya Frontend, Backend iyo
+              Full-Stack JavaScript Development.
+
+            </p>
+
+
+            <div class="instructor-mini">
+
+              <img src="./Images/Image Founder Suhayb black and White.jpeg" alt="Suhayb Mohamed">
+
+              <div>
+
+                <strong>
+                  Suhayb Mohamed
+                </strong>
+
+                <small>
+                  Instructor · Web Development
+                </small>
+
+              </div>
+
+            </div>
+
+
+            <div class="hero-stats">
+
+              <div class="stat">
+
+                <strong>
+                  48
+                </strong>
+
+                <span>
+                  Lessons
+                </span>
+
+              </div>
+
+
+              <div class="stat">
+
+                <strong>
+                  8h 30m
+                </strong>
+
+                <span>
+                  Total Content
+                </span>
+
+              </div>
+
+
+              <div class="stat">
+
+                <strong>
+                  8
+                </strong>
+
+                <span>
+                  Sections
+                </span>
+
+              </div>
+
+
+              <div class="stat">
+
+                <strong>
+                  6 Months
+                </strong>
+
+                <span>
+                  Access
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- PURCHASE CARD -->
+
+          <aside class="purchase" id="enroll">
+
+            <div class="cover">
+
+              <img src="./Images/Black and Orange Burger Food YouTube Thumbnail.png" alt="JavaScript Masterclass">
+
+              <span class="sale">
+                -30%
+              </span>
+
+
+              <button class="play" id="mainPreviewBtn" type="button" aria-label="Watch free preview">
+                ▶
+              </button>
+
+            </div>
+
+
+            <div class="purchase-body">
+
+
+              <div class="price-row">
+
+                <strong class="price">
+                  $10
+                </strong>
+
+                <span class="old-price">
+                  $15
+                </span>
+
+                <span class="discount">
+                  SAVE 30%
+                </span>
+
+              </div>
+
+
+              <div class="access">
+                6 months access · Intermediate friendly
+              </div>
+
+
+              <div class="purchase-list">
+
+                <div>
+                  <b>✓</b>
+                  48 JavaScript lessons
+                </div>
+
+                <div>
+                  <b>✓</b>
+                  8h 30m of content
+                </div>
+
+                <div>
+                  <b>✓</b>
+                  Practical projects
+                </div>
+
+                <div>
+                  <b>✓</b>
+                  Certificate of completion
+                </div>
+
+                <div>
+                  <b>✓</b>
+                  6 months access
+                </div>
+
+                <div>
+                  <b>✓</b>
+                  Free preview lessons
+                </div>
+
+              </div>
+
+
+              <a href="IIBSO COURSE.html" class="buy-course-btn">
+                IIBSO COURSE
+              </a>
+              <style>
+                .buy-course-btn {
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  padding: 15px 20px;
+                  background: #00f58f;
+                  color: #013d30;
+                  text-decoration: none;
+                  font-weight: 700;
+                  border-radius: 10px;
+                  transition: 0.3s ease;
+                }
+
+                .buy-course-btn:hover {
+                  background: #ffffff;
+                  transform: translateY(-2px);
+                }
+              </style>
+
+
+              <button class="cart" id="cartBtn" type="button">
+                Add to Cart
+              </button>
+
+
+              <p class="secure">
+                🔒 Secure checkout · One-time payment
+              </p>
+
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         CONTENT
+    ==================================================== -->
+
+    <section class="content">
+
+      <div class="container content-grid">
+
+
+        <!-- =================================================
+             LEFT CONTENT
+        ================================================== -->
+
+        <div>
+
+
+          <!-- WHAT YOU LEARN -->
+
+          <section class="section">
+
+            <span class="eyebrow">
+              WHAT YOU'LL LEARN
+            </span>
+
+            <h2>
+              Xirfadaha JavaScript-ka aad baran doonto
+            </h2>
+
+            <p class="section-intro">
+
+              Koorsadani waxay ku siinaysaa foundation adag
+              oo JavaScript ah. Waxaad ka gudbi doontaa
+              basic syntax ilaa asynchronous programming,
+              APIs iyo projects dhab ah.
+
+            </p>
+
+
+            <div class="learn-grid">
+
+
+              <div class="learn-card">
+
+                <div class="learn-icon yellow">
+                  JS
+                </div>
+
+                <div class="learn-content">
+
+                  <h3>
+                    JavaScript Fundamentals
+                  </h3>
+
+                  <p>
+                    Variables, data types, operators,
+                    functions, conditions iyo loops.
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              <div class="learn-card">
+
+                <div class="learn-icon">
+                  ES6+
+                </div>
+
+                <div class="learn-content">
+
+                  <h3>
+                    Modern JavaScript
+                  </h3>
+
+                  <p>
+                    let/const, arrow functions,
+                    destructuring, spread, modules iyo classes.
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              <div class="learn-card">
+
+                <div class="learn-icon">
+                  DOM
+                </div>
+
+                <div class="learn-content">
+
+                  <h3>
+                    DOM Manipulation
+                  </h3>
+
+                  <p>
+                    Sida JavaScript loogu xiro HTML
+                    loona beddelo content iyo styles.
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              <div class="learn-card">
+
+                <div class="learn-icon">
+                  ⚡
+                </div>
+
+                <div class="learn-content">
+
+                  <h3>
+                    Events & Interaction
+                  </h3>
+
+                  <p>
+                    Click events, keyboard events,
+                    forms iyo interactive interfaces.
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              <div class="learn-card">
+
+                <div class="learn-icon">
+                  API
+                </div>
+
+                <div class="learn-content">
+
+                  <h3>
+                    APIs & Fetch
+                  </h3>
+
+                  <p>
+                    Baro sida APIs loo isticmaalo
+                    iyo sida data looga helo server.
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              <div class="learn-card">
+
+                <div class="learn-icon">
+                  async
+                </div>
+
+                <div class="learn-content">
+
+                  <h3>
+                    Async JavaScript
+                  </h3>
+
+                  <p>
+                    Promises, async/await,
+                    error handling iyo asynchronous patterns.
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              <div class="learn-card">
+
+                <div class="learn-icon">
+                  {}
+                </div>
+
+                <div class="learn-content">
+
+                  <h3>
+                    Objects & Advanced Patterns
+                  </h3>
+
+                  <p>
+                    Objects, arrays, higher-order functions,
+                    closures iyo reusable JavaScript patterns.
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- AUDIENCE -->
+
+          <section class="section">
+
+            <span class="eyebrow">
+              IS THIS COURSE FOR YOU?
+            </span>
+
+            <h2>
+              Yaa ku habboon koorsadan?
+            </h2>
+
+            <p class="section-intro">
+
+              Koorsadani waxay ku habboon tahay qof horey
+              u yaqaan HTML iyo CSS oo doonaya inuu JavaScript
+              si professional ah u barto.
+
+            </p>
+
+
+            <div class="audience">
+
+
+              <div class="audience-card">
+
+                <span>
+                  01
+                </span>
+
+                <h3>
+                  HTML & CSS Developers
+                </h3>
+
+                <p>
+                  Qof horey u bartay HTML iyo CSS
+                  oo doonaya inuu ku daro JavaScript.
+                </p>
+
+              </div>
+
+
+              <div class="audience-card">
+
+                <span>
+                  02
+                </span>
+
+                <h3>
+                  Future Frontend Developers
+                </h3>
+
+                <p>
+                  Qof doonaya inuu noqdo professional
+                  Frontend Developer.
+                </p>
+
+              </div>
+
+
+              <div class="audience-card">
+
+                <span>
+                  03
+                </span>
+
+                <h3>
+                  Future Backend Developers
+                </h3>
+
+                <p>
+                  Qof doonaya inuu mustaqbalka u gudbo
+                  Node.js iyo Backend Development.
+                </p>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- CURRICULUM -->
+
+          <section class="section" id="curriculum">
+
+            <div class="curriculum-head">
+
+              <div>
+
+                <span class="eyebrow">
+                  CURRICULUM
+                </span>
+
+                <h2>
+                  Waxaad baran doontaa
+                </h2>
+
+                <p class="curriculum-meta">
+                  48 lessons · 8h 30m total
+                </p>
+
+              </div>
+
+
+              <button class="expand" id="expandAll" type="button">
+                Expand all
+              </button>
+
+            </div>
+
+
+            <div class="modules">
+
+
+              <!-- MODULE 01 -->
+
+              <div class="module open">
+
+                <button class="module-head" type="button">
+
+                  <span class="module-number">
+                    01
+                  </span>
+
+                  <span class="module-title">
+
+                    <strong>
+                      JavaScript Fundamentals
+                    </strong>
+
+                    <small>
+                      6 lessons · Beginner
+                    </small>
+
+                  </span>
+
+                  <span class="module-arrow">
+                    +
+                  </span>
+
+                </button>
+
+                <div class="lessons">
+
+                  <div class="lesson free-lesson" data-video="./Javascript.mp4" tabindex="0" role="button">
+
+                    <span>
+                      Course Intro?
+                      <b class="free">FREE</b>
+                    </span>
+
+                    <span class="preview-label">
+                      ▶ Preview
+                    </span>
+
+                  </div>
+
+
+
+                  <div class="lesson free-lesson" data-video="./Javascript Course/1.mp4" tabindex="0" role="button">
+
+                    <span>
+                      What is JavaScript?
+                      <b class="free">FREE</b>
+                    </span>
+
+                    <span class="preview-label">
+                      ▶ Preview
+                    </span>
+
+                  </div>
+                  <div class="lesson free-lesson" data-video="./Vs.mp4" tabindex="0" role="button">
+
+                    <span>
+                      How To Install Visual Studio Code?
+                      <b class="free">FREE</b>
+                    </span>
+
+                    <span class="preview-label">
+                      ▶ Preview
+                    </span>
+
+                  </div>
+
+                  <div class="lesson free-lesson" data-video="./Javascript Course/2.mp4" tabindex="0" role="button">
+
+                    <span>
+                      History of JavaScript
+                      <b class="free">FREE</b>
+                    </span>
+
+                    <span class="preview-label">
+                      ▶ Preview
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Variables & Data Types
+                    </span>
+
+                    <span class="duration">
+                      🔒 12:20
+                    </span>
+
+                  </div>
+
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Operators & Expressions
+                    </span>
+
+                    <span class="duration">
+                      🔒 10:15
+                    </span>
+
+                  </div>
+
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Conditions & Loops
+                    </span>
+
+                    <span class="duration">
+                      🔒 14:30
+                    </span>
+
+                  </div>
+
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Functions
+                    </span>
+
+                    <span class="duration">
+                      🔒 18:42
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- MODULE 02 -->
+
+              <div class="module">
+
+                <button class="module-head" type="button">
+
+                  <span class="module-number">
+                    02
+                  </span>
+
+                  <span class="module-title">
+
+                    <strong>
+                      ES6+ Modern JavaScript
+                    </strong>
+
+                    <small>
+                      7 lessons · Modern JS
+                    </small>
+
+                  </span>
+
+                  <span class="module-arrow">
+                    +
+                  </span>
+
+                </button>
+
+
+                <div class="lessons">
+
+                  <div class="lesson locked">
+
+                    <span>
+                      let, const & scope
+                    </span>
+
+                    <span class="duration">
+                      🔒 10:24
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Arrow Functions
+                    </span>
+
+                    <span class="duration">
+                      🔒 11:15
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Template Literals
+                    </span>
+
+                    <span class="duration">
+                      🔒 08:40
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Destructuring
+                    </span>
+
+                    <span class="duration">
+                      🔒 13:20
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Spread & Rest Operators
+                    </span>
+
+                    <span class="duration">
+                      🔒 14:05
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Modules
+                    </span>
+
+                    <span class="duration">
+                      🔒 16:30
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Classes
+                    </span>
+
+                    <span class="duration">
+                      🔒 18:10
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- MODULE 03 -->
+
+              <div class="module">
+
+                <button class="module-head" type="button">
+
+                  <span class="module-number">
+                    03
+                  </span>
+
+                  <span class="module-title">
+
+                    <strong>
+                      Arrays, Objects & Functions
+                    </strong>
+
+                    <small>
+                      7 lessons · Intermediate
+                    </small>
+
+                  </span>
+
+                  <span class="module-arrow">
+                    +
+                  </span>
+
+                </button>
+
+
+                <div class="lessons">
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Working with Arrays
+                    </span>
+
+                    <span class="duration">
+                      🔒 15:20
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      map(), filter() & reduce()
+                    </span>
+
+                    <span class="duration">
+                      🔒 18:35
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      JavaScript Objects
+                    </span>
+
+                    <span class="duration">
+                      🔒 16:10
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Object Methods
+                    </span>
+
+                    <span class="duration">
+                      🔒 13:45
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Higher-Order Functions
+                    </span>
+
+                    <span class="duration">
+                      🔒 17:30
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Scope & Closures
+                    </span>
+
+                    <span class="duration">
+                      🔒 19:20
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Reusable JavaScript Patterns
+                    </span>
+
+                    <span class="duration">
+                      🔒 15:55
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- MODULE 04 -->
+
+              <div class="module">
+
+                <button class="module-head" type="button">
+
+                  <span class="module-number">
+                    04
+                  </span>
+
+                  <span class="module-title">
+
+                    <strong>
+                      DOM Manipulation
+                    </strong>
+
+                    <small>
+                      6 lessons · Frontend
+                    </small>
+
+                  </span>
+
+                  <span class="module-arrow">
+                    +
+                  </span>
+
+                </button>
+
+
+                <div class="lessons">
+
+                  <div class="lesson locked">
+
+                    <span>
+                      What is the DOM?
+                    </span>
+
+                    <span class="duration">
+                      🔒 11:30
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Selecting Elements
+                    </span>
+
+                    <span class="duration">
+                      🔒 13:20
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Changing HTML & CSS
+                    </span>
+
+                    <span class="duration">
+                      🔒 15:40
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Creating Elements
+                    </span>
+
+                    <span class="duration">
+                      🔒 14:50
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      DOM Events
+                    </span>
+
+                    <span class="duration">
+                      🔒 17:20
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Interactive Web Page Project
+                    </span>
+
+                    <span class="duration">
+                      🔒 25:10
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- MODULE 05 -->
+
+              <div class="module">
+
+                <button class="module-head" type="button">
+
+                  <span class="module-number">
+                    05
+                  </span>
+
+                  <span class="module-title">
+
+                    <strong>
+                      Events & Forms
+                    </strong>
+
+                    <small>
+                      5 lessons · Practical
+                    </small>
+
+                  </span>
+
+                  <span class="module-arrow">
+                    +
+                  </span>
+
+                </button>
+
+
+                <div class="lessons">
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Click & Mouse Events
+                    </span>
+
+                    <span class="duration">
+                      🔒 12:20
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Keyboard Events
+                    </span>
+
+                    <span class="duration">
+                      🔒 11:35
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Form Events
+                    </span>
+
+                    <span class="duration">
+                      🔒 16:25
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Form Validation
+                    </span>
+
+                    <span class="duration">
+                      🔒 18:10
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Build a Login Form
+                    </span>
+
+                    <span class="duration">
+                      🔒 27:45
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- MODULE 06 -->
+
+              <div class="module">
+
+                <button class="module-head" type="button">
+
+                  <span class="module-number">
+                    06
+                  </span>
+
+                  <span class="module-title">
+
+                    <strong>
+                      Async JavaScript
+                    </strong>
+
+                    <small>
+                      6 lessons · Advanced
+                    </small>
+
+                  </span>
+
+                  <span class="module-arrow">
+                    +
+                  </span>
+
+                </button>
+
+
+                <div class="lessons">
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Synchronous vs Asynchronous
+                    </span>
+
+                    <span class="duration">
+                      🔒 13:30
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Callbacks
+                    </span>
+
+                    <span class="duration">
+                      🔒 15:25
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Promises
+                    </span>
+
+                    <span class="duration">
+                      🔒 19:40
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Promise Methods
+                    </span>
+
+                    <span class="duration">
+                      🔒 16:20
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Async / Await
+                    </span>
+
+                    <span class="duration">
+                      🔒 18:45
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Error Handling
+                    </span>
+
+                    <span class="duration">
+                      🔒 14:30
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- MODULE 07 -->
+
+              <div class="module">
+
+                <button class="module-head" type="button">
+
+                  <span class="module-number">
+                    07
+                  </span>
+
+                  <span class="module-title">
+
+                    <strong>
+                      APIs & Fetch
+                    </strong>
+
+                    <small>
+                      5 lessons · Real Projects
+                    </small>
+
+                  </span>
+
+                  <span class="module-arrow">
+                    +
+                  </span>
+
+                </button>
+
+
+                <div class="lessons">
+
+                  <div class="lesson locked">
+
+                    <span>
+                      What is an API?
+                    </span>
+
+                    <span class="duration">
+                      🔒 10:40
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Fetch API
+                    </span>
+
+                    <span class="duration">
+                      🔒 15:30
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      GET & POST Requests
+                    </span>
+
+                    <span class="duration">
+                      🔒 18:15
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Working with JSON
+                    </span>
+
+                    <span class="duration">
+                      🔒 13:25
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      API Project
+                    </span>
+
+                    <span class="duration">
+                      🔒 35:20
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- MODULE 08 -->
+
+              <div class="module">
+
+                <button class="module-head" type="button">
+
+                  <span class="module-number">
+                    08
+                  </span>
+
+                  <span class="module-title">
+
+                    <strong>
+                      Final JavaScript Projects
+                    </strong>
+
+                    <small>
+                      6 lessons · Portfolio
+                    </small>
+
+                  </span>
+
+                  <span class="module-arrow">
+                    +
+                  </span>
+
+                </button>
+
+
+                <div class="lessons">
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Project Planning
+                    </span>
+
+                    <span class="duration">
+                      🔒 12:40
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Todo App
+                    </span>
+
+                    <span class="duration">
+                      🔒 30:20
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Weather App
+                    </span>
+
+                    <span class="duration">
+                      🔒 38:10
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Quiz Application
+                    </span>
+
+                    <span class="duration">
+                      🔒 35:45
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      JavaScript Dashboard
+                    </span>
+
+                    <span class="duration">
+                      🔒 42:20
+                    </span>
+
+                  </div>
+
+                  <div class="lesson locked">
+
+                    <span>
+                      Final Project & Next Steps
+                    </span>
+
+                    <span class="duration">
+                      🔒 25:30
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- CODE PREVIEW -->
+
+
+
+
+          <!-- INSTRUCTOR -->
+
+          <section class="section" id="instructor">
+
+            <span class="eyebrow">
+              YOUR INSTRUCTOR
+            </span>
+
+            <h2>
+              Suhayb Mohamed
+            </h2>
+
+
+            <div class="about">
+
+              <div class="instructor-profile">
+
+                <img src="./Images/Image Founder Suhayb black and White.jpeg" alt="Suhayb Mohamed">
+
+                <div>
+
+                  <strong>
+                    Suhayb Mohamed
+                  </strong>
+
+                  <div class="role">
+                    INSTRUCTOR · WEB DEVELOPER · VIDEO EDITOR
+                  </div>
+
+                  <div class="students">
+                    23 courses · 7K+ students
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <p>
+
+                Suhayb Mohamed waa Web Developer,
+                Video Editor iyo Graphic Designer.
+                Wuxuu jecel yahay inuu barto, dhiso,
+                isla markaana la wadaago xirfadaha
+                digital-ka iyo technology-ga jiilka cusub.
+
+              </p>
+
+
+              <p>
+
+                Koorsadan JavaScript waxaa loogu talagalay
+                in ardaygu ka gudbo HTML iyo CSS oo uu
+                yeesho faham dhab ah oo JavaScript ah,
+                si uu ugu gudbo Frontend, Backend iyo
+                Full-Stack Development.
+
+              </p>
+
+            </div>
+
+          </section>
+
+
+          <!-- ABOUT COURSE -->
+
+          <section class="section" id="about">
+
+            <span class="eyebrow">
+              ABOUT THIS COURSE
+            </span>
+
+            <h2>
+              Maxaad koorsadan ku baranaysaa?
+            </h2>
+
+
+            <div class="about">
+
+              <p>
+
+                JavaScript Masterclass waa koorso loogu
+                talagalay qof horey u bartay HTML iyo CSS
+                oo doonaya inuu JavaScript si qoto dheer
+                u fahmo.
+
+              </p>
+
+
+              <p>
+
+                Waxaad baran doontaa JavaScript fundamentals,
+                ES6+, arrays, objects, functions, DOM,
+                events, forms, APIs, Fetch, Promises,
+                async/await iyo error handling.
+
+              </p>
+
+
+              <p>
+
+                Dhamaadka koorsada waxaad awoodi doontaa
+                inaad dhisto web applications interactive ah
+                oo aad JavaScript ugu isticmaasho projects
+                dhab ah.
+
+              </p>
+
+
+              <p>
+
+                Kadib markaad si fiican u barato JavaScript,
+                waxaad diyaar u noqon kartaa inaad u gudubto
+                Node.js, Express.js iyo Backend JavaScript.
+
+              </p>
+
+            </div>
+
+          </section>
+
+        </div>
+
+
+        <!-- =================================================
+             SIDEBAR
+        ================================================== -->
+
+        <aside class="sidebar">
+
+
+          <div class="side-card">
+
+            <h3>
+              What's included
+            </h3>
+
+
+            <div class="included">
+
+              <div>
+                <b>✓</b>
+                <span>
+                  48 JavaScript lessons
+                </span>
+              </div>
+
+              <div>
+                <b>✓</b>
+                <span>
+                  8h 30m of content
+                </span>
+              </div>
+
+              <div>
+                <b>✓</b>
+                <span>
+                  Practical projects
+                </span>
+              </div>
+
+              <div>
+                <b>✓</b>
+                <span>
+                  Certificate of completion
+                </span>
+              </div>
+
+              <div>
+                <b>✓</b>
+                <span>
+                  6 months access
+                </span>
+              </div>
+
+              <div>
+                <b>✓</b>
+                <span>
+                  Beginner friendly
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="side-card">
+
+            <h3>
+              Other plans
+            </h3>
+
+
+            <div class="plan">
+
+              <strong>
+                6 Months
+              </strong>
+
+              <span>
+                $15
+              </span>
+
+            </div>
+
+
+            <div class="plan">
+
+              <strong>
+                1 Year
+              </strong>
+
+              <span>
+                $25
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="side-card">
+
+            <h3>
+              Instructor
+            </h3>
+
+
+            <div class="side-instructor">
+
+              <img src="./Images/Image Founder Suhayb black and White.jpeg" alt="Suhayb Mohamed">
+
+              <div>
+
+                <strong>
+                  Suhayb Mohamed
+                </strong>
+
+                <span>
+                  WEB DEVELOPER & INSTRUCTOR
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <p>
+
+              Web developer iyo instructor
+              diiradda saaraya practical
+              web development iyo modern
+              JavaScript.
+
+            </p>
+
+
+            <div class="socials">
+
+              <a href="#" aria-label="X">
+                X
+              </a>
+
+              <a href="#" aria-label="LinkedIn">
+                in
+              </a>
+
+              <a href="#" aria-label="GitHub">
+                GH
+              </a>
+
+              <a href="#" aria-label="Instagram">
+                ◎
+              </a>
+
+            </div>
+
+          </div>
+
+        </aside>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         RELATED COURSES
+    ==================================================== -->
+
+    <section class="related" id="related">
+
+      <div class="container">
+
+
+        <div class="related-head">
+
+          <div class="related-title">
+
+            <span class="eyebrow">
+              MORE COURSES
+            </span>
+
+            <h2>
+              Koorsooyin kale oo aad baran karto
+            </h2>
+
+            <p>
+              Kordhi xirfadahaaga oo ka dooro koorsooyin
+              kale oo ku habboon roadmap-kaaga.
+            </p>
+
+          </div>
+
+
+          <a href="Course.html" class="related-view-all">
+            View all courses
+            <span>→</span>
+          </a>
+
+        </div>
+
+
+        <div class="related-grid">
+
+
+          <!-- CARD 01 -->
+
+          <article class="course-card">
+
+            <a href="HTML.html" class="course-image">
+
+              <img src="./Images/HTML CSS.png" alt="HTML CSS Course">
+
+              <div class="image-overlay"></div>
+
+              <span class="course-number">
+                01
+              </span>
+
+              <span class="course-level intermediate">
+                Beginner
+              </span>
+
+              <span class="course-arrow">
+                ↗
+              </span>
+
+            </a>
+
+
+            <div class="course-body">
+
+              <div class="course-meta">
+
+                <span>
+                  Web Development
+                </span>
+
+                <span>
+                  •
+                </span>
+
+                <span>
+                  Frontend
+                </span>
+
+              </div>
+
+
+              <h3>
+                HTML & CSS Masterclass
+              </h3>
+
+
+              <p>
+                Baro sida loo dhiso websites
+                responsive ah adigoo isticmaalaya
+                HTML5 iyo CSS3.
+              </p>
+
+
+              <div class="course-footer">
+
+                <div class="course-price">
+
+                  <strong>
+                    $10
+                  </strong>
+
+                  <del>
+                    $20
+                  </del>
+
+                </div>
+
+
+                <a href="HTML.html" class="learn-btn">
+                  Explore
+                  <span>→</span>
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- CARD 02 -->
+
+          <article class="course-card">
+
+            <a href="Nodejs.html" class="course-image">
+
+              <img src="./Images/NODE JS.png" alt="Node.js Course">
+
+              <div class="image-overlay"></div>
+
+              <span class="course-number">
+                02
+              </span>
+
+              <span class="course-level advanced">
+                Advanced
+              </span>
+
+              <span class="course-arrow">
+                ↗
+              </span>
+
+            </a>
+
+
+            <div class="course-body">
+
+              <div class="course-meta">
+
+                <span>
+                  Backend
+                </span>
+
+                <span>
+                  •
+                </span>
+
+                <span>
+                  Node.js
+                </span>
+
+              </div>
+
+
+              <h3>
+                Backend JavaScript with Node.js
+              </h3>
+
+
+              <p>
+                JavaScript-kaaga u gudub Backend,
+                APIs, Express.js iyo server-side
+                development.
+              </p>
+
+
+              <div class="course-footer">
+
+                <div class="course-price">
+
+                  <strong>
+                    $20
+                  </strong>
+
+                  <del>
+                    $30
+                  </del>
+
+                </div>
+
+
+                <a href="Nodejs.html" class="learn-btn">
+                  Explore
+                  <span>→</span>
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- CARD 03 -->
+
+          <article class="course-card">
+
+            <a href="React.html" class="course-image">
+
+              <img src="./Images/REACT.png" alt="React Course">
+
+              <div class="image-overlay"></div>
+
+              <span class="course-number">
+                03
+              </span>
+
+              <span class="course-level intermediate">
+                Intermediate
+              </span>
+
+              <span class="course-arrow">
+                ↗
+              </span>
+
+            </a>
+
+
+            <div class="course-body">
+
+              <div class="course-meta">
+
+                <span>
+                  Development
+                </span>
+
+                <span>
+                  •
+                </span>
+
+                <span>
+                  React
+                </span>
+
+              </div>
+
+
+              <h3>
+                React.js Masterclass
+              </h3>
+
+
+              <p>
+                JavaScript-kaaga ku dhis React
+                oo samee modern interactive
+                web applications.
+              </p>
+
+
+              <div class="course-footer">
+
+                <div class="course-price">
+
+                  <strong>
+                    $18
+                  </strong>
+
+                  <del>
+                    $25
+                  </del>
+
+                </div>
+
+
+                <a href="React.html" class="learn-btn">
+                  Explore
+                  <span>→</span>
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer class="site-footer">
+
+    <div class="container">
+
+
+      <div class="footer-main">
+
+
+        <!-- BRAND -->
+
+        <div class="footer-brand">
+
+          <a href="INDEX.HTML" class="footer-logo">
+
+            <img src="./Images/LOGO.jpeg" alt="Caabi Academy Logo">
+
+            <div class="footer-brand-text">
+
+              <strong>
+                CAABI
+              </strong>
+
+              <span>
+                ACADEMY
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <p class="footer-description">
+
+            Learn. Grow. Succeed.
+
+            <br>
+
+            Madal waxbarasho casri ah
+            oo Af-Soomaali ah, kuna dhisan
+            xirfado dhab ah iyo mustaqbal wanaagsan.
+
+          </p>
+
+
+          <div class="footer-socials">
+
+            <a href="#">
+              f
+            </a>
+
+            <a href="#">
+              ◎
+            </a>
+
+            <a href="#">
+              ▶
+            </a>
+
+            <a href="#">
+              ♪
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- PLATFORM -->
+
+        <div class="footer-column">
+
+          <h4>
+            Platform
+          </h4>
+
+          <ul>
+
+            <li>
+              <a href="INDEX.HTML">
+                Home
+              </a>
+            </li>
+
+            <li>
+              <a href="Course.html">
+                Courses
+              </a>
+            </li>
+
+            <li>
+              <a href="INDEX.HTML#roadmap">
+                Roadmap
+              </a>
+            </li>
+
+            <li>
+              <a href="Community.html">
+                Community
+              </a>
+            </li>
+
+            <li>
+              <a href="INDEX.HTML#faq">
+                FAQ
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- CATEGORIES -->
+
+        <div class="footer-column">
+
+          <h4>
+            Categories
+          </h4>
+
+          <ul>
+
+            <li>
+              <a href="Course.html">
+                Web Development
+              </a>
+            </li>
+
+            <li>
+              <a href="Course.html">
+                Graphic Design
+              </a>
+            </li>
+
+            <li>
+              <a href="Course.html">
+                Video Editing
+              </a>
+            </li>
+
+            <li>
+              <a href="Course.html">
+                AI Tools
+              </a>
+            </li>
+
+            <li>
+              <a href="Course.html">
+                Digital Skills
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- COMPANY -->
+
+        <div class="footer-column">
+
+          <h4>
+            Company
+          </h4>
+
+          <ul>
+
+            <li>
+              <a href="About.html">
+                About Us
+              </a>
+            </li>
+
+            <li>
+              <a href="contact.html">
+                Contact
+              </a>
+            </li>
+
+            <li>
+              <a href="Community.html">
+                Mentorship
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                Become an Instructor
+              </a>
+            </li>
+
+            <li>
+              <a href="Blog.html">
+                Blog
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- CONTACT -->
+
+        <div class="footer-column">
+
+          <h4>
+            Contact
+          </h4>
+
+          <ul>
+
+            <li>
+              <a href="mailto:info@caabiacademy.com">
+                ✉ info@caabiacademy.com
+              </a>
+            </li>
+
+            <li>
+              <a href="tel:+252907071342">
+                ☎ +252 907 071 342
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                ⌖ Somalia
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <!-- NEWSLETTER -->
+
+      <div class="footer-newsletter">
+
+        <div>
+
+          <span class="newsletter-label">
+            STAY CONNECTED
+          </span>
+
+          <h3>
+            Baro wax cusub.
+            <span>
+              Joog meel sare.
+            </span>
+          </h3>
+
+        </div>
+
+
+        <form class="newsletter-form" id="newsletterForm">
+
+          <input type="email" placeholder="Geli email-kaaga" aria-label="Email address" required>
+
+          <button type="submit">
+            Subscribe
+            <span>
+              →
+            </span>
+          </button>
+
+        </form>
+
+      </div>
+
+
+      <!-- BOTTOM -->
+
+      <div class="footer-bottom">
+
+        <span>
+          © 2026
+          <strong>
+            CAABI ACADEMY
+          </strong>.
+          All rights reserved.
+        </span>
+
+
+        <span>
+          Proudly built in Somalia 🇸🇴
+        </span>
+
+
+        <div class="footer-legal">
+
+          <a href="#">
+            Privacy
+          </a>
+
+          <a href="#">
+            Terms
+          </a>
+
+          <a href="INDEX.HTML#faq">
+            Help
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =====================================================
+       VIDEO MODAL
+  ====================================================== -->
+
+  <div class="modal" id="previewModal" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-label="JavaScript Video Preview">
+
+    <div class="modal-box">
+
+      <button class="close" id="closeModal" type="button" aria-label="Close video">
+        ×
+      </button>
+
+
+      <video class="preview-video" id="previewVideo" controls playsinline preload="metadata">
+
+        <source id="previewSource" src="" type="video/mp4">
+
+        Browser-kaagu ma taageerayo HTML5 video.
+
+      </video>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       TOAST
+  ====================================================== -->
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+
+      /* ================================================
+         MOBILE MENU
+      ================================================= */
+
+      const menuBtn =
+        document.getElementById("menuBtn");
+
+      const navLinks =
+        document.getElementById("navLinks");
+
+
+      if (menuBtn && navLinks) {
+
+        menuBtn.addEventListener("click", () => {
+
+          navLinks.classList.toggle("open");
+
+          menuBtn.textContent =
+            navLinks.classList.contains("open")
+              ? "×"
+              : "☰";
+
+        });
+
+
+        navLinks
+          .querySelectorAll("a")
+          .forEach(link => {
+
+            link.addEventListener("click", () => {
+
+              navLinks.classList.remove("open");
+
+              menuBtn.textContent = "☰";
+
+            });
+
+          });
+
+      }
+
+
+      /* ================================================
+         ACCORDION
+      ================================================= */
+
+      const modules =
+        document.querySelectorAll(".module");
+
+
+      modules.forEach(module => {
+
+        const button =
+          module.querySelector(".module-head");
+
+
+        if (!button) return;
+
+
+        button.addEventListener("click", () => {
+
+          module.classList.toggle("open");
+
+        });
+
+      });
+
+
+      /* ================================================
+         EXPAND ALL
+      ================================================= */
+
+      const expandAll =
+        document.getElementById("expandAll");
+
+      let expanded = false;
+
+
+      if (expandAll) {
+
+        expandAll.addEventListener("click", () => {
+
+          expanded = !expanded;
+
+
+          modules.forEach(module => {
+
+            module.classList.toggle(
+              "open",
+              expanded
+            );
+
+          });
+
+
+          expandAll.textContent =
+            expanded
+              ? "Collapse all"
+              : "Expand all";
+
+        });
+
+      }
+
+
+      /* ================================================
+         TOAST
+      ================================================= */
+
+      const toast =
+        document.getElementById("toast");
+
+      let toastTimer;
+
+
+      function showToast(message) {
+
+        if (!toast) return;
+
+
+        toast.innerHTML = message;
+
+        toast.classList.add("show");
+
+
+        clearTimeout(toastTimer);
+
+
+        toastTimer = setTimeout(() => {
+
+          toast.classList.remove("show");
+
+        }, 3000);
+
+      }
+
+
+      /* ================================================
+         VIDEO MODAL
+      ================================================= */
+
+      const modal =
+        document.getElementById("previewModal");
+
+      const video =
+        document.getElementById("previewVideo");
+
+      const source =
+        document.getElementById("previewSource");
+
+      const closeModal =
+        document.getElementById("closeModal");
+
+
+      function openPreview(url) {
+
+        if (!url || !url.trim()) {
+
+          showToast(
+            "⚠️ Video-ga lama helin."
+          );
+
+          return;
+
+        }
+
+
+        if (!modal || !video || !source)
+          return;
+
+
+        source.src = url.trim();
+
+        video.load();
+
+
+        modal.classList.add("show");
+
+        modal.setAttribute(
+          "aria-hidden",
+          "false"
+        );
+
+
+        document.body.classList.add(
+          "modal-open"
+        );
+
+
+        video.play().catch(() => { });
+
+      }
+
+
+      function closePreview() {
+
+        if (!video || !source || !modal)
+          return;
+
+
+        video.pause();
+
+        video.currentTime = 0;
+
+        source.removeAttribute("src");
+
+        video.load();
+
+
+        modal.classList.remove("show");
+
+        modal.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+
+        document.body.classList.remove(
+          "modal-open"
+        );
+
+      }
+
+
+      if (closeModal) {
+
+        closeModal.addEventListener(
+          "click",
+          closePreview
+        );
+
+      }
+
+
+      if (modal) {
+
+        modal.addEventListener(
+          "click",
+          event => {
+
+            if (event.target === modal) {
+
+              closePreview();
+
+            }
+
+          }
+        );
+
+      }
+
+
+      document.addEventListener(
+        "keydown",
+        event => {
+
+          if (
+            event.key === "Escape" &&
+            modal &&
+            modal.classList.contains("show")
+          ) {
+
+            closePreview();
+
+          }
+
+        }
+      );
+
+
+      /* ================================================
+         FREE LESSONS
+      ================================================= */
+
+      document
+        .querySelectorAll(".free-lesson")
+        .forEach(lesson => {
+
+
+          lesson.addEventListener(
+            "click",
+            () => {
+
+              const url =
+                lesson.getAttribute(
+                  "data-video"
+                );
+
+              openPreview(url);
+
+            }
+          );
+
+
+          lesson.addEventListener(
+            "keydown",
+            event => {
+
+              if (
+                event.key === "Enter" ||
+                event.key === " "
+              ) {
+
+                event.preventDefault();
+
+
+                const url =
+                  lesson.getAttribute(
+                    "data-video"
+                  );
+
+
+                openPreview(url);
+
+              }
+
+            }
+          );
+
+        });
+
+
+      /* ================================================
+         MAIN PREVIEW
+      ================================================= */
+
+      const mainBtn =
+        document.getElementById(
+          "mainPreviewBtn"
+        );
+
+
+      if (mainBtn) {
+
+        mainBtn.addEventListener(
+          "click",
+          () => {
+
+            const first =
+              document.querySelector(
+                ".free-lesson"
+              );
+
+
+            if (!first) {
+
+              showToast(
+                "⚠️ Free JavaScript video lama helin."
+              );
+
+              return;
+
+            }
+
+
+            openPreview(
+              first.getAttribute(
+                "data-video"
+              )
+            );
+
+          }
+        );
+
+      }
+
+
+      /* ================================================
+         LOCKED LESSONS
+      ================================================= */
+
+      document
+        .querySelectorAll(".locked")
+        .forEach(lesson => {
+
+          lesson.addEventListener(
+            "click",
+            () => {
+
+              showToast(
+                "🔒 Lesson-kan wuxuu u baahan yahay inaad course-ka iska diiwaangeliso."
+              );
+
+            }
+          );
+
+        });
+
+
+      /* ================================================
+         ENROLL
+      ================================================= */
+
+      const enrollBtn =
+        document.getElementById(
+          "enrollBtn"
+        );
+
+
+      if (enrollBtn) {
+
+        enrollBtn.addEventListener(
+          "click",
+          () => {
+
+            showToast(
+              "<b>JavaScript Masterclass</b> — Enrollment-ka waa diyaar."
+            );
+
+          }
+        );
+
+      }
+
+
+      /* ================================================
+         CART
+      ================================================= */
+
+      const cartBtn =
+        document.getElementById(
+          "cartBtn"
+        );
+
+
+      if (cartBtn) {
+
+        cartBtn.addEventListener(
+          "click",
+          () => {
+
+            const original =
+              "Add to Cart";
+
+
+            cartBtn.textContent =
+              "✓ Added to Cart";
+
+
+            showToast(
+              "<b>JavaScript Masterclass</b> waxaa lagu daray Cart-ka."
+            );
+
+
+            setTimeout(() => {
+
+              cartBtn.textContent =
+                original;
+
+            }, 2500);
+
+          }
+        );
+
+      }
+
+
+      /* ================================================
+         LOGIN
+      ================================================= */
+
+      const loginBtn =
+        document.getElementById(
+          "loginBtn"
+        );
+
+
+      if (loginBtn) {
+
+        loginBtn.addEventListener(
+          "click",
+          () => {
+
+            showToast(
+              "Login page-kaaga halkan ku xiro."
+            );
+
+          }
+        );
+
+      }
+
+
+      /* ================================================
+         SIGNUP
+      ================================================= */
+
+      const signupBtn =
+        document.getElementById(
+          "signupBtn"
+        );
+
+
+      if (signupBtn) {
+
+        signupBtn.addEventListener(
+          "click",
+          () => {
+
+            showToast(
+              "Registration page-kaaga halkan ku xiro."
+            );
+
+          }
+        );
+
+      }
+
+
+      /* ================================================
+         NEWSLETTER
+      ================================================= */
+
+      const newsletterForm =
+        document.getElementById(
+          "newsletterForm"
+        );
+
+
+      if (newsletterForm) {
+
+        newsletterForm.addEventListener(
+          "submit",
+          event => {
+
+            event.preventDefault();
+
+
+            const email =
+              newsletterForm
+                .querySelector("input")
+                .value.trim();
+
+
+            if (!email) return;
+
+
+            showToast(
+              "<b>Waad mahadsan tahay!</b> Email-kaaga waa la diiwaangeliyey."
+            );
+
+
+            newsletterForm.reset();
+
+          }
+        );
+
+      }
+
+
+    });
+
+  </script>
+
+</body>
+
+</html>

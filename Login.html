@@ -1,0 +1,1368 @@
+
+<!DOCTYPE html>
+<html lang="so">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login | Caabi Academy</title>
+
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           ROOT
+        ===================================================== */
+
+        :root {
+            --green: #00C896;
+            --green-light: #00e6ad;
+
+            --bg: #050d11;
+            --card: #0b191f;
+            --card-light: #10242b;
+
+            --white: #ffffff;
+            --text: #dce8ed;
+            --muted: #7f96a3;
+
+            --border: rgba(255,255,255,.08);
+
+            --danger: #ff6b6b;
+        }
+
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            min-height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family: "Inter", sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(0,200,150,.09),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 90% 90%,
+                    rgba(0,200,150,.06),
+                    transparent 30%
+                ),
+                var(--bg);
+
+            color: var(--text);
+
+            overflow-x: hidden;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 35px 20px;
+
+            position: relative;
+        }
+
+
+        /* =====================================================
+           BACKGROUND DECORATION
+        ===================================================== */
+
+        .bg-circle {
+            position: fixed;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            filter: blur(1px);
+        }
+
+        .circle-one {
+            width: 300px;
+            height: 300px;
+
+            left: -160px;
+            top: -130px;
+
+            border: 1px solid rgba(0,200,150,.10);
+        }
+
+        .circle-two {
+            width: 420px;
+            height: 420px;
+
+            right: -220px;
+            bottom: -200px;
+
+            border: 1px solid rgba(0,200,150,.07);
+        }
+
+
+        /* =====================================================
+           LOGIN CONTAINER
+        ===================================================== */
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 455px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        /* =====================================================
+           BRAND
+        ===================================================== */
+
+        .brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 11px;
+
+            margin-bottom: 25px;
+        }
+
+        .brand img {
+            width: 47px;
+            height: 47px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border: 2px solid var(--green);
+
+            box-shadow:
+                0 0 30px rgba(0,200,150,.12);
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+
+            line-height: 1;
+        }
+
+        .brand-text strong {
+            color: var(--white);
+
+            font-size: 20px;
+            font-weight: 900;
+
+            letter-spacing: 1px;
+        }
+
+        .brand-text span {
+            color: var(--green);
+
+            font-size: 8px;
+            font-weight: 800;
+
+            letter-spacing: 3px;
+
+            margin-top: 5px;
+        }
+
+
+        /* =====================================================
+           LOGIN CARD
+        ===================================================== */
+
+        .login-card {
+            width: 100%;
+
+            padding: 34px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(14,32,39,.98),
+                    rgba(8,20,25,.98)
+                );
+
+            border: 1px solid var(--border);
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,.38),
+                inset 0 1px 0 rgba(255,255,255,.02);
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .login-header {
+            text-align: center;
+
+            margin-bottom: 28px;
+        }
+
+        .login-badge {
+            display: inline-flex;
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 6px 10px;
+
+            border-radius: 30px;
+
+            background: rgba(0,200,150,.08);
+
+            color: var(--green);
+
+            font-size: 8px;
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 12px;
+        }
+
+        .login-badge::before {
+            content: "";
+
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+        }
+
+        .login-header h1 {
+            color: var(--white);
+
+            font-size: 25px;
+            font-weight: 900;
+
+            letter-spacing: -.5px;
+        }
+
+        .login-header p {
+            color: var(--muted);
+
+            font-size: 11px;
+
+            line-height: 1.6;
+
+            margin-top: 8px;
+        }
+
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-label-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 8px;
+        }
+
+        .form-label {
+            color: #c8d7dc;
+
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .forgot-link {
+            color: var(--green);
+
+            border: none;
+
+            background: transparent;
+
+            font-size: 9px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            padding: 0;
+        }
+
+        .forgot-link:hover {
+            color: var(--green-light);
+        }
+
+
+        /* INPUT */
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+
+            left: 14px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #5f7782;
+
+            font-size: 14px;
+
+            pointer-events: none;
+        }
+
+        .form-input {
+            width: 100%;
+
+            height: 48px;
+
+            padding: 0 44px;
+
+            border-radius: 10px;
+
+            border: 1px solid var(--border);
+
+            outline: none;
+
+            background: #08161b;
+
+            color: var(--white);
+
+            font-size: 11px;
+
+            transition: .2s ease;
+        }
+
+        .form-input::placeholder {
+            color: #4e6670;
+        }
+
+        .form-input:hover {
+            border-color: rgba(255,255,255,.13);
+        }
+
+        .form-input:focus {
+            border-color: rgba(0,200,150,.55);
+
+            box-shadow:
+                0 0 0 3px rgba(0,200,150,.06);
+        }
+
+
+        /* PASSWORD TOGGLE */
+
+        .password-toggle {
+            position: absolute;
+
+            right: 12px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            color: #617983;
+
+            font-size: 13px;
+
+            cursor: pointer;
+
+            padding: 5px;
+        }
+
+        .password-toggle:hover {
+            color: var(--green);
+        }
+
+
+        /* =====================================================
+           REMEMBER
+        ===================================================== */
+
+        .remember-row {
+            display: flex;
+            align-items: center;
+
+            gap: 8px;
+
+            margin: 3px 0 20px;
+        }
+
+        .remember-row input {
+            width: 14px;
+            height: 14px;
+
+            accent-color: var(--green);
+
+            cursor: pointer;
+        }
+
+        .remember-row label {
+            color: var(--muted);
+
+            font-size: 9px;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           LOGIN BUTTON
+        ===================================================== */
+
+        .login-button {
+            width: 100%;
+
+            height: 48px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: var(--green);
+
+            color: #001b2e;
+
+            font-size: 12px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            position: relative;
+
+            transition: .25s ease;
+        }
+
+        .login-button:hover {
+            background: var(--green-light);
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 10px 30px rgba(0,200,150,.12);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .login-button.loading {
+            pointer-events: none;
+
+            opacity: .8;
+        }
+
+        .button-text {
+            transition: .2s;
+        }
+
+        .loading-spinner {
+            display: none;
+
+            width: 17px;
+            height: 17px;
+
+            border: 2px solid rgba(0,27,46,.25);
+
+            border-top-color: #001b2e;
+
+            border-radius: 50%;
+
+            animation: spin .7s linear infinite;
+
+            margin: auto;
+        }
+
+        .login-button.loading .button-text {
+            display: none;
+        }
+
+        .login-button.loading .loading-spinner {
+            display: block;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        /* =====================================================
+           ERROR
+        ===================================================== */
+
+        .error-message {
+            display: none;
+
+            padding: 11px 12px;
+
+            margin-bottom: 16px;
+
+            border-radius: 9px;
+
+            background: rgba(255,107,107,.08);
+
+            border: 1px solid rgba(255,107,107,.16);
+
+            color: #ff8585;
+
+            font-size: 9px;
+
+            line-height: 1.5;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+
+        /* =====================================================
+           SUCCESS
+        ===================================================== */
+
+        .success-message {
+            display: none;
+
+            padding: 11px 12px;
+
+            margin-bottom: 16px;
+
+            border-radius: 9px;
+
+            background: rgba(0,200,150,.08);
+
+            border: 1px solid rgba(0,200,150,.16);
+
+            color: var(--green);
+
+            font-size: 9px;
+
+            line-height: 1.5;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+
+        /* =====================================================
+           DIVIDER
+        ===================================================== */
+
+        .divider {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 23px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+
+            height: 1px;
+
+            flex: 1;
+
+            background: var(--border);
+        }
+
+        .divider span {
+            color: #506772;
+
+            font-size: 8px;
+        }
+
+
+        /* =====================================================
+           SIGN UP
+        ===================================================== */
+
+        .signup-text {
+            text-align: center;
+
+            color: var(--muted);
+
+            font-size: 10px;
+        }
+
+        .signup-text a {
+            color: var(--green);
+
+            font-weight: 800;
+        }
+
+        .signup-text a:hover {
+            color: var(--green-light);
+        }
+
+
+        /* =====================================================
+           BACK HOME
+        ===================================================== */
+
+        .back-home {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #647b86;
+
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+        .back-home:hover {
+            color: var(--green);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 520px) {
+
+            .page {
+                padding: 25px 14px;
+            }
+
+            .login-card {
+                padding: 25px 20px;
+
+                border-radius: 17px;
+            }
+
+            .login-header h1 {
+                font-size: 22px;
+            }
+
+            .brand {
+                margin-bottom: 20px;
+            }
+
+        }
+
+
+        @media (max-width: 360px) {
+
+            .login-card {
+                padding: 22px 16px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- BACKGROUND -->
+
+    <div class="bg-circle circle-one"></div>
+    <div class="bg-circle circle-two"></div>
+
+
+    <main class="page">
+
+
+        <div class="login-wrapper">
+
+
+            <!-- =================================================
+                 BRAND
+            ================================================== -->
+
+            <a href="index.html" class="brand">
+
+                <img
+                    src="./Images/LOGO.jpeg"
+                    alt="Caabi Academy Logo"
+                >
+
+                <div class="brand-text">
+
+                    <strong>CAABI</strong>
+
+                    <span>ACADEMY</span>
+
+                </div>
+
+            </a>
+
+
+            <!-- =================================================
+                 LOGIN CARD
+            ================================================== -->
+
+            <div class="login-card">
+
+
+                <!-- HEADER -->
+
+                <div class="login-header">
+
+                    <div class="login-badge">
+                        WELCOME BACK
+                    </div>
+
+                    <h1>
+                        Ku soo laabo Caabi
+                    </h1>
+
+                    <p>
+                        Geli account-kaaga si aad u sii waddo
+                        waxbarashadaada.
+                    </p>
+
+                </div>
+
+
+                <!-- ERROR -->
+
+                <div
+                    class="error-message"
+                    id="errorMessage"
+                ></div>
+
+
+                <!-- SUCCESS -->
+
+                <div
+                    class="success-message"
+                    id="successMessage"
+                ></div>
+
+
+                <!-- FORM -->
+
+                <form id="loginForm">
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <div class="form-label-row">
+
+                            <label
+                                class="form-label"
+                                for="email"
+                            >
+                                Email
+                            </label>
+
+                        </div>
+
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                @
+                            </span>
+
+                            <input
+                                type="email"
+                                id="email"
+                                class="form-input"
+                                placeholder="Geli email-kaaga"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <div class="form-label-row">
+
+                            <label
+                                class="form-label"
+                                for="password"
+                            >
+                                Password
+                            </label>
+
+                            <button
+                                type="button"
+                                class="forgot-link"
+                                id="forgotPassword"
+                            >
+                                Forgot password?
+                            </button>
+
+                        </div>
+
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                •••
+                            </span>
+
+                            <input
+                                type="password"
+                                id="password"
+                                class="form-input"
+                                placeholder="Geli password-kaaga"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="passwordToggle"
+                                aria-label="Show password"
+                            >
+                                ◉
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- REMEMBER -->
+
+                    <div class="remember-row">
+
+                        <input
+                            type="checkbox"
+                            id="remember"
+                        >
+
+                        <label for="remember">
+                            I xasuuso account-kayga
+                        </label>
+
+                    </div>
+
+
+                    <!-- LOGIN -->
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                        id="loginButton"
+                    >
+
+                        <span class="button-text">
+                            Login
+                        </span>
+
+                        <span class="loading-spinner"></span>
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- DIVIDER -->
+
+                <div class="divider">
+
+                    <span>
+                        AMA
+                    </span>
+
+                </div>
+
+
+                <!-- SIGN UP -->
+
+                <p class="signup-text">
+
+                    Account ma lihid?
+
+                    <a href="Sign Up.html">
+                        Samee Account
+                    </a>
+
+                </p>
+
+            </div>
+
+
+            <!-- BACK -->
+
+            <a
+                href="index.html"
+                class="back-home"
+            >
+                ← Ku noqo Home
+            </a>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+
+                /* =============================================
+                   ELEMENTS
+                ============================================= */
+
+                const loginForm =
+                    document.getElementById(
+                        "loginForm"
+                    );
+
+                const emailInput =
+                    document.getElementById(
+                        "email"
+                    );
+
+                const passwordInput =
+                    document.getElementById(
+                        "password"
+                    );
+
+                const rememberInput =
+                    document.getElementById(
+                        "remember"
+                    );
+
+                const loginButton =
+                    document.getElementById(
+                        "loginButton"
+                    );
+
+                const passwordToggle =
+                    document.getElementById(
+                        "passwordToggle"
+                    );
+
+                const errorMessage =
+                    document.getElementById(
+                        "errorMessage"
+                    );
+
+                const successMessage =
+                    document.getElementById(
+                        "successMessage"
+                    );
+
+                const forgotPassword =
+                    document.getElementById(
+                        "forgotPassword"
+                    );
+
+
+                /* =============================================
+                   HELPERS
+                ============================================= */
+
+                function showError(message) {
+
+                    errorMessage.textContent =
+                        message;
+
+                    errorMessage.classList.add(
+                        "show"
+                    );
+
+                    successMessage.classList.remove(
+                        "show"
+                    );
+
+                }
+
+
+                function showSuccess(message) {
+
+                    successMessage.textContent =
+                        message;
+
+                    successMessage.classList.add(
+                        "show"
+                    );
+
+                    errorMessage.classList.remove(
+                        "show"
+                    );
+
+                }
+
+
+                function clearMessages() {
+
+                    errorMessage.classList.remove(
+                        "show"
+                    );
+
+                    successMessage.classList.remove(
+                        "show"
+                    );
+
+                }
+
+
+                /* =============================================
+                   PASSWORD SHOW / HIDE
+                ============================================= */
+
+                passwordToggle.addEventListener(
+                    "click",
+                    function () {
+
+                        if (
+                            passwordInput.type ===
+                            "password"
+                        ) {
+
+                            passwordInput.type =
+                                "text";
+
+                            passwordToggle.textContent =
+                                "◌";
+
+                        } else {
+
+                            passwordInput.type =
+                                "password";
+
+                            passwordToggle.textContent =
+                                "◉";
+
+                        }
+
+                    }
+                );
+
+
+                /* =============================================
+                   REMEMBER EMAIL
+                ============================================= */
+
+                const savedEmail =
+                    localStorage.getItem(
+                        "caabiRememberEmail"
+                    );
+
+
+                if (savedEmail) {
+
+                    emailInput.value =
+                        savedEmail;
+
+                    rememberInput.checked =
+                        true;
+
+                }
+
+
+                /* =============================================
+                   LOGIN
+                ============================================= */
+
+                loginForm.addEventListener(
+                    "submit",
+                    function (event) {
+
+                        event.preventDefault();
+
+                        clearMessages();
+
+
+                        const email =
+                            emailInput.value
+                                .trim()
+                                .toLowerCase();
+
+                        const password =
+                            passwordInput.value;
+
+
+                        /* VALIDATION */
+
+                        if (!email) {
+
+                            showError(
+                                "Fadlan geli email-kaaga."
+                            );
+
+                            emailInput.focus();
+
+                            return;
+
+                        }
+
+
+                        if (!password) {
+
+                            showError(
+                                "Fadlan geli password-kaaga."
+                            );
+
+                            passwordInput.focus();
+
+                            return;
+
+                        }
+
+
+                        /* =====================================
+                           GET REGISTERED USER
+                        ===================================== */
+
+                        const savedUser =
+                            localStorage.getItem(
+                                "caabiUser"
+                            );
+
+
+                        if (!savedUser) {
+
+                            showError(
+                                "Account-kan lama helin. Fadlan marka hore samee Sign Up."
+                            );
+
+                            return;
+
+                        }
+
+
+                        let registeredUser;
+
+
+                        try {
+
+                            registeredUser =
+                                JSON.parse(
+                                    savedUser
+                                );
+
+                        } catch (error) {
+
+                            showError(
+                                "Account data-ga ayaa khaldan. Fadlan mar kale Sign Up samee."
+                            );
+
+                            return;
+
+                        }
+
+
+                        /* =====================================
+                           CHECK EMAIL
+                        ===================================== */
+
+                        if (
+                            registeredUser.email
+                                .toLowerCase() !==
+                            email
+                        ) {
+
+                            showError(
+                                "Email-ka aad gelisay lama helin."
+                            );
+
+                            return;
+
+                        }
+
+
+                        /* =====================================
+                           CHECK PASSWORD
+                        ===================================== */
+
+                        if (
+                            registeredUser.password !==
+                            password
+                        ) {
+
+                            showError(
+                                "Password-ka waa khalad. Fadlan isku day mar kale."
+                            );
+
+                            return;
+
+                        }
+
+
+                        /* =====================================
+                           REMEMBER EMAIL
+                        ===================================== */
+
+                        if (
+                            rememberInput.checked
+                        ) {
+
+                            localStorage.setItem(
+                                "caabiRememberEmail",
+                                email
+                            );
+
+                        } else {
+
+                            localStorage.removeItem(
+                                "caabiRememberEmail"
+                            );
+
+                        }
+
+
+                        /* =====================================
+                           CURRENT USER
+                        ===================================== */
+
+                        const currentUser = {
+
+                            name:
+                                registeredUser.name,
+
+                            email:
+                                registeredUser.email
+
+                        };
+
+
+                        localStorage.setItem(
+                            "caabiCurrentUser",
+                            JSON.stringify(
+                                currentUser
+                            )
+                        );
+
+
+                        /* =====================================
+                           LOADING
+                        ===================================== */
+
+                        loginButton.classList.add(
+                            "loading"
+                        );
+
+
+                        showSuccess(
+                            "Login waa lagu guuleystay. Dashboard-ka ayaa kuu furmaya..."
+                        );
+
+
+                        /* =====================================
+                           DASHBOARD REDIRECT
+                        ===================================== */
+
+                        setTimeout(
+                            function () {
+
+                                window.location.href =
+                                    "Dashboard.html";
+
+                            },
+                            900
+                        );
+
+                    }
+                );
+
+
+                /* =============================================
+                   FORGOT PASSWORD
+                ============================================= */
+
+                forgotPassword.addEventListener(
+                    "click",
+                    function () {
+
+                        alert(
+                            "Forgot Password system-ka waxaa lagu xiriirin karaa email/backend marka authentication-ka dhabta ah la sameeyo."
+                        );
+
+                    }
+                );
+
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

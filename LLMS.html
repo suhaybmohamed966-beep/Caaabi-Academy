@@ -1,0 +1,5099 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="AI Engineering Masterclass: Build LLM Apps with RAG & Agents — Baro sida loo dhiso AI applications dhab ah adigoo isticmaalaya LLMs, RAG, AI Agents iyo modern AI tools."
+  >
+
+  <title>AI Engineering Masterclass | Caabi Academy</title>
+
+  <link rel="icon" href="./Images/LOGO.jpeg">
+
+  <style>
+
+    /* =========================================================
+       CAABI ACADEMY — AI ENGINEERING COURSE PAGE
+       SINGLE FILE
+    ========================================================= */
+
+    :root {
+      --green: #00C896;
+      --green-dark: #00A77D;
+      --green-light: #20E0B0;
+
+      --white: #FFFFFF;
+
+      --navy: #001B2E;
+      --navy-2: #00243D;
+      --navy-3: #06324B;
+      --navy-4: #082F45;
+
+      --text: #F5FAFC;
+      --text-soft: #D8E6ED;
+      --muted: #AFC2D0;
+
+      --line: rgba(175,194,208,.14);
+      --line-green: rgba(0,200,150,.24);
+
+      --soft-green: rgba(0,200,150,.09);
+
+      --shadow:
+        0 25px 80px rgba(0,0,0,.30);
+
+      --shadow-green:
+        0 20px 55px rgba(0,200,150,.13);
+
+      --radius: 18px;
+
+      --container: 1180px;
+    }
+
+
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      color: var(--text);
+      background: var(--navy);
+
+      line-height: 1.65;
+
+      overflow-x: hidden;
+    }
+
+    body::selection {
+      background: var(--green);
+      color: var(--navy);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(
+        calc(100% - 40px),
+        var(--container)
+      );
+
+      margin-inline: auto;
+    }
+
+
+    /* =========================================================
+       TOP BAR
+    ========================================================= */
+
+    .topbar {
+      background: var(--green);
+      color: var(--navy);
+
+      min-height: 42px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 9px 18px;
+
+      font-size: 13px;
+      font-weight: 800;
+
+      text-align: center;
+    }
+
+    .topbar span {
+      margin-left: 6px;
+      text-decoration: underline;
+    }
+
+
+    /* =========================================================
+       NAVBAR
+    ========================================================= */
+
+    .nav {
+      position: sticky;
+      top: 0;
+
+      z-index: 9999;
+
+      background:
+        rgba(0,27,46,.88);
+
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      min-height: 78px;
+
+      display: flex;
+      align-items: center;
+
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      flex-shrink: 0;
+    }
+
+    .brand img {
+      width: 44px;
+      height: 44px;
+
+      object-fit: cover;
+
+      border-radius: 11px;
+
+      background: #fff;
+
+      border: 1px solid
+        rgba(0,200,150,.25);
+
+      transition: .25s ease;
+    }
+
+    .brand:hover img {
+      transform: scale(1.04) rotate(-2deg);
+
+      border-color: var(--green);
+
+      box-shadow:
+        0 0 0 4px
+        rgba(0,200,150,.07);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+
+      line-height: 1;
+    }
+
+    .brand-text strong {
+      color: var(--white);
+
+      font-size: 17px;
+
+      font-weight: 900;
+
+      letter-spacing: 1px;
+    }
+
+    .brand-text span {
+      color: var(--green);
+
+      font-size: 7px;
+
+      font-weight: 900;
+
+      letter-spacing: 3px;
+
+      margin-top: 5px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+
+      gap: 3px;
+
+      margin-left: auto;
+    }
+
+    .nav-links a {
+      position: relative;
+
+      display: inline-flex;
+      align-items: center;
+
+      min-height: 42px;
+
+      padding: 0 10px;
+
+      color: var(--muted);
+
+      font-size: 12.5px;
+
+      font-weight: 700;
+
+      border-radius: 9px;
+
+      transition: .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+
+      background:
+        rgba(0,200,150,.07);
+    }
+
+    .nav-links a.active {
+      color: var(--green);
+
+      background:
+        rgba(0,200,150,.09);
+    }
+
+    .nav-links a.active::after {
+      content: "";
+
+      position: absolute;
+
+      width: 18px;
+      height: 2px;
+
+      bottom: 3px;
+      left: 50%;
+
+      transform:
+        translateX(-50%);
+
+      background: var(--green);
+
+      border-radius: 50px;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 8px;
+
+      flex-shrink: 0;
+    }
+
+    .btn {
+      min-height: 42px;
+
+      padding: 0 16px;
+
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 10px;
+
+      border: 1px solid var(--line);
+
+      color: var(--white);
+
+      background: transparent;
+
+      cursor: pointer;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      transition: .2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+
+      border-color:
+        rgba(0,200,150,.45);
+    }
+
+    .btn-primary {
+      color: var(--navy);
+
+      background: var(--green);
+
+      border-color: var(--green);
+
+      box-shadow:
+        0 10px 25px
+        rgba(0,200,150,.14);
+    }
+
+    .btn-primary:hover {
+      color: var(--navy);
+
+      background: var(--green-light);
+
+      border-color: var(--green-light);
+
+      box-shadow:
+        0 14px 35px
+        rgba(0,200,150,.20);
+    }
+
+    .menu {
+      display: none;
+
+      width: 43px;
+      height: 43px;
+
+      align-items: center;
+      justify-content: center;
+
+      margin-left: auto;
+
+      border: 1px solid var(--line);
+
+      border-radius: 10px;
+
+      background:
+        rgba(255,255,255,.04);
+
+      color: var(--white);
+
+      cursor: pointer;
+
+      font-size: 21px;
+    }
+
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      position: relative;
+
+      overflow: hidden;
+
+      padding: 48px 0 70px;
+
+      background:
+        radial-gradient(
+          circle at 80% 10%,
+          rgba(0,200,150,.13),
+          transparent 30%
+        ),
+
+        radial-gradient(
+          circle at 20% 80%,
+          rgba(0,117,170,.11),
+          transparent 35%
+        ),
+
+        linear-gradient(
+          135deg,
+          var(--navy),
+          var(--navy-2)
+        );
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero::before {
+      content: "";
+
+      position: absolute;
+
+      width: 450px;
+      height: 450px;
+
+      right: -180px;
+      top: -220px;
+
+      border-radius: 50%;
+
+      border: 1px solid
+        rgba(0,200,150,.10);
+
+      box-shadow:
+        0 0 0 70px
+        rgba(0,200,150,.025),
+        0 0 0 140px
+        rgba(0,200,150,.018);
+    }
+
+    .breadcrumbs {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 8px;
+
+      margin-bottom: 28px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+    .breadcrumbs a:hover {
+      color: var(--green);
+    }
+
+    .hero-grid {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0,1fr)
+        370px;
+
+      gap: 58px;
+
+      align-items: start;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      margin-bottom: 17px;
+
+      color: var(--green);
+
+      font-size: 11px;
+
+      font-weight: 900;
+
+      letter-spacing: .14em;
+
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+
+      width: 27px;
+      height: 2px;
+
+      background: var(--green);
+
+      border-radius: 20px;
+    }
+
+    h1 {
+      max-width: 850px;
+
+      margin-bottom: 20px;
+
+      font-size:
+        clamp(36px,4.5vw,59px);
+
+      line-height: 1.05;
+
+      letter-spacing: -.045em;
+    }
+
+    .gradient-text {
+      background:
+        linear-gradient(
+          90deg,
+          var(--white),
+          var(--green)
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      color: transparent;
+    }
+
+    .hero-description {
+      max-width: 790px;
+
+      margin-bottom: 23px;
+
+      color: var(--text-soft);
+
+      font-size: 17px;
+    }
+
+    .advanced-warning {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      margin-bottom: 22px;
+
+      padding: 8px 12px;
+
+      border: 1px solid
+        rgba(0,200,150,.22);
+
+      background:
+        rgba(0,200,150,.07);
+
+      color: #dffbf4;
+
+      border-radius: 9px;
+
+      font-size: 12px;
+
+      font-weight: 800;
+    }
+
+    .advanced-warning b {
+      color: var(--green);
+    }
+
+    .rating-row {
+      display: flex;
+
+      align-items: center;
+
+      flex-wrap: wrap;
+
+      gap: 11px;
+
+      font-size: 13px;
+    }
+
+    .bestseller {
+      padding: 5px 8px;
+
+      border-radius: 6px;
+
+      color: var(--navy);
+
+      background: var(--green);
+
+      font-size: 10px;
+
+      font-weight: 950;
+
+      text-transform: uppercase;
+    }
+
+    .stars {
+      color: var(--green);
+
+      letter-spacing: 2px;
+    }
+
+    .rating-link {
+      color: var(--muted);
+
+      text-decoration: underline;
+    }
+
+    .students {
+      color: var(--muted);
+    }
+
+    .meta-row {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 17px;
+
+      margin-top: 25px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    .meta-row strong {
+      color: var(--white);
+    }
+
+
+    /* =========================================================
+       PURCHASE CARD
+    ========================================================= */
+
+    .purchase-card {
+      position: sticky;
+
+      top: 98px;
+
+      overflow: hidden;
+
+      border:
+        1px solid
+        rgba(175,194,208,.19);
+
+      border-radius: 21px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(6,50,75,.98),
+          rgba(0,27,46,.98)
+        );
+
+      box-shadow: var(--shadow);
+
+      z-index: 3;
+    }
+
+    .course-cover {
+      position: relative;
+
+      min-height: 215px;
+
+      padding: 25px;
+
+      display: flex;
+
+      align-items: flex-end;
+
+      overflow: hidden;
+
+      background:
+        radial-gradient(
+          circle at 75% 25%,
+          rgba(0,200,150,.35),
+          transparent 25%
+        ),
+
+        radial-gradient(
+          circle at 20% 100%,
+          rgba(0,115,165,.3),
+          transparent 35%
+        ),
+
+        linear-gradient(
+          145deg,
+          #003D58,
+          #001B2E
+        );
+    }
+
+    .course-cover::before {
+      content: "AI";
+
+      position: absolute;
+
+      right: -10px;
+      bottom: -48px;
+
+      font-size: 180px;
+
+      line-height: 1;
+
+      font-weight: 950;
+
+      color:
+        rgba(255,255,255,.035);
+
+      letter-spacing: -.1em;
+    }
+
+    .cover-grid {
+      position: absolute;
+
+      inset: 0;
+
+      opacity: .13;
+
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,.22) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,.22) 1px,
+          transparent 1px
+        );
+
+      background-size: 28px 28px;
+    }
+
+    .cover-label {
+      position: absolute;
+
+      top: 17px;
+      right: 17px;
+
+      padding: 6px 9px;
+
+      border-radius: 7px;
+
+      color: var(--navy);
+
+      background: var(--green);
+
+      font-size: 9px;
+
+      font-weight: 950;
+    }
+
+    .cover-content {
+      position: relative;
+
+      z-index: 2;
+    }
+
+    .cover-small {
+      color: #b9d5df;
+
+      font-size: 10px;
+
+      font-weight: 800;
+
+      letter-spacing: .13em;
+
+      text-transform: uppercase;
+
+      margin-bottom: 5px;
+    }
+
+    .cover-title {
+      font-size: 28px;
+
+      line-height: 1;
+
+      font-weight: 950;
+
+      letter-spacing: -.04em;
+    }
+
+    .cover-title span {
+      color: var(--green);
+    }
+
+    .purchase-content {
+      padding: 23px;
+    }
+
+    .price-line {
+      display: flex;
+
+      align-items: baseline;
+
+      gap: 10px;
+
+      margin-bottom: 4px;
+    }
+
+    .price {
+      font-size: 35px;
+
+      line-height: 1;
+
+      font-weight: 950;
+    }
+
+    .old-price {
+      color: var(--muted);
+
+      text-decoration: line-through;
+
+      font-size: 14px;
+    }
+
+    .discount {
+      padding: 4px 7px;
+
+      border-radius: 6px;
+
+      background:
+        rgba(0,200,150,.10);
+
+      color: var(--green);
+
+      font-size: 10px;
+
+      font-weight: 900;
+    }
+
+    .access {
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+    .buy-btn {
+      width: 100%;
+
+      min-height: 51px;
+
+      margin: 19px 0 10px;
+
+      border: 0;
+
+      border-radius: 11px;
+
+      color: var(--navy);
+
+      background: var(--green);
+
+      cursor: pointer;
+
+      font-weight: 950;
+
+      transition: .2s ease;
+
+      box-shadow:
+        0 12px 30px
+        rgba(0,200,150,.13);
+    }
+
+    .buy-btn:hover {
+      background: var(--green-light);
+
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 17px 38px
+        rgba(0,200,150,.21);
+    }
+
+    .cart-btn {
+      width: 100%;
+
+      min-height: 47px;
+
+      border: 1px solid
+        rgba(175,194,208,.18);
+
+      border-radius: 11px;
+
+      background:
+        rgba(255,255,255,.025);
+
+      color: var(--white);
+
+      cursor: pointer;
+
+      font-weight: 850;
+
+      transition: .2s ease;
+    }
+
+    .cart-btn:hover {
+      border-color: var(--green);
+
+      color: var(--green);
+    }
+
+    .secure-note {
+      display: flex;
+
+      justify-content: center;
+
+      gap: 6px;
+
+      margin-top: 12px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+    }
+
+    .included {
+      margin-top: 21px;
+
+      padding-top: 17px;
+
+      border-top: 1px solid var(--line);
+    }
+
+    .included-title {
+      margin-bottom: 10px;
+
+      font-size: 13px;
+
+      font-weight: 900;
+    }
+
+    .include-item {
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 9px;
+
+      margin: 9px 0;
+
+      color: var(--text-soft);
+
+      font-size: 12px;
+    }
+
+    .check {
+      width: 20px;
+      height: 20px;
+
+      flex: 0 0 20px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      background:
+        rgba(0,200,150,.10);
+
+      color: var(--green);
+
+      font-size: 11px;
+
+      font-weight: 950;
+    }
+
+
+    /* =========================================================
+       MAIN
+    ========================================================= */
+
+    main {
+      padding: 58px 0 90px;
+    }
+
+    .main-grid {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0,1fr)
+        300px;
+
+      gap: 50px;
+
+      align-items: start;
+    }
+
+    .section {
+      margin-bottom: 53px;
+    }
+
+    .section-header {
+      margin-bottom: 20px;
+    }
+
+    .section h2 {
+      margin-bottom: 9px;
+
+      font-size: 29px;
+
+      line-height: 1.2;
+
+      letter-spacing: -.03em;
+    }
+
+    .section-intro {
+      color: var(--muted);
+
+      max-width: 780px;
+
+      font-size: 14px;
+    }
+
+
+    /* =========================================================
+       LEARN GRID
+    ========================================================= */
+
+    .learn-box {
+      padding: 26px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: var(--radius);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(6,50,75,.62),
+          rgba(0,36,61,.43)
+        );
+    }
+
+    .learn-grid {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 16px 27px;
+    }
+
+    .learn-item {
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 11px;
+
+      color: var(--text-soft);
+
+      font-size: 13.5px;
+    }
+
+    .learn-item .check {
+      margin-top: 2px;
+    }
+
+
+    /* =========================================================
+       SKILLS
+    ========================================================= */
+
+    .skills {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 9px;
+    }
+
+    .tag {
+      padding: 7px 11px;
+
+      border: 1px solid
+        rgba(0,200,150,.20);
+
+      border-radius: 999px;
+
+      background:
+        rgba(0,200,150,.07);
+
+      color: #dffbf4;
+
+      font-size: 11px;
+
+      font-weight: 800;
+
+      transition: .2s ease;
+    }
+
+    .tag:hover {
+      border-color: var(--green);
+
+      background:
+        rgba(0,200,150,.12);
+
+      transform: translateY(-1px);
+    }
+
+
+    /* =========================================================
+       REQUIREMENTS
+    ========================================================= */
+
+    .requirements {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 14px;
+    }
+
+    .requirement {
+      padding: 18px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 14px;
+
+      background:
+        rgba(0,36,61,.45);
+    }
+
+    .requirement-icon {
+      width: 35px;
+      height: 35px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: 10px;
+
+      border-radius: 10px;
+
+      color: var(--green);
+
+      background:
+        rgba(0,200,150,.09);
+
+      font-size: 15px;
+    }
+
+    .requirement h3 {
+      margin-bottom: 5px;
+
+      font-size: 14px;
+    }
+
+    .requirement p {
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+
+    /* =========================================================
+       CURRICULUM
+    ========================================================= */
+
+    .curriculum-top {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: flex-end;
+
+      gap: 20px;
+
+      margin-bottom: 17px;
+    }
+
+    .curriculum-stats {
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+    .curriculum-tools {
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-box input {
+      width: 220px;
+
+      min-height: 40px;
+
+      padding: 0 13px 0 36px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 9px;
+
+      outline: none;
+
+      color: var(--white);
+
+      background: var(--navy-2);
+
+      font-size: 12px;
+    }
+
+    .search-box input:focus {
+      border-color:
+        rgba(0,200,150,.45);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(0,200,150,.06);
+    }
+
+    .search-icon {
+      position: absolute;
+
+      left: 12px;
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    .accordion {
+      overflow: hidden;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 15px;
+    }
+
+    .lesson-group + .lesson-group {
+      border-top: 1px solid var(--line);
+    }
+
+    .lesson-head {
+      width: 100%;
+
+      min-height: 74px;
+
+      padding: 15px 18px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      text-align: left;
+
+      border: 0;
+
+      background:
+        rgba(0,36,61,.72);
+
+      color: var(--white);
+
+      cursor: pointer;
+
+      transition: .2s ease;
+    }
+
+    .lesson-head:hover {
+      background:
+        rgba(6,50,75,.85);
+    }
+
+    .lesson-left {
+      display: flex;
+
+      align-items: center;
+
+      gap: 13px;
+    }
+
+    .lesson-number {
+      width: 36px;
+      height: 36px;
+
+      flex: 0 0 36px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 9px;
+
+      background:
+        rgba(0,200,150,.08);
+
+      color: var(--green);
+
+      font-size: 11px;
+
+      font-weight: 950;
+    }
+
+    .lesson-title {
+      font-size: 13px;
+
+      font-weight: 850;
+    }
+
+    .lesson-info {
+      color: var(--muted);
+
+      font-size: 11px;
+
+      white-space: nowrap;
+    }
+
+    .arrow {
+      color: var(--green);
+
+      font-size: 17px;
+
+      transition: .25s ease;
+    }
+
+    .lesson-group.open .arrow {
+      transform: rotate(180deg);
+    }
+
+    .lesson-body {
+      display: none;
+
+      padding: 0 19px 13px;
+
+      background:
+        rgba(0,25,42,.75);
+    }
+
+    .lesson-group.open .lesson-body {
+      display: block;
+    }
+
+    .lesson-row {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      padding: 12px 4px;
+
+      border-bottom:
+        1px solid
+        rgba(175,194,208,.07);
+
+      color: var(--text-soft);
+
+      font-size: 12px;
+    }
+
+    .lesson-row:last-child {
+      border-bottom: 0;
+    }
+
+    .lesson-row-left {
+      display: flex;
+
+      align-items: center;
+
+      gap: 9px;
+    }
+
+    .play {
+      color: var(--green);
+
+      font-size: 10px;
+    }
+
+    .lesson-row-meta {
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+
+      white-space: nowrap;
+    }
+
+    .free {
+      padding: 3px 6px;
+
+      border-radius: 5px;
+
+      color: var(--green);
+
+      background:
+        rgba(0,200,150,.09);
+
+      font-size: 9px;
+
+      font-weight: 900;
+    }
+
+
+    /* =========================================================
+       ABOUT
+    ========================================================= */
+
+    .description {
+      color: var(--text-soft);
+
+      font-size: 14px;
+    }
+
+    .description p {
+      margin-bottom: 17px;
+    }
+
+    .description strong {
+      color: var(--white);
+    }
+
+    .notice {
+      margin: 21px 0;
+
+      padding: 18px;
+
+      border-left:
+        3px solid var(--green);
+
+      border-radius: 0 12px 12px 0;
+
+      background:
+        rgba(0,200,150,.06);
+
+      color: var(--text-soft);
+
+      font-size: 13px;
+    }
+
+    .notice strong {
+      color: var(--green);
+    }
+
+
+    /* =========================================================
+       INSTRUCTOR
+    ========================================================= */
+
+    .instructor-card {
+      display: grid;
+
+      grid-template-columns: 115px 1fr;
+
+      gap: 22px;
+
+      padding: 25px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: var(--radius);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(6,50,75,.58),
+          rgba(0,36,61,.35)
+        );
+    }
+
+    .instructor-photo {
+      width: 115px;
+      height: 115px;
+
+      border-radius: 18px;
+
+      object-fit: cover;
+
+      border:
+        2px solid
+        rgba(0,200,150,.30);
+
+      box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.20);
+    }
+
+    .instructor-role {
+      color: var(--green);
+
+      font-size: 10px;
+
+      font-weight: 900;
+
+      text-transform: uppercase;
+
+      letter-spacing: .12em;
+
+      margin-bottom: 5px;
+    }
+
+    .instructor-name {
+      margin-bottom: 9px;
+
+      font-size: 22px;
+
+      line-height: 1.2;
+    }
+
+    .instructor-description {
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    .instructor-stats {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 9px;
+
+      margin-top: 15px;
+    }
+
+    .stat {
+      padding: 7px 10px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 8px;
+
+      background:
+        rgba(255,255,255,.025);
+
+      color: var(--text-soft);
+
+      font-size: 11px;
+
+      font-weight: 800;
+    }
+
+
+    /* =========================================================
+       RELATED COURSES
+    ========================================================= */
+
+    .related {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap: 15px;
+    }
+
+    .related-card {
+      overflow: hidden;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 15px;
+
+      background: var(--navy-2);
+
+      transition: .25s ease;
+    }
+
+    .related-card:hover {
+      transform: translateY(-4px);
+
+      border-color:
+        rgba(0,200,150,.30);
+
+      box-shadow:
+        var(--shadow-green);
+    }
+
+    .related-cover {
+      position: relative;
+
+      height: 125px;
+
+      padding: 18px;
+
+      overflow: hidden;
+
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(0,200,150,.25),
+          transparent 30%
+        ),
+
+        linear-gradient(
+          135deg,
+          #003950,
+          #001B2E
+        );
+    }
+
+    .related-cover::after {
+      content: "";
+
+      position: absolute;
+
+      width: 100px;
+      height: 100px;
+
+      right: -25px;
+      bottom: -40px;
+
+      border-radius: 50%;
+
+      border: 1px solid
+        rgba(0,200,150,.20);
+    }
+
+    .related-label {
+      color: var(--green);
+
+      font-size: 22px;
+
+      font-weight: 950;
+
+      letter-spacing: -.05em;
+    }
+
+    .related-body {
+      padding: 15px;
+    }
+
+    .related-body h3 {
+      min-height: 48px;
+
+      margin-bottom: 8px;
+
+      font-size: 14px;
+
+      line-height: 1.35;
+    }
+
+    .related-body p {
+      color: var(--muted);
+
+      font-size: 11px;
+    }
+
+    .related-rating {
+      margin-top: 9px;
+
+      color: var(--green);
+
+      font-size: 11px;
+
+      font-weight: 800;
+    }
+
+
+    /* =========================================================
+       REVIEWS
+    ========================================================= */
+
+    .review-summary {
+      display: flex;
+
+      align-items: center;
+
+      gap: 18px;
+
+      margin-bottom: 20px;
+
+      padding: 21px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 15px;
+
+      background:
+        rgba(6,50,75,.45);
+    }
+
+    .review-score {
+      font-size: 39px;
+
+      line-height: 1;
+
+      font-weight: 950;
+    }
+
+    .review-score-stars {
+      color: var(--green);
+
+      letter-spacing: 2px;
+
+      font-size: 14px;
+    }
+
+    .review-count {
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+    .review {
+      padding: 20px 0;
+
+      border-top: 1px solid var(--line);
+    }
+
+    .review-top {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 15px;
+    }
+
+    .reviewer {
+      font-size: 13px;
+
+      font-weight: 850;
+    }
+
+    .review-date {
+      color: var(--muted);
+
+      font-size: 11px;
+    }
+
+    .review-stars {
+      margin: 5px 0;
+
+      color: var(--green);
+
+      font-size: 12px;
+
+      letter-spacing: 1px;
+    }
+
+    .review p {
+      color: var(--text-soft);
+
+      font-size: 12.5px;
+    }
+
+
+    /* =========================================================
+       SIDEBAR
+    ========================================================= */
+
+    .sidebar {
+      position: relative;
+    }
+
+    .side-card {
+      margin-bottom: 16px;
+
+      padding: 20px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 15px;
+
+      background:
+        rgba(6,50,75,.45);
+    }
+
+    .side-card h3 {
+      margin-bottom: 14px;
+
+      font-size: 16px;
+    }
+
+    .side-row {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 14px;
+
+      padding: 10px 0;
+
+      border-bottom:
+        1px solid
+        rgba(175,194,208,.07);
+
+      font-size: 12px;
+    }
+
+    .side-row:last-child {
+      border-bottom: 0;
+    }
+
+    .side-row span {
+      color: var(--muted);
+    }
+
+    .side-row strong {
+      text-align: right;
+    }
+
+    .topic-list {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 7px;
+    }
+
+
+    /* =========================================================
+       CTA
+    ========================================================= */
+
+    .cta {
+      position: relative;
+
+      overflow: hidden;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 25px;
+
+      margin-top: 20px;
+
+      padding: 30px;
+
+      border:
+        1px solid
+        rgba(0,200,150,.24);
+
+      border-radius: 20px;
+
+      background:
+        radial-gradient(
+          circle at 90% 30%,
+          rgba(0,200,150,.16),
+          transparent 30%
+        ),
+
+        linear-gradient(
+          135deg,
+          rgba(0,200,150,.08),
+          rgba(6,50,75,.60)
+        );
+    }
+
+    .cta h2 {
+      margin-bottom: 5px;
+
+      font-size: 24px;
+    }
+
+    .cta p {
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      padding: 50px 0 25px;
+
+      border-top:
+        1px solid var(--line);
+
+      background:
+        #001522;
+    }
+
+    .footer-grid {
+      display: grid;
+
+      grid-template-columns:
+        2fr 1fr 1fr 1fr;
+
+      gap: 35px;
+    }
+
+    .footer-brand {
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      margin-bottom: 14px;
+    }
+
+    .footer-brand img {
+      width: 42px;
+      height: 42px;
+
+      border-radius: 10px;
+
+      object-fit: cover;
+
+      background: white;
+    }
+
+    footer h3 {
+      margin-bottom: 12px;
+
+      color: var(--white);
+
+      font-size: 13px;
+    }
+
+    footer a {
+      display: block;
+
+      margin: 7px 0;
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      transition: .2s ease;
+    }
+
+    footer a:hover {
+      color: var(--green);
+    }
+
+    .footer-description {
+      max-width: 430px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+    .copyright {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 15px;
+
+      margin-top: 35px;
+
+      padding-top: 19px;
+
+      border-top:
+        1px solid var(--line);
+
+      color: var(--muted);
+
+      font-size: 11px;
+    }
+
+
+    /* =========================================================
+       TOAST
+    ========================================================= */
+
+    .toast {
+      position: fixed;
+
+      right: 22px;
+      bottom: 22px;
+
+      z-index: 10000;
+
+      min-width: 250px;
+
+      padding: 14px 17px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.10);
+
+      border-radius: 12px;
+
+      background:
+        var(--green);
+
+      color: var(--navy);
+
+      box-shadow: var(--shadow);
+
+      font-size: 12px;
+
+      font-weight: 900;
+
+      transform:
+        translateY(120px);
+
+      opacity: 0;
+
+      transition: .3s ease;
+    }
+
+    .toast.show {
+      transform:
+        translateY(0);
+
+      opacity: 1;
+    }
+
+
+    /* =========================================================
+       MOBILE MENU
+    ========================================================= */
+
+    @media (max-width: 1050px) {
+
+      .nav-links a {
+        padding-inline: 7px;
+
+        font-size: 11px;
+      }
+
+      .nav-actions .btn {
+        padding-inline: 12px;
+      }
+
+      .hero-grid {
+        grid-template-columns:
+          minmax(0,1fr)
+          330px;
+
+        gap: 35px;
+      }
+
+    }
+
+
+    @media (max-width: 900px) {
+
+      .nav-links {
+        position: absolute;
+
+        top: calc(100% + 8px);
+
+        left: 14px;
+        right: 14px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 4px;
+
+        padding: 12px;
+
+        border:
+          1px solid var(--line);
+
+        border-radius: 16px;
+
+        background:
+          rgba(0,27,46,.98);
+
+        backdrop-filter: blur(20px);
+
+        box-shadow:
+          0 25px 60px
+          rgba(0,0,0,.35);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        transform:
+          translateY(-10px);
+
+        transition: .25s ease;
+      }
+
+      .nav-links.open {
+        opacity: 1;
+
+        visibility: visible;
+
+        transform:
+          translateY(0);
+      }
+
+      .nav-links a {
+        width: 100%;
+
+        min-height: 45px;
+
+        padding: 0 14px;
+
+        font-size: 13px;
+      }
+
+      .nav-links a.active::after {
+        display: none;
+      }
+
+      .menu {
+        display: flex;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .purchase-card {
+        position: relative;
+
+        top: auto;
+
+        max-width: 560px;
+      }
+
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: grid;
+
+        grid-template-columns:
+          repeat(3,1fr);
+
+        gap: 14px;
+      }
+
+      .side-card {
+        margin-bottom: 0;
+      }
+
+    }
+
+
+    @media (max-width: 700px) {
+
+      .container {
+        width:
+          min(
+            calc(100% - 28px),
+            var(--container)
+          );
+      }
+
+      .nav-inner {
+        min-height: 70px;
+      }
+
+      .nav-actions {
+        display: none;
+      }
+
+      .brand img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .brand-text strong {
+        font-size: 16px;
+      }
+
+      .hero {
+        padding: 35px 0 45px;
+      }
+
+      h1 {
+        font-size: 37px;
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .learn-grid,
+      .requirements,
+      .related {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        grid-template-columns: 1fr;
+      }
+
+      .curriculum-top {
+        flex-direction: column;
+
+        align-items: stretch;
+      }
+
+      .curriculum-tools {
+        width: 100%;
+      }
+
+      .search-box,
+      .search-box input {
+        width: 100%;
+      }
+
+      .lesson-head {
+        min-height: 66px;
+
+        padding: 13px;
+      }
+
+      .lesson-info {
+        display: none;
+      }
+
+      .lesson-title {
+        font-size: 12px;
+      }
+
+      .lesson-row {
+        align-items: flex-start;
+      }
+
+      .lesson-row-meta {
+        flex-direction: column;
+
+        align-items: flex-end;
+
+        gap: 4px;
+      }
+
+      .instructor-card {
+        grid-template-columns: 1fr;
+      }
+
+      .instructor-photo {
+        width: 95px;
+        height: 95px;
+      }
+
+      .cta {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        padding: 25px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .copyright {
+        flex-direction: column;
+      }
+
+    }
+
+
+    @media (max-width: 480px) {
+
+      .topbar {
+        font-size: 11px;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .rating-row {
+        gap: 7px;
+
+        font-size: 11px;
+      }
+
+      .meta-row {
+        flex-direction: column;
+
+        gap: 7px;
+      }
+
+      .learn-box {
+        padding: 19px;
+      }
+
+      .course-cover {
+        min-height: 190px;
+      }
+
+      .purchase-content {
+        padding: 19px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .toast {
+        right: 14px;
+        left: 14px;
+
+        min-width: auto;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =======================================================
+       TOP ANNOUNCEMENT
+  ======================================================== -->
+
+  <div class="topbar">
+    🎓 30% off all courses
+    <span>Bilow barashada maanta →</span>
+  </div>
+
+
+  <!-- =======================================================
+       NAVBAR
+  ======================================================== -->
+
+  <header class="nav">
+
+    <div class="container nav-inner">
+
+      <a href="INDEX.HTML" class="brand">
+
+        <img
+          src="./Images/LOGO.jpeg"
+          alt="Caabi Academy Logo"
+        >
+
+        <div class="brand-text">
+          <strong>CAABI</strong>
+          <span>ACADEMY</span>
+        </div>
+
+      </a>
+
+
+      <nav class="nav-links" id="navLinks">
+
+        <a href="INDEX.HTML">
+          Home
+        </a>
+
+        <a href="Course.html" class="active">
+          Courses
+        </a>
+
+        <a href="Ambassador.html">
+          Ambassador
+        </a>
+
+        <a href="League.html">
+          League
+        </a>
+
+        <a href="Blog.html">
+          Blog
+        </a>
+
+        <a href="Community.html">
+          Mentorship
+        </a>
+
+        <a href="About.html">
+          About
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+      </nav>
+
+
+      <div class="nav-actions">
+
+        <button
+          class="btn"
+          onclick="showToast('Login page ayaa diyaar ah.')"
+        >
+          Login
+        </button>
+
+        <button
+          class="btn btn-primary"
+          onclick="scrollToEnroll()"
+        >
+          Bilow Hadda
+        </button>
+
+      </div>
+
+
+      <button
+        class="menu"
+        id="menuBtn"
+        aria-label="Open navigation"
+      >
+        ☰
+      </button>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =======================================================
+       HERO
+  ======================================================== -->
+
+  <section class="hero">
+
+    <div class="container">
+
+      <div class="breadcrumbs">
+
+        <a href="INDEX.HTML">
+          Home
+        </a>
+
+        <span>›</span>
+
+        <a href="Course.html">
+          Courses
+        </a>
+
+        <span>›</span>
+
+        <a href="#">
+          AI Engineering
+        </a>
+
+        <span>›</span>
+
+        <span>
+          LLM & AI Agents
+        </span>
+
+      </div>
+
+
+      <div class="hero-grid">
+
+
+        <div class="hero-content">
+
+          <div class="eyebrow">
+            AI ENGINEERING • MASTERCLASS
+          </div>
+
+
+          <h1>
+            AI Engineering Masterclass:
+            <span class="gradient-text">
+              Build LLM Apps with RAG & Agents
+            </span>
+          </h1>
+
+
+          <p class="hero-description">
+
+            Baro sida loo dhiso AI applications dhab ah:
+            Chat Apps, AI Image Editors, Chat-with-PDF RAG Systems,
+            iyo Multi-Agent Systems adigoo isticmaalaya
+            LLMs, RAG, AI SDK, Pinecone iyo Inngest.
+
+          </p>
+
+
+          <div class="advanced-warning">
+
+            ⚡
+            <b>Advanced Course</b>
+
+            — Waxaa loogu talagalay developers horey u dhisay apps.
+
+          </div>
+
+
+          <div class="rating-row">
+
+            <span class="bestseller">
+              Featured
+            </span>
+
+            <span class="stars">
+              ★★★★★
+            </span>
+
+            <strong>
+              4.9
+            </strong>
+
+            <a
+              href="#reviews"
+              class="rating-link"
+            >
+              120+ ratings
+            </a>
+
+            <span class="students">
+              1,200+ students
+            </span>
+
+          </div>
+
+
+          <div class="meta-row">
+
+            <span>
+              Created by
+              <strong>
+                Caabi Academy
+              </strong>
+            </span>
+
+            <span>
+              Updated
+              <strong>
+                2026
+              </strong>
+            </span>
+
+            <span>
+              Language
+              <strong>
+                Af-Soomaali
+              </strong>
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- PURCHASE CARD -->
+
+        <aside
+          class="purchase-card"
+          id="enroll"
+        >
+
+          <div class="course-cover">
+
+            <div class="cover-grid"></div>
+
+            <span class="cover-label">
+              ADVANCED
+            </span>
+
+            <div class="cover-content">
+
+              <div class="cover-small">
+                CAABI AI ENGINEERING
+              </div>
+
+              <div class="cover-title">
+                LLM
+                <span>×</span>
+                RAG
+                <span>×</span>
+                AI
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="purchase-content">
+
+
+            <div class="price-line">
+
+              <div class="price">
+                $19
+              </div>
+
+              <div class="old-price">
+                $30
+              </div>
+
+              <div class="discount">
+                -37%
+              </div>
+
+            </div>
+
+
+            <div class="access">
+              6 months access
+            </div>
+
+
+            <button
+              class="buy-btn"
+              onclick="enroll()"
+            >
+              Iibso Course-ka →
+            </button>
+
+
+            <button
+              class="cart-btn"
+              onclick="addToCart()"
+            >
+              + Add to Cart
+            </button>
+
+
+            <div class="secure-note">
+              🔒 Secure checkout
+              •
+              🎓 Certificate included
+            </div>
+
+
+            <div class="included">
+
+              <div class="included-title">
+                Course-kan waxa ku jira
+              </div>
+
+
+              <div class="include-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  102 video lessons
+                </span>
+
+              </div>
+
+
+              <div class="include-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  22h 26m oo content ah
+                </span>
+
+              </div>
+
+
+              <div class="include-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  Certificate of completion
+                </span>
+
+              </div>
+
+
+              <div class="include-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  6 months access
+                </span>
+
+              </div>
+
+
+              <div class="include-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  Mobile & desktop access
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </aside>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =======================================================
+       MAIN
+  ======================================================== -->
+
+  <main>
+
+    <div class="container main-grid">
+
+
+      <!-- ===================================================
+           CONTENT
+      ==================================================== -->
+
+      <div>
+
+
+        <!-- WHAT YOU'LL LEARN -->
+
+        <section class="section" id="learn">
+
+          <div class="section-header">
+
+            <h2>
+              What you'll learn
+            </h2>
+
+            <p class="section-intro">
+              Waxaad ku baran doontaa skills practical ah
+              oo aad si toos ah ugu isticmaali karto AI-powered
+              applications iyo SaaS products.
+            </p>
+
+          </div>
+
+
+          <div class="learn-box">
+
+            <div class="learn-grid">
+
+
+              <div class="learn-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  Faham sida AI loogu daro
+                  real-world applications.
+                </span>
+
+              </div>
+
+
+              <div class="learn-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  La shaqee LLMs iyo
+                  RAG pipelines.
+                </span>
+
+              </div>
+
+
+              <div class="learn-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  Ku dar Computer Vision APIs
+                  iyo Multimodal AI Systems.
+                </span>
+
+              </div>
+
+
+              <div class="learn-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  Samee chatbots iyo
+                  AI automation tools.
+                </span>
+
+              </div>
+
+
+              <div class="learn-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  Dhis AI dashboards iyo
+                  SaaS applications dhab ah.
+                </span>
+
+              </div>
+
+
+              <div class="learn-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  Ku deploy garee oo scale garee
+                  AI applications.
+                </span>
+
+              </div>
+
+
+              <div class="learn-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  Naqshadee AI products
+                  diyaar u ah users.
+                </span>
+
+              </div>
+
+
+              <div class="learn-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  Dhis Full-Stack AI Chat Apps
+                  oo production-ready ah.
+                </span>
+
+              </div>
+
+
+              <div class="learn-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  Dhis Chat-with-PDF
+                  RAG systems.
+                </span>
+
+              </div>
+
+
+              <div class="learn-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  Dhis Multi-Agent Systems
+                  iyo AI workflows.
+                </span>
+
+              </div>
+
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+
+        <!-- TOPICS -->
+
+        <section class="section">
+
+          <div class="section-header">
+
+            <h2>
+              Skills & technologies
+            </h2>
+
+          </div>
+
+
+          <div class="skills">
+
+            <span class="tag">LLMs</span>
+
+            <span class="tag">RAG</span>
+
+            <span class="tag">AI Agents</span>
+
+            <span class="tag">AI SDK</span>
+
+            <span class="tag">Pinecone</span>
+
+            <span class="tag">Inngest</span>
+
+            <span class="tag">Next.js</span>
+
+            <span class="tag">React</span>
+
+            <span class="tag">Node.js</span>
+
+            <span class="tag">PostgreSQL</span>
+
+            <span class="tag">Drizzle ORM</span>
+
+            <span class="tag">Prompt Engineering</span>
+
+            <span class="tag">Multimodal AI</span>
+
+            <span class="tag">Computer Vision</span>
+
+          </div>
+
+        </section>
+
+
+
+        <!-- REQUIREMENTS -->
+
+        <section class="section">
+
+          <div class="section-header">
+
+            <h2>
+              Is this course for you?
+            </h2>
+
+            <p class="section-intro">
+              Course-kan ma aha programming beginner course.
+              Waxaad u baahan tahay foundation developer ah.
+            </p>
+
+          </div>
+
+
+          <div class="requirements">
+
+
+            <div class="requirement">
+
+              <div class="requirement-icon">
+                JS
+              </div>
+
+              <h3>
+                JavaScript
+              </h3>
+
+              <p>
+                Waa inaad faham fiican ka haysataa
+                JavaScript fundamentals.
+              </p>
+
+            </div>
+
+
+            <div class="requirement">
+
+              <div class="requirement-icon">
+                ⚛
+              </div>
+
+              <h3>
+                React / Next.js
+              </h3>
+
+              <p>
+                Waa inaad horey ugu shaqaysay
+                React ama Next.js.
+              </p>
+
+            </div>
+
+
+            <div class="requirement">
+
+              <div class="requirement-icon">
+                API
+              </div>
+
+              <h3>
+                APIs
+              </h3>
+
+              <p>
+                Faham basic ah oo ku saabsan
+                APIs iyo integrations.
+              </p>
+
+            </div>
+
+
+            <div class="requirement">
+
+              <div class="requirement-icon">
+                DB
+              </div>
+
+              <h3>
+                Databases
+              </h3>
+
+              <p>
+                Basic understanding of
+                databases ayaa ku filan.
+              </p>
+
+            </div>
+
+
+            <div class="requirement">
+
+              <div class="requirement-icon">
+                N
+              </div>
+
+              <h3>
+                Node.js
+              </h3>
+
+              <p>
+                Basic Node.js knowledge
+                ayaa lagaa filayaa.
+              </p>
+
+            </div>
+
+
+            <div class="requirement">
+
+              <div class="requirement-icon">
+                VS
+              </div>
+
+              <h3>
+                VS Code
+              </h3>
+
+              <p>
+                Laptop iyo modern code editor
+                sida VS Code.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="notice">
+
+            ⚡
+            <strong>Important:</strong>
+
+            Course-kan waa ADVANCED.
+            Waxaa loogu talagalay developers horey
+            u dhisay applications, ma aha qof markii ugu
+            horreysay baranaya programming.
+
+          </div>
+
+        </section>
+
+
+
+        <!-- CURRICULUM -->
+
+        <section
+          class="section"
+          id="curriculum"
+        >
+
+          <div class="curriculum-top">
+
+            <div>
+
+              <h2>
+                Course curriculum
+              </h2>
+
+              <div class="curriculum-stats">
+                10 sections •
+                102 lessons •
+                22h 26m total
+              </div>
+
+            </div>
+
+
+            <div class="curriculum-tools">
+
+              <div class="search-box">
+
+                <span class="search-icon">
+                  🔍
+                </span>
+
+                <input
+                  id="curriculumSearch"
+                  type="search"
+                  placeholder="Search lessons..."
+                >
+
+              </div>
+
+
+              <button
+                class="btn"
+                onclick="toggleAll()"
+              >
+                Expand all
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="accordion"
+            id="accordion"
+          >
+
+
+            <!-- 01 -->
+
+            <div class="lesson-group open">
+
+              <button class="lesson-head">
+
+                <div class="lesson-left">
+
+                  <span class="lesson-number">
+                    01
+                  </span>
+
+                  <span class="lesson-title">
+                    AI Foundations
+                  </span>
+
+                </div>
+
+                <span class="lesson-info">
+                  5 lessons • 1h 30m
+                </span>
+
+                <span class="arrow">
+                 ⌄
+                </span>
+
+              </button>
+
+
+              <div class="lesson-body">
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Course Intro
+                  </div>
+
+                  <div class="lesson-row-meta">
+
+                    <span class="free">
+                      FREE
+                    </span>
+
+                    <span>
+                      08:32
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    What is Artificial Intelligence?
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    21:54
+                  </div>
+
+                </div>
+
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    What is AI Engineering?
+                  </div>
+
+                  <div class="lesson-row-meta">
+
+                    <span class="free">
+                      FREE
+                    </span>
+
+                    13:57
+
+                  </div>
+
+                </div>
+
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Large Language Models Deep Dive
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    15:02
+                  </div>
+
+                </div>
+
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Essential AI / LLM Terminology
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    23:36
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- 02 -->
+
+            <div class="lesson-group">
+
+              <button class="lesson-head">
+
+                <div class="lesson-left">
+
+                  <span class="lesson-number">
+                    02
+                  </span>
+
+                  <span class="lesson-title">
+                    AI APIs & Integration Patterns
+                  </span>
+
+                </div>
+
+                <span class="lesson-info">
+                  7 lessons • 1h 10m
+                </span>
+
+                <span class="arrow">
+                 ⌄
+                </span>
+
+              </button>
+
+
+              <div class="lesson-body">
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Working with AI APIs
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    11:32
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    API Authentication
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    13:41
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Streaming AI Responses
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    15:27
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- 03 -->
+
+            <div class="lesson-group">
+
+              <button class="lesson-head">
+
+                <div class="lesson-left">
+
+                  <span class="lesson-number">
+                    03
+                  </span>
+
+                  <span class="lesson-title">
+                    AI SDK
+                  </span>
+
+                </div>
+
+                <span class="lesson-info">
+                  8 lessons • 1h 45m
+                </span>
+
+                <span class="arrow">
+                 ⌄
+                </span>
+
+              </button>
+
+
+              <div class="lesson-body">
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    AI SDK Fundamentals
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    14:22
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Generative UI
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    17:40
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Streaming & Tool Calling
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    18:16
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- 04 -->
+
+            <div class="lesson-group">
+
+              <button class="lesson-head">
+
+                <div class="lesson-left">
+
+                  <span class="lesson-number">
+                    04
+                  </span>
+
+                  <span class="lesson-title">
+                    Better Auth with Drizzle ORM & PostgreSQL
+                  </span>
+
+                </div>
+
+                <span class="lesson-info">
+                  5 lessons • 1h 24m
+                </span>
+
+                <span class="arrow">
+                 ⌄
+                </span>
+
+              </button>
+
+
+              <div class="lesson-body">
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Database Architecture
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    15:31
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Drizzle ORM Setup
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    18:42
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Authentication Flow
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    20:10
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- 05 -->
+
+            <div class="lesson-group">
+
+              <button class="lesson-head">
+
+                <div class="lesson-left">
+
+                  <span class="lesson-number">
+                    05
+                  </span>
+
+                  <span class="lesson-title">
+                    Full Stack AI Chat App
+                  </span>
+
+                </div>
+
+                <span class="lesson-info">
+                  9 lessons • 1h 59m
+                </span>
+
+                <span class="arrow">
+                 ⌄
+                </span>
+
+              </button>
+
+
+              <div class="lesson-body">
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Building the AI Chat Interface
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    18:24
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Connecting the AI Model
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    21:17
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Message Persistence
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    16:52
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Production Improvements
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    22:11
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- 06 -->
+
+            <div class="lesson-group">
+
+              <button class="lesson-head">
+
+                <div class="lesson-left">
+
+                  <span class="lesson-number">
+                    06
+                  </span>
+
+                  <span class="lesson-title">
+                    AI Image Editor
+                  </span>
+
+                </div>
+
+                <span class="lesson-info">
+                  11 lessons • 2h 37m
+                </span>
+
+                <span class="arrow">
+                 ⌄
+                </span>
+
+              </button>
+
+
+              <div class="lesson-body">
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Image Generation APIs
+                  </div>
+
+                  <div class="lesson-row-meta">
+
+                    <span class="free">
+                      FREE
+                    </span>
+
+                    16:44
+
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Upload & Image Processing
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    22:05
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    AI Editing Workflow
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    24:18
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- 07 -->
+
+            <div class="lesson-group">
+
+              <button class="lesson-head">
+
+                <div class="lesson-left">
+
+                  <span class="lesson-number">
+                    07
+                  </span>
+
+                  <span class="lesson-title">
+                    RAG Systems — Chat With PDF
+                  </span>
+
+                </div>
+
+                <span class="lesson-info">
+                  22 lessons • 4h 29m
+                </span>
+
+                <span class="arrow">
+                 ⌄
+                </span>
+
+              </button>
+
+
+              <div class="lesson-body">
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    What is RAG?
+                  </div>
+
+                  <div class="lesson-row-meta">
+
+                    <span class="free">
+                      FREE
+                    </span>
+
+                    17:22
+
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    PDF Processing
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    19:41
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Embeddings
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    22:17
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Pinecone Vector Database
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    24:31
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Building Chat With PDF
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    28:04
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- 08 -->
+
+            <div class="lesson-group">
+
+              <button class="lesson-head">
+
+                <div class="lesson-left">
+
+                  <span class="lesson-number">
+                    08
+                  </span>
+
+                  <span class="lesson-title">
+                    AI Agents — Inngest
+                  </span>
+
+                </div>
+
+                <span class="lesson-info">
+                  11 lessons • 2h 24m
+                </span>
+
+                <span class="arrow">
+                 ⌄
+                </span>
+
+              </button>
+
+
+              <div class="lesson-body">
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Introduction to AI Agents
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    18:42
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Agent Tools
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    20:13
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Inngest Workflows
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    25:21
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- 09 -->
+
+            <div class="lesson-group">
+
+              <button class="lesson-head">
+
+                <div class="lesson-left">
+
+                  <span class="lesson-number">
+                    09
+                  </span>
+
+                  <span class="lesson-title">
+                    Multi-Agent System
+                  </span>
+
+                </div>
+
+                <span class="lesson-info">
+                  16 lessons • 3h 26m
+                </span>
+
+                <span class="arrow">
+                 ⌄
+                </span>
+
+              </button>
+
+
+              <div class="lesson-body">
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Multi-Agent Architecture
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    21:22
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Agent Communication
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    24:41
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Building Specialized Agents
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    29:18
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+            <!-- 10 -->
+
+            <div class="lesson-group">
+
+              <button class="lesson-head">
+
+                <div class="lesson-left">
+
+                  <span class="lesson-number">
+                    10
+                  </span>
+
+                  <span class="lesson-title">
+                    Fine-Tuning & Open Source Models
+                  </span>
+
+                </div>
+
+                <span class="lesson-info">
+                  8 lessons • 1h 37m
+                </span>
+
+                <span class="arrow">
+                 ⌄
+                </span>
+
+              </button>
+
+
+              <div class="lesson-body">
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Open Source LLMs
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    16:21
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Model Selection
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    19:42
+                  </div>
+
+                </div>
+
+                <div class="lesson-row">
+
+                  <div class="lesson-row-left">
+                    <span class="play">▶</span>
+                    Fine-Tuning Fundamentals
+                  </div>
+
+                  <div class="lesson-row-meta">
+                    22:17
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </section>
+
+
+
+        <!-- DESCRIPTION -->
+
+        <section class="section">
+
+          <div class="section-header">
+
+            <h2>
+              About this course
+            </h2>
+
+          </div>
+
+
+          <div class="description">
+
+            <div class="notice">
+
+              <strong>Ogeysiis muhiim ah:</strong>
+
+              Course-kan waa
+              <strong>ADVANCED</strong>
+              waxaana loogu talagalay developers
+              horey u dhisay applications.
+
+              Haddii aad taqaan JavaScript,
+              React/Next.js iyo Node.js,
+              course-kan ayaa si gaar ah kuugu habboon.
+
+            </div>
+
+
+            <p>
+
+              AI Engineering wuxuu si degdeg ah u noqonayaa
+              mid ka mid ah xirfadaha ugu muhiimsan ee software
+              development-ka casriga ah.
+
+              Course-kan wuxuu ku barayaa sida aad
+              AI ugu dhex dari karto applications-kaaga
+              halkii aad theory oo keliya ku baran lahayd.
+
+            </p>
+
+
+            <p>
+
+              Waxaad si hands-on ah u dhisi doontaa
+              <strong>AI Chat Applications</strong>,
+              <strong>AI Image Editors</strong>,
+              <strong>Chat-with-PDF RAG Systems</strong>
+              iyo <strong>Multi-Agent Systems</strong>.
+
+            </p>
+
+
+            <p>
+
+              Inta aad course-ka ku jirto waxaad la shaqayn
+              doontaa LLM APIs, RAG pipelines,
+              vector databases, AI agents,
+              authentication, databases iyo
+              production deployment patterns.
+
+            </p>
+
+
+            <p>
+
+              Ujeeddadu ma aha oo keliya inaad fahanto
+              waxa AI yahay — laakiin inaad awooddo inaad
+              <strong>dhisto, deploy-gareyso, oo scale-gareyso
+              AI-powered applications dhab ah.</strong>
+
+            </p>
+
+          </div>
+
+        </section>
+
+
+
+        <!-- INSTRUCTOR -->
+
+        <section class="section">
+
+          <div class="section-header">
+
+            <h2>
+              Your instructor
+            </h2>
+
+          </div>
+
+
+          <div class="instructor-card">
+
+            <img
+              class="instructor-photo"
+              src="./Images/LOGO.jpeg"
+              alt="Caabi Academy Instructor"
+            >
+
+
+            <div>
+
+              <div class="instructor-role">
+                AI Engineering Instructor
+              </div>
+
+              <h3 class="instructor-name">
+                Caabi Academy
+              </h3>
+
+              <p class="instructor-description">
+
+                Waxaa lagu barayaa practical AI Engineering
+                iyadoo diiradda la saarayo projects dhab ah,
+                modern web technologies, LLM applications,
+                RAG, AI agents iyo production workflows.
+
+              </p>
+
+
+              <div class="instructor-stats">
+
+                <span class="stat">
+                  🎓 AI Engineering
+                </span>
+
+                <span class="stat">
+                  💻 Full-Stack Development
+                </span>
+
+                <span class="stat">
+                  🤖 LLM Applications
+                </span>
+
+                <span class="stat">
+                  🚀 Real Projects
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+
+        <!-- RELATED COURSES -->
+
+        <section class="section">
+
+          <div class="section-header">
+
+            <h2>
+              You may also like
+            </h2>
+
+            <p class="section-intro">
+              Koorsooyin kale oo kaa caawinaya
+              inaad sii horumariso xirfadahaaga.
+            </p>
+
+          </div>
+
+
+          <div class="related">
+
+
+            <article class="related-card">
+
+              <div class="related-cover">
+
+                <div class="related-label">
+                  NEXT
+                </div>
+
+              </div>
+
+              <div class="related-body">
+
+                <h3>
+                  Next.js Masterclass:
+                  Build Full-Stack Apps
+                </h3>
+
+                <p>
+                  Intermediate • 18h
+                </p>
+
+                <div class="related-rating">
+                  ★★★★★ 4.8
+                </div>
+
+              </div>
+
+            </article>
+
+
+
+            <article class="related-card">
+
+              <div class="related-cover">
+
+                <div class="related-label">
+                  MERN
+                </div>
+
+              </div>
+
+              <div class="related-body">
+
+                <h3>
+                  MERN Stack:
+                  Build Full-Stack Apps
+                </h3>
+
+                <p>
+                  Intermediate • 20h
+                </p>
+
+                <div class="related-rating">
+                  ★★★★★ 4.8
+                </div>
+
+              </div>
+
+            </article>
+
+
+
+            <article class="related-card">
+
+              <div class="related-cover">
+
+                <div class="related-label">
+                  SAAS
+                </div>
+
+              </div>
+
+              <div class="related-body">
+
+                <h3>
+                  SaaS Engineering:
+                  Build & Deploy Apps
+                </h3>
+
+                <p>
+                  Advanced • 16h
+                </p>
+
+                <div class="related-rating">
+                  ★★★★★ 4.9
+                </div>
+
+              </div>
+
+            </article>
+
+
+          </div>
+
+        </section>
+
+
+
+        <!-- REVIEWS -->
+
+        <section
+          class="section"
+          id="reviews"
+        >
+
+          <div class="section-header">
+
+            <h2>
+              Student reviews
+            </h2>
+
+          </div>
+
+
+          <div class="review-summary">
+
+            <div class="review-score">
+              4.9
+            </div>
+
+            <div>
+
+              <div class="review-score-stars">
+                ★★★★★
+              </div>
+
+              <div class="review-count">
+                Based on 120+ student ratings
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="review">
+
+            <div class="review-top">
+
+              <span class="reviewer">
+                Ahmed
+              </span>
+
+              <span class="review-date">
+                2 weeks ago
+              </span>
+
+            </div>
+
+            <div class="review-stars">
+              ★★★★★
+            </div>
+
+            <p>
+              Course-ku waa practical. Waxaan si gaar ah
+              uga helay RAG iyo AI Agents projects-ka.
+            </p>
+
+          </div>
+
+
+          <div class="review">
+
+            <div class="review-top">
+
+              <span class="reviewer">
+                Mohamed
+              </span>
+
+              <span class="review-date">
+                1 month ago
+              </span>
+
+            </div>
+
+            <div class="review-stars">
+              ★★★★★
+            </div>
+
+            <p>
+              Aad ayuu ugu fiican yahay developer horey
+              u yaqaan React iyo Next.js oo doonaya
+              inuu AI ku daro applications-kiisa.
+            </p>
+
+          </div>
+
+
+          <div class="review">
+
+            <div class="review-top">
+
+              <span class="reviewer">
+                Yusuf
+              </span>
+
+              <span class="review-date">
+                1 month ago
+              </span>
+
+            </div>
+
+            <div class="review-stars">
+              ★★★★★
+            </div>
+
+            <p>
+              Projects-ka ayaa course-ka ka dhigaya mid
+              qiimo badan. Waxaa si fiican loogu fahmayaa
+              sida AI application dhab ah loo dhiso.
+            </p>
+
+          </div>
+
+        </section>
+
+
+
+        <!-- CTA -->
+
+        <section class="cta">
+
+          <div>
+
+            <h2>
+              Diyaar ma u tahay inaad AI dhisto?
+            </h2>
+
+            <p>
+              Bilow AI Engineering Masterclass
+              oo dhis applications dhab ah.
+            </p>
+
+          </div>
+
+
+          <button
+            class="btn btn-primary"
+            onclick="scrollToEnroll()"
+          >
+            Start Learning →
+          </button>
+
+        </section>
+
+
+      </div>
+
+
+
+      <!-- ===================================================
+           SIDEBAR
+      ==================================================== -->
+
+      <aside class="sidebar">
+
+
+        <div class="side-card">
+
+          <h3>
+            Course details
+          </h3>
+
+
+          <div class="side-row">
+
+            <span>
+              Level
+            </span>
+
+            <strong>
+              Advanced
+            </strong>
+
+          </div>
+
+
+          <div class="side-row">
+
+            <span>
+              Lessons
+            </span>
+
+            <strong>
+              102
+            </strong>
+
+          </div>
+
+
+          <div class="side-row">
+
+            <span>
+              Sections
+            </span>
+
+            <strong>
+              10
+            </strong>
+
+          </div>
+
+
+          <div class="side-row">
+
+            <span>
+              Duration
+            </span>
+
+            <strong>
+              22h 26m
+            </strong>
+
+          </div>
+
+
+          <div class="side-row">
+
+            <span>
+              Language
+            </span>
+
+            <strong>
+              Somali
+            </strong>
+
+          </div>
+
+
+          <div class="side-row">
+
+            <span>
+              Access
+            </span>
+
+            <strong>
+              6 Months
+            </strong>
+
+          </div>
+
+
+          <div class="side-row">
+
+            <span>
+              Certificate
+            </span>
+
+            <strong>
+              Yes
+            </strong>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="side-card">
+
+          <h3>
+            Technologies
+          </h3>
+
+
+          <div class="topic-list">
+
+            <span class="tag">
+              LLM
+            </span>
+
+            <span class="tag">
+              RAG
+            </span>
+
+            <span class="tag">
+              AI Agents
+            </span>
+
+            <span class="tag">
+              Next.js
+            </span>
+
+            <span class="tag">
+              React
+            </span>
+
+            <span class="tag">
+              Node.js
+            </span>
+
+            <span class="tag">
+              Pinecone
+            </span>
+
+            <span class="tag">
+              Inngest
+            </span>
+
+            <span class="tag">
+              PostgreSQL
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="side-card">
+
+          <h3>
+            Course includes
+          </h3>
+
+
+          <div class="side-row">
+
+            <span>
+              Video lessons
+            </span>
+
+            <strong>
+              102
+            </strong>
+
+          </div>
+
+
+          <div class="side-row">
+
+            <span>
+              Video content
+            </span>
+
+            <strong>
+              22h 26m
+            </strong>
+
+          </div>
+
+
+          <div class="side-row">
+
+            <span>
+              Projects
+            </span>
+
+            <strong>
+              4+
+            </strong>
+
+          </div>
+
+
+          <div class="side-row">
+
+            <span>
+              Certificate
+            </span>
+
+            <strong>
+              Included
+            </strong>
+
+          </div>
+
+        </div>
+
+
+      </aside>
+
+
+    </div>
+
+  </main>
+
+
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+
+        <div>
+
+          <div class="footer-brand">
+
+            <img
+              src="./Images/LOGO.jpeg"
+              alt="Caabi Academy"
+            >
+
+            <div class="brand-text">
+
+              <strong>
+                CAABI
+              </strong>
+
+              <span>
+                ACADEMY
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <p class="footer-description">
+
+            Baro xirfadaha casriga ah.
+            Dhis projects dhab ah.
+            U diyaargarow mustaqbalka digital-ka.
+
+          </p>
+
+        </div>
+
+
+
+        <div>
+
+          <h3>
+            Learning
+          </h3>
+
+          <a href="#learn">
+            What you'll learn
+          </a>
+
+          <a href="#curriculum">
+            Curriculum
+          </a>
+
+          <a href="#reviews">
+            Reviews
+          </a>
+
+          <a href="Course.html">
+            All Courses
+          </a>
+
+        </div>
+
+
+
+        <div>
+
+          <h3>
+            Categories
+          </h3>
+
+          <a href="#">
+            AI Engineering
+          </a>
+
+          <a href="#">
+            Web Development
+          </a>
+
+          <a href="#">
+            Graphic Design
+          </a>
+
+          <a href="#">
+            Video Editing
+          </a>
+
+        </div>
+
+
+
+        <div>
+
+          <h3>
+            Company
+          </h3>
+
+          <a href="About.html">
+            About
+          </a>
+
+          <a href="Community.html">
+            Community
+          </a>
+
+          <a href="contact.html">
+            Contact
+          </a>
+
+          <a href="#">
+            Terms & Privacy
+          </a>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="copyright">
+
+        <span>
+          © 2026 Caabi Academy. All rights reserved.
+        </span>
+
+        <span>
+          Proudly built in Somalia 🇸🇴
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- TOAST -->
+
+  <div
+    class="toast"
+    id="toast"
+  >
+    Course-ka waa lagu daray! 🚀
+  </div>
+
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
+
+  <script>
+
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
+
+    const menuBtn =
+      document.getElementById("menuBtn");
+
+    const navLinks =
+      document.getElementById("navLinks");
+
+
+    menuBtn.addEventListener(
+      "click",
+      () => {
+
+        navLinks.classList.toggle("open");
+
+        menuBtn.textContent =
+          navLinks.classList.contains("open")
+            ? "×"
+            : "☰";
+
+      }
+    );
+
+
+    /* Close menu after click */
+
+    document
+      .querySelectorAll(".nav-links a")
+      .forEach(link => {
+
+        link.addEventListener(
+          "click",
+          () => {
+
+            navLinks.classList.remove("open");
+
+            menuBtn.textContent = "☰";
+
+          }
+        );
+
+      });
+
+
+
+    /* =====================================================
+       ACCORDION
+    ===================================================== */
+
+    const groups =
+      [...document.querySelectorAll(".lesson-group")];
+
+
+    document
+      .querySelectorAll(".lesson-head")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const group =
+              button.parentElement;
+
+            group.classList.toggle("open");
+
+          }
+        );
+
+      });
+
+
+
+    /* =====================================================
+       EXPAND ALL
+    ===================================================== */
+
+    function toggleAll() {
+
+      const allOpen =
+        groups.every(
+          group =>
+            group.classList.contains("open")
+        );
+
+
+      groups.forEach(group => {
+
+        group.classList.toggle(
+          "open",
+          !allOpen
+        );
+
+      });
+
+    }
+
+
+
+    /* =====================================================
+       CURRICULUM SEARCH
+    ===================================================== */
+
+    const curriculumSearch =
+      document.getElementById(
+        "curriculumSearch"
+      );
+
+
+    curriculumSearch.addEventListener(
+      "input",
+      function () {
+
+        const query =
+          this.value
+            .trim()
+            .toLowerCase();
+
+
+        groups.forEach(group => {
+
+          const text =
+            group.innerText.toLowerCase();
+
+
+          if (!query) {
+
+            group.style.display = "";
+
+            return;
+
+          }
+
+
+          if (text.includes(query)) {
+
+            group.style.display = "";
+
+            group.classList.add("open");
+
+          } else {
+
+            group.style.display = "none";
+
+          }
+
+        });
+
+      }
+    );
+
+
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+
+    let toastTimer;
+
+
+    function showToast(message) {
+
+      const toast =
+        document.getElementById("toast");
+
+
+      toast.textContent = message;
+
+      toast.classList.add("show");
+
+
+      clearTimeout(toastTimer);
+
+
+      toastTimer =
+        setTimeout(
+          () => {
+
+            toast.classList.remove("show");
+
+          },
+          2500
+        );
+
+    }
+
+
+
+    /* =====================================================
+       ENROLL
+    ===================================================== */
+
+    function enroll() {
+
+      showToast(
+        "🎓 Course-ka waxaa lagu bilaabayaa checkout!"
+      );
+
+      /*
+        Connect your real payment page here.
+
+        Example:
+
+        window.location.href =
+          "payment.html?course=ai-engineering";
+      */
+
+    }
+
+
+
+    /* =====================================================
+       ADD TO CART
+    ===================================================== */
+
+    function addToCart() {
+
+      showToast(
+        "🛒 AI Engineering Course waxaa lagu daray cart-ka!"
+      );
+
+      /*
+        Connect your real cart system here.
+      */
+
+    }
+
+
+
+    /* =====================================================
+       SCROLL TO ENROLL
+    ===================================================== */
+
+    function scrollToEnroll() {
+
+      const card =
+        document.getElementById("enroll");
+
+
+      card.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+
+    }
+
+
+
+    /* =====================================================
+       ESC KEY — CLOSE MOBILE MENU
+    ===================================================== */
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (event.key === "Escape") {
+
+          navLinks.classList.remove("open");
+
+          menuBtn.textContent = "☰";
+
+        }
+
+      }
+    );
+
+
+  </script>
+
+</body>
+</html>

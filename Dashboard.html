@@ -1,0 +1,3745 @@
+
+<!DOCTYPE html>
+<html lang="so">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard | Caabi Academy</title>
+
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           ROOT
+        ===================================================== */
+
+        :root {
+            --green: #00C896;
+            --green-light: #00e6ad;
+
+            --bg: #050d11;
+            --sidebar: #071217;
+            --card: #0b191f;
+            --card-2: #0e2027;
+
+            --white: #ffffff;
+            --text: #dce8ed;
+            --muted: #7f96a3;
+            --border: rgba(255,255,255,0.07);
+
+            --danger: #ff6b6b;
+            --warning: #f5c451;
+
+            --sidebar-width: 265px;
+        }
+
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+
+            background: var(--bg);
+
+            color: var(--text);
+
+            min-height: 100vh;
+
+            overflow-x: hidden;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: var(--sidebar-width);
+            height: 100vh;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #071217 0%,
+                    #061015 100%
+                );
+
+            border-right: 1px solid var(--border);
+
+            z-index: 1000;
+
+            display: flex;
+            flex-direction: column;
+
+            transition: transform .3s ease;
+        }
+
+
+        /* LOGO */
+
+        .sidebar-logo {
+            height: 82px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 11px;
+
+            padding: 0 23px;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-logo img {
+            width: 43px;
+            height: 43px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border: 2px solid var(--green);
+        }
+
+        .sidebar-logo-text {
+            display: flex;
+            flex-direction: column;
+
+            line-height: 1;
+        }
+
+        .sidebar-logo-text strong {
+            color: var(--white);
+
+            font-size: 18px;
+            font-weight: 900;
+
+            letter-spacing: 1px;
+        }
+
+        .sidebar-logo-text span {
+            color: var(--green);
+
+            font-size: 8px;
+            font-weight: 800;
+
+            letter-spacing: 3px;
+
+            margin-top: 5px;
+        }
+
+
+        /* SIDEBAR NAV */
+
+        .sidebar-content {
+            flex: 1;
+
+            overflow-y: auto;
+
+            padding: 22px 13px;
+        }
+
+        .sidebar-label {
+            color: #506772;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            padding: 0 13px;
+
+            margin-bottom: 9px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+
+            margin-bottom: 25px;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 4px;
+        }
+
+        .sidebar-link {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 12px 13px;
+
+            color: var(--muted);
+
+            border-radius: 10px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            border: none;
+
+            background: transparent;
+
+            transition: .2s ease;
+
+            text-align: left;
+        }
+
+        .sidebar-link:hover {
+            color: var(--white);
+
+            background: rgba(255,255,255,.035);
+        }
+
+        .sidebar-link.active {
+            color: var(--green);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(0,200,150,.13),
+                    rgba(0,200,150,.035)
+                );
+        }
+
+        .sidebar-icon {
+            width: 20px;
+            height: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 15px;
+
+            flex-shrink: 0;
+        }
+
+        .notification-dot {
+            margin-left: auto;
+
+            width: 7px;
+            height: 7px;
+
+            background: var(--green);
+
+            border-radius: 50%;
+        }
+
+
+        /* SIDEBAR BOTTOM */
+
+        .sidebar-bottom {
+            padding: 13px;
+
+            border-top: 1px solid var(--border);
+        }
+
+        .sidebar-user {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 10px;
+        }
+
+        .sidebar-user-avatar {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+
+            color: #001b2e;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .sidebar-user-info {
+            min-width: 0;
+        }
+
+        .sidebar-user-info strong {
+            display: block;
+
+            color: var(--white);
+
+            font-size: 12px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+        .sidebar-user-info span {
+            display: block;
+
+            color: var(--muted);
+
+            font-size: 10px;
+
+            margin-top: 3px;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main {
+            margin-left: var(--sidebar-width);
+
+            min-height: 100vh;
+        }
+
+
+        /* =====================================================
+           TOPBAR
+        ===================================================== */
+
+        .topbar {
+            height: 82px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 34px;
+
+            border-bottom: 1px solid var(--border);
+
+            background: rgba(5,13,17,.82);
+
+            backdrop-filter: blur(18px);
+
+            position: sticky;
+            top: 0;
+
+            z-index: 500;
+        }
+
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+
+            gap: 15px;
+        }
+
+        .mobile-sidebar-btn {
+            display: none;
+
+            width: 40px;
+            height: 40px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 9px;
+
+            background: var(--card);
+
+            color: var(--white);
+
+            font-size: 19px;
+        }
+
+        .topbar-title h1 {
+            color: var(--white);
+
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .topbar-title p {
+            color: var(--muted);
+
+            font-size: 11px;
+
+            margin-top: 4px;
+        }
+
+
+        /* TOPBAR RIGHT */
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .topbar-icon {
+            position: relative;
+
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid var(--border);
+
+            border-radius: 10px;
+
+            background: var(--card);
+
+            color: var(--muted);
+
+            font-size: 16px;
+
+            transition: .2s;
+        }
+
+        .topbar-icon:hover {
+            color: var(--green);
+
+            border-color: rgba(0,200,150,.3);
+        }
+
+        .notification-badge {
+            position: absolute;
+
+            top: 7px;
+            right: 7px;
+
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+        }
+
+
+        /* TOP PROFILE */
+
+        .top-profile {
+            position: relative;
+        }
+
+        .top-profile-button {
+            display: flex;
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 4px 8px 4px 4px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 11px;
+
+            color: var(--white);
+        }
+
+        .top-avatar {
+            width: 37px;
+            height: 37px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: var(--green);
+
+            color: #001b2e;
+
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .top-profile-info {
+            text-align: left;
+        }
+
+        .top-profile-info strong {
+            display: block;
+
+            font-size: 11px;
+
+            max-width: 105px;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+            white-space: nowrap;
+        }
+
+        .top-profile-info span {
+            display: block;
+
+            color: var(--muted);
+
+            font-size: 9px;
+
+            margin-top: 2px;
+        }
+
+        .top-arrow {
+            color: var(--muted);
+
+            font-size: 14px;
+        }
+
+
+        /* TOP PROFILE MENU */
+
+        .top-profile-menu {
+            position: absolute;
+
+            top: calc(100% + 10px);
+            right: 0;
+
+            width: 220px;
+
+            padding: 8px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 13px;
+
+            box-shadow: 0 20px 60px rgba(0,0,0,.45);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: translateY(-7px);
+
+            transition: .2s;
+        }
+
+        .top-profile-menu.show {
+            opacity: 1;
+            visibility: visible;
+
+            transform: translateY(0);
+        }
+
+        .top-profile-menu a,
+        .top-profile-menu button {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 10px;
+
+            background: transparent;
+
+            border: none;
+
+            border-radius: 8px;
+
+            color: var(--muted);
+
+            font-size: 11px;
+            font-weight: 600;
+
+            text-align: left;
+        }
+
+        .top-profile-menu a:hover {
+            color: var(--green);
+
+            background: rgba(0,200,150,.07);
+        }
+
+        .top-profile-menu button {
+            color: var(--danger);
+        }
+
+        .top-profile-menu button:hover {
+            background: rgba(255,107,107,.07);
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
+            padding: 34px;
+        }
+
+
+        /* =====================================================
+           WELCOME
+        ===================================================== */
+
+        .welcome {
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 31px;
+
+            border-radius: 18px;
+
+            background:
+                radial-gradient(
+                    circle at 90% 0%,
+                    rgba(0,200,150,.15),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #0c1d23,
+                    #09161b
+                );
+
+            border: 1px solid var(--border);
+
+            margin-bottom: 24px;
+        }
+
+        .welcome::after {
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            right: -100px;
+            bottom: -130px;
+
+            border-radius: 50%;
+
+            border: 35px solid rgba(0,200,150,.035);
+        }
+
+        .welcome-content {
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .welcome-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 6px 10px;
+
+            border-radius: 30px;
+
+            background: rgba(0,200,150,.09);
+
+            color: var(--green);
+
+            font-size: 9px;
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 13px;
+        }
+
+        .welcome-badge::before {
+            content: "";
+
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+        }
+
+        .welcome h2 {
+            color: var(--white);
+
+            font-size: clamp(22px, 3vw, 30px);
+
+            font-weight: 900;
+
+            letter-spacing: -.7px;
+        }
+
+        .welcome h2 span {
+            color: var(--green);
+        }
+
+        .welcome p {
+            max-width: 620px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.7;
+
+            margin-top: 9px;
+        }
+
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        .stats-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 15px;
+
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            padding: 19px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            transition: .25s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+
+            border-color: rgba(0,200,150,.18);
+        }
+
+        .stat-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 17px;
+        }
+
+        .stat-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: rgba(0,200,150,.09);
+
+            color: var(--green);
+
+            font-size: 16px;
+        }
+
+        .stat-label {
+            color: var(--muted);
+
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .stat-value {
+            color: var(--white);
+
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .stat-change {
+            color: var(--green);
+
+            font-size: 9px;
+            font-weight: 700;
+
+            margin-top: 5px;
+        }
+
+
+        /* =====================================================
+           CONTENT GRID
+        ===================================================== */
+
+        .dashboard-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.65fr)
+                minmax(280px, .85fr);
+
+            gap: 20px;
+        }
+
+
+        /* =====================================================
+           CARD
+        ===================================================== */
+
+        .card {
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 16px;
+
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 19px 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-header h3 {
+            color: var(--white);
+
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .card-header a {
+            color: var(--green);
+
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           CONTINUE LEARNING
+        ===================================================== */
+
+        .continue-course {
+            padding: 18px;
+
+            display: flex;
+
+            gap: 17px;
+        }
+
+        .course-image {
+            width: 150px;
+            height: 105px;
+
+            flex-shrink: 0;
+
+            border-radius: 11px;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #123b36,
+                    #0a171c
+                );
+
+            position: relative;
+        }
+
+        .course-image::before {
+            content: "CAABI";
+
+            position: absolute;
+
+            left: 13px;
+            top: 13px;
+
+            color: rgba(255,255,255,.3);
+
+            font-size: 10px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+        }
+
+        .course-image::after {
+            content: "LEARN";
+
+            position: absolute;
+
+            left: 13px;
+            bottom: 13px;
+
+            color: var(--green);
+
+            font-size: 17px;
+            font-weight: 900;
+        }
+
+        .course-content {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+        .course-category {
+            color: var(--green);
+
+            font-size: 9px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+        .course-content h4 {
+            color: var(--white);
+
+            font-size: 15px;
+            font-weight: 800;
+
+            margin-top: 6px;
+        }
+
+        .course-content p {
+            color: var(--muted);
+
+            font-size: 10px;
+
+            margin-top: 5px;
+        }
+
+        .progress-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-top: 14px;
+
+            color: var(--muted);
+
+            font-size: 9px;
+        }
+
+        .progress-row strong {
+            color: var(--green);
+        }
+
+        .progress-bar {
+            height: 6px;
+
+            width: 100%;
+
+            background: #14262d;
+
+            border-radius: 10px;
+
+            margin-top: 6px;
+
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+
+            width: 68%;
+
+            background: var(--green);
+
+            border-radius: inherit;
+        }
+
+        .continue-btn {
+            align-self: center;
+
+            padding: 10px 14px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: var(--green);
+
+            color: #001b2e;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+        .continue-btn:hover {
+            background: var(--green-light);
+        }
+
+
+        /* =====================================================
+           QUICK ACTIONS
+        ===================================================== */
+
+        .quick-actions {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 9px;
+
+            padding: 17px;
+        }
+
+        .quick-action {
+            padding: 14px 11px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 11px;
+
+            background: #0a171c;
+
+            color: var(--muted);
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+        .quick-action:hover {
+            color: var(--green);
+
+            border-color: rgba(0,200,150,.25);
+
+            transform: translateY(-2px);
+        }
+
+        .quick-action-icon {
+            font-size: 19px;
+
+            margin-bottom: 7px;
+        }
+
+        .quick-action span {
+            display: block;
+
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           OVERALL PROGRESS
+        ===================================================== */
+
+        .overall-progress {
+            padding: 21px;
+        }
+
+        .progress-circle-wrap {
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .progress-circle {
+            width: 120px;
+            height: 120px;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                conic-gradient(
+                    var(--green) 0deg 245deg,
+                    #172a31 245deg 360deg
+                );
+
+            position: relative;
+        }
+
+        .progress-circle::after {
+            content: "";
+
+            position: absolute;
+
+            width: 92px;
+            height: 92px;
+
+            background: var(--card);
+
+            border-radius: 50%;
+        }
+
+        .circle-number {
+            position: relative;
+
+            z-index: 2;
+
+            text-align: center;
+        }
+
+        .circle-number strong {
+            display: block;
+
+            color: var(--white);
+
+            font-size: 22px;
+            font-weight: 900;
+        }
+
+        .circle-number span {
+            color: var(--muted);
+
+            font-size: 8px;
+        }
+
+        .progress-details {
+            flex: 1;
+        }
+
+        .progress-details h4 {
+            color: var(--white);
+
+            font-size: 13px;
+
+            margin-bottom: 12px;
+        }
+
+        .progress-detail-row {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 7px 0;
+
+            border-bottom: 1px solid rgba(255,255,255,.04);
+
+            color: var(--muted);
+
+            font-size: 9px;
+        }
+
+        .progress-detail-row strong {
+            color: var(--white);
+        }
+
+
+        /* =====================================================
+           ACTIVITY
+        ===================================================== */
+
+        .activity-list {
+            padding: 8px 20px 15px;
+        }
+
+        .activity {
+            display: flex;
+
+            gap: 12px;
+
+            padding: 12px 0;
+
+            border-bottom: 1px solid rgba(255,255,255,.04);
+        }
+
+        .activity:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 32px;
+            height: 32px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background: rgba(0,200,150,.08);
+
+            color: var(--green);
+
+            font-size: 12px;
+        }
+
+        .activity-text {
+            min-width: 0;
+        }
+
+        .activity-text strong {
+            display: block;
+
+            color: var(--text);
+
+            font-size: 10px;
+
+            line-height: 1.5;
+        }
+
+        .activity-text span {
+            display: block;
+
+            color: var(--muted);
+
+            font-size: 8px;
+
+            margin-top: 3px;
+        }
+
+
+        /* =====================================================
+           CERTIFICATE
+        ===================================================== */
+
+        .certificate {
+            margin: 17px;
+
+            padding: 18px;
+
+            border-radius: 12px;
+
+            border: 1px solid rgba(0,200,150,.15);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0,200,150,.08),
+                    rgba(0,200,150,.015)
+                );
+        }
+
+        .certificate-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: rgba(0,200,150,.12);
+
+            color: var(--green);
+
+            font-size: 17px;
+
+            margin-bottom: 12px;
+        }
+
+        .certificate small {
+            color: var(--green);
+
+            font-size: 8px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+        .certificate h4 {
+            color: var(--white);
+
+            font-size: 12px;
+
+            margin-top: 6px;
+        }
+
+        .certificate p {
+            color: var(--muted);
+
+            font-size: 9px;
+
+            line-height: 1.5;
+
+            margin-top: 5px;
+        }
+
+        .certificate button {
+            width: 100%;
+
+            margin-top: 12px;
+
+            padding: 9px;
+
+            border-radius: 8px;
+
+            border: 1px solid rgba(0,200,150,.25);
+
+            background: transparent;
+
+            color: var(--green);
+
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        .certificate button:hover {
+            background: var(--green);
+
+            color: #001b2e;
+        }
+
+
+        /* =====================================================
+           COURSE SEARCH
+        ===================================================== */
+
+        .search-box {
+            position: relative;
+
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+
+            height: 45px;
+
+            padding: 0 16px 0 43px;
+
+            border-radius: 11px;
+
+            border: 1px solid var(--border);
+
+            outline: none;
+
+            background: var(--card);
+
+            color: var(--white);
+
+            font-size: 11px;
+        }
+
+        .search-box input::placeholder {
+            color: #536a75;
+        }
+
+        .search-box input:focus {
+            border-color: rgba(0,200,150,.4);
+        }
+
+        .search-icon {
+            position: absolute;
+
+            left: 16px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--muted);
+
+            font-size: 15px;
+        }
+
+
+        /* =====================================================
+           COURSES SECTION
+        ===================================================== */
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 13px;
+        }
+
+        .section-title h3 {
+            color: var(--white);
+
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .section-title span {
+            color: var(--green);
+
+            font-size: 9px;
+        }
+
+        .courses-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0,1fr));
+
+            gap: 14px;
+        }
+
+        .course-card {
+            overflow: hidden;
+
+            border-radius: 14px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            transition: .25s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-3px);
+
+            border-color: rgba(0,200,150,.2);
+        }
+
+        .course-thumb {
+            height: 120px;
+
+            position: relative;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #102f2b,
+                    #09151a
+                );
+        }
+
+        .course-thumb::after {
+            content: attr(data-title);
+
+            position: absolute;
+
+            left: 13px;
+            bottom: 12px;
+
+            color: var(--green);
+
+            font-size: 17px;
+            font-weight: 900;
+        }
+
+        .course-level {
+            position: absolute;
+
+            top: 10px;
+            right: 10px;
+
+            padding: 5px 8px;
+
+            border-radius: 20px;
+
+            background: rgba(0,0,0,.35);
+
+            color: var(--white);
+
+            font-size: 7px;
+            font-weight: 800;
+        }
+
+        .course-card-content {
+            padding: 14px;
+        }
+
+        .course-card-content h4 {
+            color: var(--white);
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+        .course-card-content p {
+            color: var(--muted);
+
+            font-size: 8px;
+
+            margin-top: 5px;
+        }
+
+        .course-card-progress {
+            margin-top: 12px;
+        }
+
+        .course-card-progress-top {
+            display: flex;
+            justify-content: space-between;
+
+            color: var(--muted);
+
+            font-size: 8px;
+        }
+
+        .course-card-progress-top strong {
+            color: var(--green);
+        }
+
+        .mini-progress {
+            height: 4px;
+
+            background: #16282f;
+
+            border-radius: 10px;
+
+            margin-top: 5px;
+
+            overflow: hidden;
+        }
+
+        .mini-progress span {
+            display: block;
+
+            height: 100%;
+
+            background: var(--green);
+        }
+
+
+        /* =====================================================
+           PAGE SECTIONS
+        ===================================================== */
+
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+
+        /* =====================================================
+           EMPTY / PLACEHOLDER
+        ===================================================== */
+
+        .placeholder {
+            min-height: 400px;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 16px;
+        }
+
+        .placeholder-icon {
+            width: 65px;
+            height: 65px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 17px;
+
+            background: rgba(0,200,150,.08);
+
+            color: var(--green);
+
+            font-size: 25px;
+
+            margin-bottom: 16px;
+        }
+
+        .placeholder h3 {
+            color: var(--white);
+
+            font-size: 16px;
+        }
+
+        .placeholder p {
+            max-width: 400px;
+
+            color: var(--muted);
+
+            font-size: 10px;
+
+            line-height: 1.7;
+
+            margin-top: 7px;
+        }
+
+
+        /* =====================================================
+           OVERLAY
+        ===================================================== */
+
+        .sidebar-overlay {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0,0,0,.55);
+
+            z-index: 900;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1200px) {
+
+            .stats-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .courses-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+        }
+
+
+        @media (max-width: 900px) {
+
+            :root {
+                --sidebar-width: 250px;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .sidebar-overlay.show {
+                display: block;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .mobile-sidebar-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page {
+                padding: 24px;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .topbar {
+                padding: 0 17px;
+            }
+
+            .top-profile-info,
+            .top-arrow {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+
+                gap: 10px;
+            }
+
+            .stat-card {
+                padding: 15px;
+            }
+
+            .stat-value {
+                font-size: 20px;
+            }
+
+            .welcome {
+                padding: 22px;
+            }
+
+            .continue-course {
+                flex-direction: column;
+            }
+
+            .course-image {
+                width: 100%;
+                height: 150px;
+            }
+
+            .continue-btn {
+                width: 100%;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-circle-wrap {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+        }
+
+
+        @media (max-width: 430px) {
+
+            .page {
+                padding: 17px;
+            }
+
+            .topbar-title h1 {
+                font-size: 14px;
+            }
+
+            .topbar-title p {
+                font-size: 9px;
+            }
+
+            .topbar-icon {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome h2 {
+                font-size: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR OVERLAY
+    ====================================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <!-- LOGO -->
+
+        <div class="sidebar-logo">
+
+            <img
+                src="./Images/LOGO.jpeg"
+                alt="Caabi Academy"
+            >
+
+            <div class="sidebar-logo-text">
+
+                <strong>CAABI</strong>
+
+                <span>ACADEMY</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <div class="sidebar-content">
+
+            <div class="sidebar-label">
+                Main Menu
+            </div>
+
+            <ul class="sidebar-menu">
+
+                <li>
+                    <button
+                        class="sidebar-link active"
+                        data-section="dashboard"
+                    >
+                        <span class="sidebar-icon">⌂</span>
+                        Dashboard
+                    </button>
+                </li>
+
+                <li>
+                    <button
+                        class="sidebar-link"
+                        data-section="courses"
+                    >
+                        <span class="sidebar-icon">▣</span>
+                        My Courses
+                    </button>
+                </li>
+
+                <li>
+                    <button
+                        class="sidebar-link"
+                        data-section="progress"
+                    >
+                        <span class="sidebar-icon">◔</span>
+                        My Progress
+                    </button>
+                </li>
+
+                <li>
+                    <button
+                        class="sidebar-link"
+                        data-section="certificates"
+                    >
+                        <span class="sidebar-icon">◇</span>
+                        Certificates
+                    </button>
+                </li>
+
+                <li>
+                    <button
+                        class="sidebar-link"
+                        data-section="community"
+                    >
+                        <span class="sidebar-icon">♧</span>
+                        Community
+                    </button>
+                </li>
+
+                <li>
+                    <button
+                        class="sidebar-link"
+                        data-section="notifications"
+                    >
+                        <span class="sidebar-icon">♢</span>
+                        Notifications
+
+                        <span class="notification-dot"></span>
+                    </button>
+                </li>
+
+            </ul>
+
+
+            <div class="sidebar-label">
+                Account
+            </div>
+
+            <ul class="sidebar-menu">
+
+                <li>
+                    <button
+                        class="sidebar-link"
+                        data-section="profile"
+                    >
+                        <span class="sidebar-icon">◉</span>
+                        My Profile
+                    </button>
+                </li>
+
+                <li>
+                    <button
+                        class="sidebar-link"
+                        data-section="settings"
+                    >
+                        <span class="sidebar-icon">⚙</span>
+                        Settings
+                    </button>
+                </li>
+
+            </ul>
+
+
+            <div class="sidebar-label">
+                Help
+            </div>
+
+            <ul class="sidebar-menu">
+
+                <li>
+                    <button
+                        class="sidebar-link"
+                        data-section="support"
+                    >
+                        <span class="sidebar-icon">?</span>
+                        Contact Support
+                    </button>
+                </li>
+
+                <li>
+                    <button
+                        class="sidebar-link"
+                        id="sidebarLogout"
+                    >
+                        <span class="sidebar-icon">↪</span>
+                        Logout
+                    </button>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- USER -->
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-user">
+
+                <div
+                    class="sidebar-user-avatar"
+                    id="sidebarAvatar"
+                >
+                    U
+                </div>
+
+                <div class="sidebar-user-info">
+
+                    <strong id="sidebarName">
+                        User
+                    </strong>
+
+                    <span>
+                        Student Account
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    class="mobile-sidebar-btn"
+                    id="mobileSidebarBtn"
+                >
+                    ☰
+                </button>
+
+                <div class="topbar-title">
+
+                    <h1>
+                        Welcome back,
+                        <span id="topName">
+                            Student
+                        </span>
+                    </h1>
+
+                    <p>
+                        Continue your learning journey today.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <!-- NOTIFICATION -->
+
+                <button
+                    class="topbar-icon"
+                    data-section="notifications"
+                >
+                    ♢
+
+                    <span class="notification-badge"></span>
+                </button>
+
+
+                <!-- PROFILE -->
+
+                <div class="top-profile">
+
+                    <button
+                        class="top-profile-button"
+                        id="topProfileButton"
+                    >
+
+                        <div
+                            class="top-avatar"
+                            id="topAvatar"
+                        >
+                            U
+                        </div>
+
+                        <div class="top-profile-info">
+
+                            <strong id="topProfileName">
+                                User
+                            </strong>
+
+                            <span>
+                                Student
+                            </span>
+
+                        </div>
+
+                        <span class="top-arrow">
+                            ⌄
+                        </span>
+
+                    </button>
+
+
+                    <!-- PROFILE MENU -->
+
+                    <div
+                        class="top-profile-menu"
+                        id="topProfileMenu"
+                    >
+
+                        <a href="#" data-section="profile">
+                            ◉ &nbsp; My Profile
+                        </a>
+
+                        <a href="#" data-section="settings">
+                            ⚙ &nbsp; Settings
+                        </a>
+
+                        <a href="#" data-section="notifications">
+                            ♢ &nbsp; Notifications
+                        </a>
+
+                        <button id="topLogout">
+                            ↪ &nbsp; Logout
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             PAGE
+        ================================================== -->
+
+        <div class="page">
+
+
+            <!-- =================================================
+                 DASHBOARD SECTION
+            ================================================== -->
+
+            <section
+                class="page-section active"
+                id="dashboard"
+            >
+
+
+                <!-- WELCOME -->
+
+                <div class="welcome">
+
+                    <div class="welcome-content">
+
+                        <div class="welcome-badge">
+                            CAABI LEARNING SPACE
+                        </div>
+
+                        <h2>
+                            Keep learning,
+                            <span id="welcomeName">
+                                Student
+                            </span>.
+                        </h2>
+
+                        <p>
+                            Ku sii wad safarkaaga waxbarasho.
+                            Baro xirfado cusub, dhammee koorsooyinka,
+                            oo dhis mustaqbalkaaga digital-ka ah.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STATS -->
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+
+                            <div class="stat-icon">
+                                ▣
+                            </div>
+
+                            <span class="stat-label">
+                                Enrolled
+                            </span>
+
+                        </div>
+
+                        <div class="stat-value">
+                            4
+                        </div>
+
+                        <div class="stat-change">
+                            +1 this month
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+
+                            <div class="stat-icon">
+                                ◔
+                            </div>
+
+                            <span class="stat-label">
+                                Learning Progress
+                            </span>
+
+                        </div>
+
+                        <div class="stat-value">
+                            68%
+                        </div>
+
+                        <div class="stat-change">
+                            +12% this week
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+
+                            <div class="stat-icon">
+                                ✓
+                            </div>
+
+                            <span class="stat-label">
+                                Completed
+                            </span>
+
+                        </div>
+
+                        <div class="stat-value">
+                            2
+                        </div>
+
+                        <div class="stat-change">
+                            Keep going!
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+
+                            <div class="stat-icon">
+                                ◇
+                            </div>
+
+                            <span class="stat-label">
+                                Certificates
+                            </span>
+
+                        </div>
+
+                        <div class="stat-value">
+                            2
+                        </div>
+
+                        <div class="stat-change">
+                            Achievement unlocked
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- MAIN DASHBOARD GRID -->
+
+                <div class="dashboard-grid">
+
+
+                    <!-- LEFT -->
+
+                    <div>
+
+
+                        <!-- CONTINUE -->
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <h3>
+                                    Continue Learning
+                                </h3>
+
+                                <a href="#" data-section="courses">
+                                    View all
+                                </a>
+
+                            </div>
+
+
+                            <div class="continue-course">
+
+                                <div class="course-image"></div>
+
+                                <div class="course-content">
+
+                                    <span class="course-category">
+                                        Video Editing
+                                    </span>
+
+                                    <h4>
+                                        Adobe Premiere Pro Masterclass
+                                    </h4>
+
+                                    <p>
+                                        Lesson 24 of 36
+                                    </p>
+
+                                    <div class="progress-row">
+
+                                        <span>
+                                            Course progress
+                                        </span>
+
+                                        <strong>
+                                            68%
+                                        </strong>
+
+                                    </div>
+
+                                    <div class="progress-bar">
+
+                                        <div
+                                            class="progress-fill"
+                                            style="width:68%"
+                                        ></div>
+
+                                    </div>
+
+                                </div>
+
+                                <button
+                                    class="continue-btn"
+                                    onclick="alert('Course player coming soon.')"
+                                >
+                                    Continue
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <br>
+
+
+                        <!-- OVERALL PROGRESS -->
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <h3>
+                                    Overall Learning Progress
+                                </h3>
+
+                                <span
+                                    style="
+                                    color:#7f96a3;
+                                    font-size:9px;
+                                    "
+                                >
+                                    This year
+                                </span>
+
+                            </div>
+
+
+                            <div class="overall-progress">
+
+                                <div class="progress-circle-wrap">
+
+                                    <div class="progress-circle">
+
+                                        <div class="circle-number">
+
+                                            <strong>
+                                                68%
+                                            </strong>
+
+                                            <span>
+                                                COMPLETE
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="progress-details">
+
+                                        <h4>
+                                            Your learning journey
+                                        </h4>
+
+                                        <div class="progress-detail-row">
+
+                                            <span>
+                                                Lessons Completed
+                                            </span>
+
+                                            <strong>
+                                                87
+                                            </strong>
+
+                                        </div>
+
+                                        <div class="progress-detail-row">
+
+                                            <span>
+                                                Total Lessons
+                                            </span>
+
+                                            <strong>
+                                                128
+                                            </strong>
+
+                                        </div>
+
+                                        <div class="progress-detail-row">
+
+                                            <span>
+                                                Learning Hours
+                                            </span>
+
+                                            <strong>
+                                                31h 45m
+                                            </strong>
+
+                                        </div>
+
+                                        <div class="progress-detail-row">
+
+                                            <span>
+                                                Current Streak
+                                            </span>
+
+                                            <strong>
+                                                7 days
+                                            </strong>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <br>
+
+
+                        <!-- RECENT ACTIVITY -->
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <h3>
+                                    Recent Activity
+                                </h3>
+
+                                <a href="#">
+                                    View history
+                                </a>
+
+                            </div>
+
+
+                            <div class="activity-list">
+
+                                <div class="activity">
+
+                                    <div class="activity-icon">
+                                        ✓
+                                    </div>
+
+                                    <div class="activity-text">
+
+                                        <strong>
+                                            You completed “Color Correction”
+                                            lesson.
+                                        </strong>
+
+                                        <span>
+                                            Adobe Premiere Pro · 2 hours ago
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="activity">
+
+                                    <div class="activity-icon">
+                                        ◇
+                                    </div>
+
+                                    <div class="activity-text">
+
+                                        <strong>
+                                            You earned a new certificate.
+                                        </strong>
+
+                                        <span>
+                                            Graphic Design Fundamentals · Yesterday
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="activity">
+
+                                    <div class="activity-icon">
+                                        ▶
+                                    </div>
+
+                                    <div class="activity-text">
+
+                                        <strong>
+                                            You started a new course.
+                                        </strong>
+
+                                        <span>
+                                            JavaScript Masterclass · 2 days ago
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- RIGHT -->
+
+                    <div>
+
+
+                        <!-- QUICK ACTIONS -->
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <h3>
+                                    Quick Actions
+                                </h3>
+
+                            </div>
+
+
+                            <div class="quick-actions">
+
+                                <div
+                                    class="quick-action"
+                                    data-section="courses"
+                                >
+
+                                    <div class="quick-action-icon">
+                                        ▣
+                                    </div>
+
+                                    <span>
+                                        Browse Courses
+                                    </span>
+
+                                </div>
+
+
+                                <div
+                                    class="quick-action"
+                                    data-section="certificates"
+                                >
+
+                                    <div class="quick-action-icon">
+                                        ◇
+                                    </div>
+
+                                    <span>
+                                        Certificates
+                                    </span>
+
+                                </div>
+
+
+                                <div
+                                    class="quick-action"
+                                    data-section="community"
+                                >
+
+                                    <div class="quick-action-icon">
+                                        ♧
+                                    </div>
+
+                                    <span>
+                                        Community
+                                    </span>
+
+                                </div>
+
+
+                                <div
+                                    class="quick-action"
+                                    data-section="support"
+                                >
+
+                                    <div class="quick-action-icon">
+                                        ?
+                                    </div>
+
+                                    <span>
+                                        Get Support
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <br>
+
+
+                        <!-- LATEST CERTIFICATE -->
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <h3>
+                                    Latest Certificate
+                                </h3>
+
+                                <a
+                                    href="#"
+                                    data-section="certificates"
+                                >
+                                    View all
+                                </a>
+
+                            </div>
+
+
+                            <div class="certificate">
+
+                                <div class="certificate-icon">
+                                    ◇
+                                </div>
+
+                                <small>
+                                    Certificate of Completion
+                                </small>
+
+                                <h4>
+                                    Graphic Design Fundamentals
+                                </h4>
+
+                                <p>
+                                    Completed successfully on
+                                    September 20, 2026.
+                                </p>
+
+                                <button
+                                    onclick="alert('Certificate viewer coming soon.')"
+                                >
+                                    View Certificate
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <br>
+
+
+                        <!-- LEARNING TIP -->
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <h3>
+                                    Learning Tip
+                                </h3>
+
+                            </div>
+
+                            <div style="padding:20px">
+
+                                <div
+                                    style="
+                                    color:#00C896;
+                                    font-size:25px;
+                                    margin-bottom:10px;
+                                    "
+                                >
+                                    ✦
+                                </div>
+
+                                <h4
+                                    style="
+                                    color:#fff;
+                                    font-size:12px;
+                                    margin-bottom:7px;
+                                    "
+                                >
+                                    Practice every day
+                                </h4>
+
+                                <p
+                                    style="
+                                    color:#7f96a3;
+                                    font-size:9px;
+                                    line-height:1.7;
+                                    "
+                                >
+                                    Xirfadda waxaa lagu dhisaa
+                                    practice. Maalin kasta samee
+                                    ugu yaraan hal lesson ama
+                                    project yar.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MY COURSES
+            ================================================== -->
+
+            <section
+                class="page-section"
+                id="courses"
+            >
+
+                <div class="section-title">
+
+                    <h3>
+                        My Courses
+                    </h3>
+
+                    <span>
+                        4 Courses
+                    </span>
+
+                </div>
+
+
+                <div class="search-box">
+
+                    <span class="search-icon">
+                        ⌕
+                    </span>
+
+                    <input
+                        type="text"
+                        id="courseSearch"
+                        placeholder="Search your courses..."
+                    >
+
+                </div>
+
+
+                <div class="courses-grid" id="coursesGrid">
+
+
+                    <div
+                        class="course-card"
+                        data-course="javascript masterclass"
+                    >
+
+                        <div
+                            class="course-thumb"
+                            data-title="JS"
+                        >
+
+                            <span class="course-level">
+                                Intermediate
+                            </span>
+
+                        </div>
+
+                        <div class="course-card-content">
+
+                            <h4>
+                                JavaScript Masterclass
+                            </h4>
+
+                            <p>
+                                ES6+, DOM & Async Patterns
+                            </p>
+
+                            <div class="course-card-progress">
+
+                                <div class="course-card-progress-top">
+
+                                    <span>
+                                        Progress
+                                    </span>
+
+                                    <strong>
+                                        72%
+                                    </strong>
+
+                                </div>
+
+                                <div class="mini-progress">
+                                    <span style="width:72%"></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="course-card"
+                        data-course="premiere pro"
+                    >
+
+                        <div
+                            class="course-thumb"
+                            data-title="PREMIERE"
+                        >
+
+                            <span class="course-level">
+                                Beginner
+                            </span>
+
+                        </div>
+
+                        <div class="course-card-content">
+
+                            <h4>
+                                Adobe Premiere Pro
+                            </h4>
+
+                            <p>
+                                Professional Video Editing
+                            </p>
+
+                            <div class="course-card-progress">
+
+                                <div class="course-card-progress-top">
+
+                                    <span>
+                                        Progress
+                                    </span>
+
+                                    <strong>
+                                        68%
+                                    </strong>
+
+                                </div>
+
+                                <div class="mini-progress">
+                                    <span style="width:68%"></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="course-card"
+                        data-course="photoshop"
+                    >
+
+                        <div
+                            class="course-thumb"
+                            data-title="PS"
+                        >
+
+                            <span class="course-level">
+                                Beginner
+                            </span>
+
+                        </div>
+
+                        <div class="course-card-content">
+
+                            <h4>
+                                Adobe Photoshop
+                            </h4>
+
+                            <p>
+                                Graphic Design Masterclass
+                            </p>
+
+                            <div class="course-card-progress">
+
+                                <div class="course-card-progress-top">
+
+                                    <span>
+                                        Progress
+                                    </span>
+
+                                    <strong>
+                                        100%
+                                    </strong>
+
+                                </div>
+
+                                <div class="mini-progress">
+                                    <span style="width:100%"></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="course-card"
+                        data-course="html css"
+                    >
+
+                        <div
+                            class="course-thumb"
+                            data-title="HTML"
+                        >
+
+                            <span class="course-level">
+                                Beginner
+                            </span>
+
+                        </div>
+
+                        <div class="course-card-content">
+
+                            <h4>
+                                HTML & CSS Masterclass
+                            </h4>
+
+                            <p>
+                                Build Modern Websites
+                            </p>
+
+                            <div class="course-card-progress">
+
+                                <div class="course-card-progress-top">
+
+                                    <span>
+                                        Progress
+                                    </span>
+
+                                    <strong>
+                                        45%
+                                    </strong>
+
+                                </div>
+
+                                <div class="mini-progress">
+                                    <span style="width:45%"></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 PROGRESS
+            ================================================== -->
+
+            <section
+                class="page-section"
+                id="progress"
+            >
+
+                <div class="placeholder">
+
+                    <div class="placeholder-icon">
+                        ◔
+                    </div>
+
+                    <h3>
+                        My Progress
+                    </h3>
+
+                    <p>
+                        Halkan waxaad ka arki doontaa
+                        dhammaan progress-kaaga, lessons-ka
+                        aad dhamaysay iyo learning statistics-kaaga.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 CERTIFICATES
+            ================================================== -->
+
+            <section
+                class="page-section"
+                id="certificates"
+            >
+
+                <div class="placeholder">
+
+                    <div class="placeholder-icon">
+                        ◇
+                    </div>
+
+                    <h3>
+                        My Certificates
+                    </h3>
+
+                    <p>
+                        Certificates-ka aad kasbatay
+                        waxay halkan kasoo muuqan doonaan.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 COMMUNITY
+            ================================================== -->
+
+            <section
+                class="page-section"
+                id="community"
+            >
+
+                <div class="placeholder">
+
+                    <div class="placeholder-icon">
+                        ♧
+                    </div>
+
+                    <h3>
+                        Caabi Community
+                    </h3>
+
+                    <p>
+                        La xiriir ardayda kale, wadaag projects,
+                        weydii su'aalo oo ka qayb qaado bulshada
+                        Caabi Academy.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 NOTIFICATIONS
+            ================================================== -->
+
+            <section
+                class="page-section"
+                id="notifications"
+            >
+
+                <div class="placeholder">
+
+                    <div class="placeholder-icon">
+                        ♢
+                    </div>
+
+                    <h3>
+                        Notifications
+                    </h3>
+
+                    <p>
+                        Notifications-ka cusub,
+                        course updates iyo announcements
+                        ayaa halkan kasoo muuqan doona.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 PROFILE
+            ================================================== -->
+
+            <section
+                class="page-section"
+                id="profile"
+            >
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <h3>
+                            My Profile
+                        </h3>
+
+                    </div>
+
+                    <div
+                        style="
+                        padding:30px;
+                        display:flex;
+                        align-items:center;
+                        gap:20px;
+                        "
+                    >
+
+                        <div
+                            class="top-avatar"
+                            id="profilePageAvatar"
+                            style="
+                            width:75px;
+                            height:75px;
+                            font-size:24px;
+                            "
+                        >
+                            U
+                        </div>
+
+                        <div>
+
+                            <h2
+                                id="profilePageName"
+                                style="
+                                color:#fff;
+                                font-size:20px;
+                                "
+                            >
+                                User
+                            </h2>
+
+                            <p
+                                id="profilePageEmail"
+                                style="
+                                color:#7f96a3;
+                                font-size:11px;
+                                margin-top:5px;
+                                "
+                            >
+                                user@email.com
+                            </p>
+
+                            <span
+                                style="
+                                display:inline-block;
+                                margin-top:10px;
+                                padding:5px 9px;
+                                border-radius:20px;
+                                background:rgba(0,200,150,.09);
+                                color:#00C896;
+                                font-size:8px;
+                                font-weight:800;
+                                "
+                            >
+                                STUDENT
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 SETTINGS
+            ================================================== -->
+
+            <section
+                class="page-section"
+                id="settings"
+            >
+
+                <div class="placeholder">
+
+                    <div class="placeholder-icon">
+                        ⚙
+                    </div>
+
+                    <h3>
+                        Settings
+                    </h3>
+
+                    <p>
+                        Account settings, password,
+                        notifications iyo preferences-kaaga
+                        waxaad halkan ka maamuli kartaa.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 SUPPORT
+            ================================================== -->
+
+            <section
+                class="page-section"
+                id="support"
+            >
+
+                <div class="placeholder">
+
+                    <div class="placeholder-icon">
+                        ?
+                    </div>
+
+                    <h3>
+                        Contact Support
+                    </h3>
+
+                    <p>
+                        Haddii aad caawimaad u baahan tahay,
+                        la xiriir kooxda Caabi Academy.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+
+            /* =================================================
+               ELEMENTS
+            ================================================= */
+
+            const sidebar =
+                document.getElementById("sidebar");
+
+            const sidebarOverlay =
+                document.getElementById("sidebarOverlay");
+
+            const mobileSidebarBtn =
+                document.getElementById("mobileSidebarBtn");
+
+            const topProfileButton =
+                document.getElementById("topProfileButton");
+
+            const topProfileMenu =
+                document.getElementById("topProfileMenu");
+
+            const topLogout =
+                document.getElementById("topLogout");
+
+            const sidebarLogout =
+                document.getElementById("sidebarLogout");
+
+
+            /* =================================================
+               CURRENT USER
+            ================================================= */
+
+            function getCurrentUser() {
+
+                const savedUser =
+                    localStorage.getItem("caabiCurrentUser");
+
+                if (!savedUser) {
+
+                    return null;
+
+                }
+
+                try {
+
+                    return JSON.parse(savedUser);
+
+                } catch (error) {
+
+                    return null;
+
+                }
+
+            }
+
+
+            /* =================================================
+               USER DATA
+            ================================================= */
+
+            const user =
+                getCurrentUser();
+
+
+            /*
+                Haddii user uusan login ahayn,
+                dib ugu celi Login.html
+            */
+
+            if (!user) {
+
+                window.location.href =
+                    "Login.html";
+
+                return;
+
+            }
+
+
+            const userName =
+                user.name || "Student";
+
+            const userEmail =
+                user.email || "user@email.com";
+
+
+            const firstLetter =
+                userName
+                    .trim()
+                    .charAt(0)
+                    .toUpperCase() || "U";
+
+
+            /* =================================================
+               UPDATE USER INFORMATION
+            ================================================= */
+
+            document.getElementById(
+                "topName"
+            ).textContent = userName;
+
+
+            document.getElementById(
+                "welcomeName"
+            ).textContent = userName;
+
+
+            document.getElementById(
+                "topProfileName"
+            ).textContent = userName;
+
+
+            document.getElementById(
+                "sidebarName"
+            ).textContent = userName;
+
+
+            document.getElementById(
+                "topAvatar"
+            ).textContent = firstLetter;
+
+
+            document.getElementById(
+                "sidebarAvatar"
+            ).textContent = firstLetter;
+
+
+            document.getElementById(
+                "profilePageAvatar"
+            ).textContent = firstLetter;
+
+
+            document.getElementById(
+                "profilePageName"
+            ).textContent = userName;
+
+
+            document.getElementById(
+                "profilePageEmail"
+            ).textContent = userEmail;
+
+
+            /* =================================================
+               SECTION NAVIGATION
+            ================================================= */
+
+            const sidebarLinks =
+                document.querySelectorAll(
+                    ".sidebar-link[data-section]"
+                );
+
+            const sections =
+                document.querySelectorAll(
+                    ".page-section"
+                );
+
+
+            function openSection(sectionId) {
+
+                sections.forEach(section => {
+
+                    section.classList.remove("active");
+
+                });
+
+
+                const target =
+                    document.getElementById(sectionId);
+
+
+                if (target) {
+
+                    target.classList.add("active");
+
+                }
+
+
+                sidebarLinks.forEach(link => {
+
+                    link.classList.remove("active");
+
+                    if (
+                        link.dataset.section ===
+                        sectionId
+                    ) {
+
+                        link.classList.add("active");
+
+                    }
+
+                });
+
+
+                topProfileMenu.classList.remove(
+                    "show"
+                );
+
+
+                sidebar.classList.remove(
+                    "open"
+                );
+
+                sidebarOverlay.classList.remove(
+                    "show"
+                );
+
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+
+
+            /* SIDEBAR LINKS */
+
+            sidebarLinks.forEach(link => {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+
+                        openSection(
+                            this.dataset.section
+                        );
+
+                    }
+                );
+
+            });
+
+
+            /* ALL DATA SECTION ELEMENTS */
+
+            document
+                .querySelectorAll(
+                    "[data-section]:not(.sidebar-link)"
+                )
+                .forEach(element => {
+
+                    element.addEventListener(
+                        "click",
+                        function (event) {
+
+                            const section =
+                                this.dataset.section;
+
+                            if (section) {
+
+                                event.preventDefault();
+
+                                openSection(
+                                    section
+                                );
+
+                            }
+
+                        }
+                    );
+
+                });
+
+
+            /* =================================================
+               MOBILE SIDEBAR
+            ================================================= */
+
+            mobileSidebarBtn.addEventListener(
+                "click",
+                function () {
+
+                    sidebar.classList.toggle("open");
+
+                    sidebarOverlay.classList.toggle(
+                        "show"
+                    );
+
+                }
+            );
+
+
+            sidebarOverlay.addEventListener(
+                "click",
+                function () {
+
+                    sidebar.classList.remove(
+                        "open"
+                    );
+
+                    sidebarOverlay.classList.remove(
+                        "show"
+                    );
+
+                }
+            );
+
+
+            /* =================================================
+               PROFILE DROPDOWN
+            ================================================= */
+
+            topProfileButton.addEventListener(
+                "click",
+                function (event) {
+
+                    event.stopPropagation();
+
+                    topProfileMenu.classList.toggle(
+                        "show"
+                    );
+
+                }
+            );
+
+
+            document.addEventListener(
+                "click",
+                function (event) {
+
+                    if (
+                        !topProfileButton.contains(
+                            event.target
+                        ) &&
+                        !topProfileMenu.contains(
+                            event.target
+                        )
+                    ) {
+
+                        topProfileMenu.classList.remove(
+                            "show"
+                        );
+
+                    }
+
+                }
+            );
+
+
+            /* =================================================
+               LOGOUT
+            ================================================= */
+
+            function logout() {
+
+                localStorage.removeItem(
+                    "caabiCurrentUser"
+                );
+
+                localStorage.removeItem(
+                    "caabiUser"
+                );
+
+                window.location.href =
+                    "index.html";
+
+            }
+
+
+            topLogout.addEventListener(
+                "click",
+                logout
+            );
+
+
+            sidebarLogout.addEventListener(
+                "click",
+                logout
+            );
+
+
+            /* =================================================
+               COURSE SEARCH
+            ================================================= */
+
+            const courseSearch =
+                document.getElementById(
+                    "courseSearch"
+                );
+
+            const courseCards =
+                document.querySelectorAll(
+                    ".course-card"
+                );
+
+
+            courseSearch.addEventListener(
+                "input",
+                function () {
+
+                    const search =
+                        this.value
+                            .toLowerCase()
+                            .trim();
+
+
+                    courseCards.forEach(card => {
+
+                        const course =
+                            card.dataset.course
+                                .toLowerCase();
+
+                        const title =
+                            card
+                                .querySelector("h4")
+                                .textContent
+                                .toLowerCase();
+
+
+                        if (
+                            course.includes(search) ||
+                            title.includes(search)
+                        ) {
+
+                            card.style.display =
+                                "block";
+
+                        } else {
+
+                            card.style.display =
+                                "none";
+
+                        }
+
+                    });
+
+                }
+            );
+
+
+        });
+
+    </script>
+
+</body>
+
+</html>

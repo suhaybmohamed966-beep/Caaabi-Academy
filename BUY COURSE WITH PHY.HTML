@@ -1,0 +1,510 @@
+  <!DOCTYPE html>
+<html lang="so">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Submit Payment · Caabi Academy</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(0, 200, 150, .16), transparent 30%),
+                radial-gradient(circle at 90% 90%, rgba(0, 167, 125, .12), transparent 30%),
+                #06131d;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 35px 15px;
+        }
+
+        .payment-wrapper {
+            width: 100%;
+            max-width: 560px;
+        }
+
+        .payment-card {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(145deg, #0b202d, #071722);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 28px;
+            padding: 38px;
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, .45),
+                0 0 50px rgba(0, 200, 150, .05);
+        }
+
+        .payment-card::before {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: #00c896;
+            filter: blur(100px);
+            opacity: .10;
+            top: -130px;
+            left: -100px;
+            pointer-events: none;
+        }
+
+        .payment-card::after {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            background: #00a77d;
+            filter: blur(100px);
+            opacity: .07;
+            right: -80px;
+            bottom: -80px;
+            pointer-events: none;
+        }
+
+        /* Header */
+
+        .header {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 78px;
+            height: 78px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 18px;
+            border: 3px solid rgba(0, 200, 150, .25);
+            box-shadow: 0 0 30px rgba(0, 200, 150, .12);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 13px;
+            border-radius: 50px;
+            background: rgba(0, 200, 150, .09);
+            border: 1px solid rgba(0, 200, 150, .18);
+            color: #00d9a1;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+            background: #00d9a1;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00d9a1;
+        }
+
+        h1 {
+            font-size: 34px;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        h1 span {
+            color: #00c896;
+        }
+
+        .description {
+            max-width: 430px;
+            margin: auto;
+            color: #3c413f;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        /* Payment amount */
+
+        .amount-card {
+            position: relative;
+            z-index: 2;
+            margin: 25px 0 18px;
+            padding: 18px 20px;
+            border-radius: 17px;
+            background: rgba(255, 255, 255, .035);
+            border: 1px solid rgba(255, 255, 255, .07);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .amount-label {
+            color: #8fa4b0;
+            font-size: 13px;
+        }
+
+        .amount {
+            color: #00C896;
+            font-size: 23px;
+            font-weight: 800;
+        }
+
+        /* Number */
+
+        .number-box {
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(
+                145deg,
+                rgba(0, 200, 150, .12),
+                rgba(0, 200, 150, .045)
+            );
+            border: 1px solid rgba(0, 200, 150, .24);
+            border-radius: 20px;
+            padding: 23px;
+        }
+
+        .number-label {
+            display: block;
+            color: #8fa6b4;
+            font-size: 12px;
+            margin-bottom: 9px;
+        }
+
+        .number-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .phone-number {
+            color: #00d9a1;
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .copy-btn {
+            border: none;
+            cursor: pointer;
+            padding: 10px 14px;
+            border-radius: 11px;
+            background: #00c896;
+            color: #031b15;
+            font-weight: 800;
+            font-size: 12px;
+            transition: .25s;
+        }
+
+        .copy-btn:hover {
+            background: #00e0aa;
+            transform: translateY(-2px);
+        }
+
+        .academy {
+            margin-top: 7px;
+            color: #c3d0d7;
+            font-size: 13px;
+        }
+
+        /* Steps */
+
+        .steps-title {
+            position: relative;
+            z-index: 2;
+            margin: 28px 0 15px;
+            font-size: 15px;
+            color: #dce6eb;
+        }
+
+        .steps {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 15px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, .025);
+            border: 1px solid rgba(255, 255, 255, .055);
+            transition: .25s;
+        }
+
+        .step:hover {
+            background: rgba(0, 200, 150, .045);
+            border-color: rgba(0, 200, 150, .15);
+            transform: translateX(3px);
+        }
+
+        .step-number {
+            min-width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(0, 200, 150, .12);
+            color: #00c896;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 13px;
+            border: 1px solid rgba(0, 200, 150, .15);
+        }
+
+        .step-text strong {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .step-text span {
+            color: #8499a5;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* Bottom notice */
+
+        .notice {
+            position: relative;
+            z-index: 2;
+            margin-top: 22px;
+            padding: 14px 16px;
+            border-radius: 14px;
+            background: rgba(255, 193, 7, .06);
+            border: 1px solid rgba(255, 193, 7, .12);
+            color: #b9c3c8;
+            font-size: 12px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .notice strong {
+            color: #e5c65c;
+        }
+
+        .footer {
+            text-align: center;
+            color: #536874;
+            font-size: 11px;
+            margin-top: 20px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 20px 12px;
+            }
+
+            .payment-card {
+                padding: 27px 20px;
+                border-radius: 23px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .phone-number {
+                font-size: 23px;
+            }
+
+            .number-row {
+                align-items: center;
+            }
+
+            .copy-btn {
+                padding: 9px 11px;
+            }
+
+            .amount {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 390px) {
+
+            .phone-number {
+                font-size: 20px;
+            }
+
+            .copy-btn {
+                font-size: 11px;
+                padding: 8px 9px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="payment-wrapper">
+
+        <section class="payment-card">
+
+            <!-- Header -->
+            <div class="header">
+
+                <div class="logo">
+                    <img
+                        src="./cropped_circle_image (3).png"
+                        alt="Caabi Academy Logo">
+                </div>
+
+                <div class="badge">
+                    <span class="badge-dot"></span>
+                    Secure Payment
+                </div>
+
+                <h1>
+                    Submit <span>Payment</span>
+                </h1>
+
+                <p class="description">
+                    Ku dir lacagta course-kaaga
+                    <strong>Sahal</strong>,
+                    kadib buuxi xogta payment-kaaga si loo xaqiijiyo.
+                </p>
+
+            </div>
+
+
+            <!-- Amount -->
+            <div class="amount-card">
+
+                <div>
+                    <div class="amount-label">
+                        Course Payment
+                    </div>
+
+                    <div style="font-size:13px; color:#fcfcfc; margin-top:4px;">
+                        Learn Python Programming from Zero to Building Real Programs
+                    </div>
+                </div>
+
+                <div class="amount">
+                    $15.00
+                </div>
+
+            </div>
+
+
+            <!-- Phone Number -->
+            <div class="number-box">
+
+                <span class="number-label">
+                    LACAGTA KU DIR NUMBER-KAN
+                </span>
+
+                <div class="number-row">
+
+                    <div class="phone-number" id="phoneNumber">
+                        907071342
+                    </div>
+
+                    <button
+                        class="copy-btn"
+                        onclick="copyNumber()"
+                        id="copyBtn">
+                        Copy
+                    </button>
+
+                </div>
+
+                <div class="academy">
+                    Caabi Academy
+                </div>
+
+            </div>
+
+        <!-- Notice -->
+
+            <div class="notice">
+                <strong>Fiiro gaar ah:</strong>
+                Hubi in number-ka iyo lacagta aad dirayso ay sax yihiin
+                ka hor intaadan xaqiijin payment-ka.
+            </div>
+             <div class="notice">
+                <strong>Fiiro gaar ah:</strong>
+                Marka aad Hubiso payment Soo Gal <br> What'sApp Number-ka Usoo Dir Massage +252907071342.
+            </div>
+            <div class="notice">
+                <a href="Python.html"><strong>← Back To Course:</strong></a>
+            </div>
+            <Style>
+                .notice {
+    margin: 20px 0;
+}
+
+.notice a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    color: #001B2E;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 27, 46, 0.08);
+}
+
+.notice a:active {
+    transform: translateY(0);
+}
+            </Style>
+
+        </section>
+
+        <div class="footer">
+            © 2026 Caabi Academy · Learn. Build. Grow.
+        </div>
+
+    </main>
+
+
+    <script>
+
+        function copyNumber() {
+
+            const number = document.getElementById("phoneNumber").innerText;
+            const button = document.getElementById("copyBtn");
+
+            navigator.clipboard.writeText(number);
+
+            button.innerText = "Copied ✓";
+
+            setTimeout(() => {
+                button.innerText = "Copy";
+            }, 1800);
+
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>League | Caabi Academy</title>
+  <link rel="icon" href="images/LOGO-Photoroom.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green: #00C896;
+      --white: #FFFFFF;
+      --bg: #001B2E;
+      --bg-light: #06263A;
+      --card: rgba(255,255,255,0.055);
+      --border: rgba(255,255,255,0.10);
+      --muted: #9DB0BE;
+      --shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: auto;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(0, 27, 46, 0.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .brand img {
+      width: 45px;
+      height: 45px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .brand-text strong {
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    .brand-text span {
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-top: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .nav-links a {
+      color: #c6d2da;
+      font-size: 14px;
+      font-weight: 500;
+      transition: 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--green);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 11px 18px;
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: 0.3s ease;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: white;
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: #00291f;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 200, 150, 0.25);
+    }
+
+    .menu {
+      display: none;
+      background: transparent;
+      border: 0;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      padding: 95px 0 70px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 550px;
+      height: 550px;
+      background: rgba(0, 200, 150, 0.08);
+      border-radius: 50%;
+      filter: blur(90px);
+      top: -220px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 15px var(--green);
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      color: var(--green);
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    /* =========================
+       WEEK INFO
+    ========================= */
+
+    .week-card {
+      margin: 15px auto 55px;
+      max-width: 850px;
+      background: linear-gradient(
+        135deg,
+        rgba(0,200,150,0.11),
+        rgba(255,255,255,0.04)
+      );
+      border: 1px solid rgba(0,200,150,0.25);
+      border-radius: 20px;
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .week-info h3 {
+      font-size: 18px;
+      margin-bottom: 3px;
+    }
+
+    .week-info p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .countdown {
+      text-align: right;
+    }
+
+    .countdown strong {
+      display: block;
+      color: var(--green);
+      font-size: 18px;
+    }
+
+    .countdown span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* =========================
+       STATS
+    ========================= */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 70px;
+    }
+
+    .stat {
+      padding: 25px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 32px;
+      color: var(--green);
+      margin-bottom: 3px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* =========================
+       SECTION TITLE
+    ========================= */
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 38px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* =========================
+       TOP LEADERS
+    ========================= */
+
+    .leaders {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      align-items: end;
+      margin-bottom: 80px;
+    }
+
+    .leader-card {
+      position: relative;
+      text-align: center;
+      padding: 32px 22px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: linear-gradient(
+        145deg,
+        rgba(255,255,255,0.07),
+        rgba(255,255,255,0.025)
+      );
+      box-shadow: var(--shadow);
+      transition: 0.35s ease;
+    }
+
+    .leader-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(0,200,150,0.45);
+    }
+
+    .leader-card.first {
+      padding-top: 45px;
+      padding-bottom: 45px;
+      border-color: rgba(0,200,150,0.45);
+    }
+
+    .rank {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: rgba(0,200,150,0.13);
+      color: var(--green);
+      border: 1px solid rgba(0,200,150,0.25);
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .avatar {
+      width: 78px;
+      height: 78px;
+      margin: 0 auto 17px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), #087e66);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #00291f;
+      font-size: 23px;
+      font-weight: 800;
+      border: 4px solid rgba(255,255,255,0.08);
+    }
+
+    .first .avatar {
+      width: 92px;
+      height: 92px;
+      font-size: 27px;
+      box-shadow: 0 0 35px rgba(0,200,150,0.18);
+    }
+
+    .leader-card h3 {
+      font-size: 17px;
+      margin-bottom: 7px;
+    }
+
+    .place {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+
+    .points {
+      font-size: 31px;
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .points small {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* =========================
+       TABLE
+    ========================= */
+
+    .table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.035);
+      margin-bottom: 80px;
+    }
+
+    .leaderboard {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 650px;
+    }
+
+    .leaderboard th {
+      text-align: left;
+      padding: 17px 22px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.035);
+    }
+
+    .leaderboard td {
+      padding: 17px 22px;
+      border-top: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .leaderboard tr {
+      transition: 0.25s ease;
+    }
+
+    .leaderboard tbody tr:hover {
+      background: rgba(0,200,150,0.055);
+    }
+
+    .number {
+      width: 60px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .student {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+    }
+
+    .mini-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #0b394e;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .points-cell {
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .lessons {
+      color: var(--muted);
+    }
+
+    /* =========================
+       LAST WEEK
+    ========================= */
+
+    .last-week {
+      margin-bottom: 85px;
+    }
+
+    .champions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .champion {
+      padding: 23px;
+      border-radius: 17px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .champion-rank {
+      width: 43px;
+      height: 43px;
+      border-radius: 12px;
+      background: rgba(0,200,150,0.10);
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+
+    .champion-info strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .champion-info span {
+      color: var(--green);
+      font-size: 13px;
+    }
+
+    /* =========================
+       CTA
+    ========================= */
+
+    .cta {
+      text-align: center;
+      padding: 75px 25px;
+      border-radius: 25px;
+      border: 1px solid rgba(0,200,150,0.20);
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(0,200,150,0.13),
+          transparent 65%
+        ),
+        rgba(255,255,255,0.035);
+      margin-bottom: 90px;
+    }
+
+    .cta h2 {
+      font-size: clamp(30px, 4vw, 48px);
+      margin-bottom: 13px;
+    }
+
+    .cta p {
+      max-width: 620px;
+      margin: 0 auto 28px;
+      color: var(--muted);
+    }
+
+    .cta .btn {
+      display: inline-block;
+      padding: 14px 25px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 65px 0 25px;
+      background: rgba(0,0,0,0.12);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 45px;
+      margin-bottom: 50px;
+    }
+
+    .footer-brand p {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 330px;
+      margin-top: 18px;
+    }
+
+    .footer-col h4 {
+      font-size: 14px;
+      margin-bottom: 17px;
+    }
+
+    .footer-col a {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 11px;
+      transition: 0.25s ease;
+    }
+
+    .footer-col a:hover {
+      color: var(--green);
+    }
+
+    .socials {
+      display: flex;
+      gap: 9px;
+      margin-top: 22px;
+    }
+
+    .socials a {
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      font-size: 12px;
+      color: white;
+      margin: 0;
+    }
+
+    .socials a:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .copyright {
+      padding-top: 23px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* =========================
+       ANIMATION
+    ========================= */
+
+    .fade-up {
+      animation: fadeUp 0.8s ease both;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 1000px) {
+
+      .nav-links {
+        gap: 13px;
+      }
+
+      .nav-links a {
+        font-size: 12px;
+      }
+
+      .leaders {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1.4fr 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 800px) {
+
+      .menu {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 78px;
+        left: 4%;
+        right: 4%;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 18px;
+        background: #06263A;
+        border: 1px solid var(--border);
+        border-radius: 15px;
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 10px;
+        font-size: 14px;
+      }
+
+      .nav-actions {
+        display: none;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .leaders {
+        grid-template-columns: 1fr;
+        max-width: 470px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .leader-card.first {
+        order: -1;
+      }
+
+      .champions {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .week-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .countdown {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 520px) {
+
+      .hero {
+        padding-top: 65px;
+      }
+
+      .hero h1 {
+        letter-spacing: -1px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .week-card {
+        padding: 20px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .copyright {
+        flex-direction: column;
+      }
+
+      .brand img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVBAR
+  ========================== -->
+
+ <header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#home">
+  <img src="./Images/LOGO.jpeg" alt="Caabi Academy Logo">
+  <div class="brand-text">
+    <strong>CAABI</strong>
+    <span>ACADEMY</span>
+  </div>
+</a>
+    <button class="menu" id="menuBtn" aria-label="Menu">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="INDEX.HTML" >Home</a>
+      <a href="Course.html" >Courses</a>
+      <a href="Ambassador.html">Ambassador</a>
+      <a href="League.html" class="Active">League</a>
+      <a href="Blog.html">Blog</a>
+      <a href="Community.html">Mentorship</a>
+      <a href="About.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="btn btn-ghost" id="loginBtn">Login</button>
+      <button class="btn btn-primary" id="signupBtn">Bilow Hadda</button>
+    </div>
+  </div>
+</header>
+   <style>
+    /* =====================================================
+   CAABI ACADEMY NAVBAR
+   Colors:
+   Green  #00C896
+   White  #FFFFFF
+   Navy   #001B2E
+===================================================== */
+
+:root {
+  --green: #00C896;
+  --green-dark: #00A77D;
+  --white: #FFFFFF;
+
+  --navy: #001B2E;
+  --navy-2: #00243D;
+
+  --text: #FFFFFF;
+  --muted: #AFC2D0;
+
+  --border: rgba(255, 255, 255, 0.10);
+
+  --container: 1180px;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+
+  width: 100%;
+
+  background: rgba(0, 27, 46, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  transition: all 0.3s ease;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.nav .container {
+  width: min(100% - 40px, var(--container));
+  margin: 0 auto;
+}
+
+.nav-inner {
+  min-height: 78px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 11px;
+
+  text-decoration: none;
+
+  flex-shrink: 0;
+}
+
+.brand img {
+  width: 45px;
+  height: 45px;
+
+  object-fit: cover;
+
+  border-radius: 11px;
+
+  border: 1px solid rgba(0, 200, 150, 0.25);
+
+  background: #ffffff;
+
+  transition: all 0.3s ease;
+}
+
+.brand:hover img {
+  transform: rotate(-3deg) scale(1.05);
+
+  border-color: var(--green);
+
+  box-shadow:
+    0 0 0 4px rgba(0, 200, 150, 0.08),
+    0 8px 25px rgba(0, 200, 150, 0.15);
+}
+
+
+/* =========================
+   BRAND TEXT
+========================= */
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+
+  line-height: 1;
+}
+
+.brand-text strong {
+  color: var(--white);
+
+  font-size: 18px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+.brand-text span {
+  margin-top: 4px;
+
+  color: var(--green);
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 3px;
+}
+
+
+/* =========================
+   NAV LINKS
+========================= */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+
+  margin-left: auto;
+  margin-right: 5px;
+}
+
+.nav-links a {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 42px;
+
+  padding: 0 11px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  border-radius: 9px;
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease;
+}
+
+
+/* Hover */
+
+.nav-links a:hover {
+  color: var(--white);
+
+  background: rgba(0, 200, 150, 0.07);
+}
+
+
+/* Active */
+
+.nav-links a.Active,
+.nav-links a.active {
+  color: var(--green);
+
+  background: rgba(0, 200, 150, 0.09);
+}
+
+
+/* Active underline */
+
+.nav-links a.Active::after,
+.nav-links a.active::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: 3px;
+
+  width: 18px;
+  height: 2px;
+
+  transform: translateX(-50%);
+
+  background: var(--green);
+
+  border-radius: 20px;
+}
+
+
+/* =========================
+   NAV ACTIONS
+========================= */
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================
+   BUTTON BASE
+========================= */
+
+.nav-actions .btn {
+  height: 42px;
+
+  padding: 0 17px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  border: 1px solid transparent;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+
+/* =========================
+   LOGIN BUTTON
+========================= */
+
+.nav-actions .btn-ghost {
+  color: var(--white);
+
+  background: transparent;
+
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.nav-actions .btn-ghost:hover {
+  color: var(--green);
+
+  border-color: rgba(0, 200, 150, 0.4);
+
+  background: rgba(0, 200, 150, 0.07);
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   SIGNUP BUTTON
+========================= */
+
+.nav-actions .btn-primary {
+  color: var(--navy);
+
+  background: var(--green);
+
+  border-color: var(--green);
+
+  box-shadow:
+    0 8px 22px rgba(0, 200, 150, 0.15);
+}
+
+.nav-actions .btn-primary:hover {
+  background: #10D5A5;
+
+  border-color: #10D5A5;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 28px rgba(0, 200, 150, 0.25);
+}
+
+.nav-actions .btn:active {
+  transform: translateY(0);
+}
+
+
+/* =========================
+   MOBILE MENU BUTTON
+========================= */
+
+.menu {
+  display: none;
+
+  width: 43px;
+  height: 43px;
+
+  align-items: center;
+  justify-content: center;
+
+  color: var(--white);
+
+  background: rgba(255, 255, 255, 0.04);
+
+  border: 1px solid rgba(255, 255, 255, 0.10);
+
+  border-radius: 10px;
+
+  font-size: 22px;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+.menu:hover {
+  color: var(--green);
+
+  border-color: rgba(0, 200, 150, 0.4);
+
+  background: rgba(0, 200, 150, 0.08);
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1050px) {
+
+  .nav-links {
+    gap: 0;
+  }
+
+  .nav-links a {
+    padding: 0 8px;
+    font-size: 12px;
+  }
+
+  .nav-actions .btn {
+    padding: 0 13px;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 850px) {
+
+  .nav .container {
+    width: min(100% - 28px, var(--container));
+  }
+
+  .nav-inner {
+    min-height: 70px;
+  }
+
+
+  /* Hide desktop links */
+
+  .nav-links {
+    position: absolute;
+
+    top: calc(100% + 8px);
+
+    left: 14px;
+    right: 14px;
+
+    display: flex;
+
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 5px;
+
+    padding: 12px;
+
+    background: rgba(0, 27, 46, 0.98);
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+
+    border-radius: 17px;
+
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.35);
+
+    backdrop-filter: blur(20px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(-10px);
+
+    transition:
+      opacity 0.25s ease,
+      visibility 0.25s ease,
+      transform 0.25s ease;
+  }
+
+
+  /* Open menu */
+
+  .nav-links.open {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+  }
+
+
+  .nav-links a {
+    width: 100%;
+
+    min-height: 46px;
+
+    padding: 0 15px;
+
+    justify-content: flex-start;
+
+    font-size: 14px;
+
+    border-radius: 10px;
+  }
+
+
+  .nav-links a:hover {
+    background: rgba(0, 200, 150, 0.08);
+  }
+
+
+  /* Remove desktop underline */
+
+  .nav-links a.Active::after,
+  .nav-links a.active::after {
+    display: none;
+  }
+
+
+  /* Menu */
+
+  .menu {
+    display: flex;
+
+    order: 3;
+  }
+
+
+  /* Actions */
+
+  .nav-actions {
+    margin-left: auto;
+  }
+
+
+  .nav-actions .btn {
+    height: 40px;
+
+    padding: 0 13px;
+
+    font-size: 12px;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 560px) {
+
+  .brand img {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 10px;
+  }
+
+  .brand-text strong {
+    font-size: 16px;
+  }
+
+  .brand-text span {
+    font-size: 7px;
+    letter-spacing: 2.5px;
+  }
+
+
+  .nav-actions {
+    display: none;
+  }
+
+
+  .menu {
+    margin-left: auto;
+  }
+
+}
+
+
+/* =====================================================
+   EXTRA SMALL
+===================================================== */
+
+@media (max-width: 360px) {
+
+  .brand-text {
+    display: none;
+  }
+
+  .brand img {
+    width: 41px;
+    height: 41px;
+  }
+
+}
+   </style>
+
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <main>
+
+    <section class="hero">
+
+      <div class="container fade-up">
+
+        <div class="eyebrow">
+          Weekly Competition
+        </div>
+
+        <h1>
+          Weekly Lessons
+          <span>League</span>
+        </h1>
+
+        <p>
+          Cashar kasta dhibco ayuu kuu keenayaa.
+          Todobaad kasta leaderboard-ku wuu reset-gareeyaa.
+          Baro, dhammee lessons-ka, oo magacaaga geli kuwa ugu sarreeya.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         WEEK CARD
+    ========================== -->
+
+    <section class="container">
+
+      <div class="week-card">
+
+        <div class="week-info">
+          <h3>This week: Aug 24 – Aug 30</h3>
+          <p>
+            Todobaadkan ardaydu waxay u tartamayaan dhibcaha ugu badan.
+          </p>
+        </div>
+
+        <div class="countdown">
+          <strong id="countdown">
+            3d 5h
+          </strong>
+          <span>
+            Resets this week
+          </span>
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           STATS
+      ========================== -->
+
+      <div class="stats">
+
+        <div class="stat">
+          <strong>214</strong>
+          <span>Students competing</span>
+        </div>
+
+        <div class="stat">
+          <strong>10+</strong>
+          <span>Lessons completed</span>
+        </div>
+
+        <div class="stat">
+          <strong>7</strong>
+          <span>Days in every sprint</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         THIS WEEK LEADERS
+    ========================== -->
+
+    <section class="container">
+
+      <div class="section-title">
+        <h2>This week's leaders</h2>
+        <p>Ardayda hadda ugu sarreysa leaderboard-ka.</p>
+      </div>
+
+      <div class="leaders">
+
+        <!-- 2nd -->
+
+        <article class="leader-card">
+
+          <span class="rank">
+            2ND PLACE
+          </span>
+
+          <div class="avatar">
+            RA2
+          </div>
+
+          <h3>
+            Ruqiyo Abdirashid Nor
+          </h3>
+
+          <div class="place">
+            Second place
+          </div>
+
+          <div class="points">
+            149
+            <small>points · 67 lessons</small>
+          </div>
+
+        </article>
+
+
+        <!-- 1st -->
+
+        <article class="leader-card first">
+
+          <span class="rank">
+            1ST PLACE
+          </span>
+
+          <div class="avatar">
+            SJ1
+          </div>
+
+          <h3>
+            Said Jama
+          </h3>
+
+          <div class="place">
+            Weekly Champion
+          </div>
+
+          <div class="points">
+            232
+            <small>points · 115 lessons</small>
+          </div>
+
+        </article>
+
+
+        <!-- 3rd -->
+
+        <article class="leader-card">
+
+          <span class="rank">
+            3RD PLACE
+          </span>
+
+          <div class="avatar">
+            IA3
+          </div>
+
+          <h3>
+            Irshaad Abdukadir Hassan
+          </h3>
+
+          <div class="place">
+            Third place
+          </div>
+
+          <div class="points">
+            91
+            <small>points · 44 lessons</small>
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         LEADERBOARD
+    ========================== -->
+
+    <section class="container">
+
+      <div class="section-title">
+        <h2>Chasing the podium</h2>
+        <p>
+          Ardayda ku dhow saddexda boos ee ugu sarreeya.
+        </p>
+      </div>
+
+      <div class="table-wrapper">
+
+        <table class="leaderboard">
+
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Student</th>
+              <th>Points</th>
+              <th>Lessons</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td class="number">4</td>
+
+              <td>
+                <div class="student">
+                  <div class="mini-avatar">HM</div>
+                  Hassan mahad
+                </div>
+              </td>
+
+              <td class="points-cell">86</td>
+              <td class="lessons">39</td>
+            </tr>
+
+
+            <tr>
+              <td class="number">5</td>
+
+              <td>
+                <div class="student">
+                  <div class="mini-avatar">MA</div>
+                  Mohamed Abdiaziz Abdullahi
+                </div>
+              </td>
+
+              <td class="points-cell">76.5</td>
+              <td class="lessons">26</td>
+            </tr>
+
+
+            <tr>
+              <td class="number">6</td>
+
+              <td>
+                <div class="student">
+                  <div class="mini-avatar">LU</div>
+                  Liibaan3 User
+                </div>
+              </td>
+
+              <td class="points-cell">72.5</td>
+              <td class="lessons">34</td>
+            </tr>
+
+
+            <tr>
+              <td class="number">7</td>
+
+              <td>
+                <div class="student">
+                  <div class="mini-avatar">MS</div>
+                  mohamed said salah
+                </div>
+              </td>
+
+              <td class="points-cell">71.5</td>
+              <td class="lessons">26</td>
+            </tr>
+
+
+            <tr>
+              <td class="number">7</td>
+
+              <td>
+                <div class="student">
+                  <div class="mini-avatar">AA</div>
+                  Abas Ali Dahir Mohamud
+                </div>
+              </td>
+
+              <td class="points-cell">71.5</td>
+              <td class="lessons">37</td>
+            </tr>
+
+
+            <tr>
+              <td class="number">9</td>
+
+              <td>
+                <div class="student">
+                  <div class="mini-avatar">YA</div>
+                  Yahye Abdiwahab Yousuf
+                </div>
+              </td>
+
+              <td class="points-cell">70</td>
+              <td class="lessons">31</td>
+            </tr>
+
+
+            <tr>
+              <td class="number">9</td>
+
+              <td>
+                <div class="student">
+                  <div class="mini-avatar">AI</div>
+                  Abdullahi Ali Ibrahim
+                </div>
+              </td>
+
+              <td class="points-cell">70</td>
+              <td class="lessons">26</td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         LAST WEEK
+    ========================== -->
+
+    <section class="container last-week">
+
+      <div class="section-title">
+        <h2>Last week's champions</h2>
+        <p>
+          Kuwii qaaday podium-ka todobaadkii hore.
+        </p>
+      </div>
+
+      <div class="champions">
+
+        <div class="champion">
+
+          <div class="champion-rank">
+            1
+          </div>
+
+          <div class="champion-info">
+            <strong>
+              Abdullahi Mohamed
+            </strong>
+
+            <span>
+              409.5 pts
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="champion">
+
+          <div class="champion-rank">
+            2
+          </div>
+
+          <div class="champion-info">
+            <strong>
+              Abdullahi Ali Ibrahim
+            </strong>
+
+            <span>
+              373 pts
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="champion">
+
+          <div class="champion-rank">
+            3
+          </div>
+
+          <div class="champion-info">
+            <strong>
+              Irshaad Abdukadir Hassan
+            </strong>
+
+            <span>
+              170 pts
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CTA
+    ========================== -->
+
+    <section class="container">
+
+      <div class="cta">
+
+        <div class="eyebrow">
+          Join the League
+        </div>
+
+        <h2>
+          Want your name on this board?
+        </h2>
+
+        <p>
+          League-ku wuxuu u furan yahay ardayda Caabi Academy.
+          Ku biir mentorship-ka, dhammee casharrada, hel dhibco,
+          kadibna toddobaad kasta kor ugu kac leaderboard-ka.
+        </p>
+
+        <a href="#mentorship" class="btn btn-primary">
+          Join the Mentorship →
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+
+          <a class="brand" href="INDEX.HTML">
+
+            <img
+              src="./Images/LOGO.jpeg"
+              alt="Caabi Academy Logo"
+            >
+
+            <div class="brand-text">
+              <strong>CAABI</strong>
+              <span>ACADEMY</span>
+            </div>
+
+          </a>
+
+          <p>
+            Baro xirfadaha technology-ga,
+            dhis projects dhab ah, kuna koro
+            Af-Soomaali.
+          </p>
+
+          <div class="socials">
+            <a href="#" aria-label="YouTube">YT</a>
+            <a href="#" aria-label="GitHub">GH</a>
+            <a href="#" aria-label="WhatsApp">WA</a>
+            <a href="#" aria-label="Facebook">FB</a>
+            <a href="#" aria-label="LinkedIn">IN</a>
+          </div>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>Product</h4>
+
+          <a href="Course.html">Courses</a>
+          <a href="#mentorship">Mentorship</a>
+          <a href="League.html">League</a>
+          <a href="Blog.html">Blog</a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>Company</h4>
+
+          <a href="About.html">About Us</a>
+          <a href="#contact">Contact</a>
+          <a href="#Ambassador">Ambassador</a>
+          <a href="#community">Community</a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h4>Legal</h4>
+
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+          <a href="#">Refund Policy</a>
+
+        </div>
+
+      </div>
+
+
+      <div class="copyright">
+
+        <span>
+          © 2026 Caabi Academy. All rights reserved.
+        </span>
+
+        <span>
+          Proudly built in Somalia.
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    /* Mobile Menu */
+
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+
+
+    /* Close menu after clicking */
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+      });
+
+    });
+
+
+    /* Login */
+
+    const loginBtn = document.getElementById("loginBtn");
+
+    loginBtn.addEventListener("click", () => {
+      window.location.href = "login.html";
+    });
+
+
+    /* Signup */
+
+    const signupBtn = document.getElementById("signupBtn");
+
+    signupBtn.addEventListener("click", () => {
+      window.location.href = "signup.html";
+    });
+
+
+    /* Simple countdown */
+
+    const countdown = document.getElementById("countdown");
+
+    let totalSeconds =
+      (3 * 24 * 60 * 60) +
+      (5 * 60 * 60);
+
+    function updateCountdown() {
+
+      if (totalSeconds <= 0) {
+        countdown.textContent = "Resetting...";
+        return;
+      }
+
+      const days =
+        Math.floor(totalSeconds / 86400);
+
+      const hours =
+        Math.floor(
+          (totalSeconds % 86400) / 3600
+        );
+
+      const minutes =
+        Math.floor(
+          (totalSeconds % 3600) / 60
+        );
+
+      countdown.textContent =
+        `${days}d ${hours}h ${minutes}m`;
+
+      totalSeconds--;
+
+    }
+
+    updateCountdown();
+
+    setInterval(updateCountdown, 1000);
+
+
+    /* Scroll animation */
+
+    const animatedElements =
+      document.querySelectorAll(
+        ".stat, .leader-card, .champion, .table-wrapper, .cta"
+      );
+
+    const observer =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add("fade-up");
+
+              observer.unobserve(entry.target);
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+    animatedElements.forEach(element => {
+      observer.observe(element);
+    });
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,5752 @@
+<!DOCTYPE html>
+<html lang="so">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description"
+    content="Dugsiiye — Software engineering lagu barto Af-Soomaali. Baro HTML ilaa AI Engineering, dhis apps dhab ah, kuna shaqee AI.">
+
+  <meta name="theme-color" content="#001B2E">
+
+  <title>About Dugsiiye — Software Engineering in Af-Soomaali</title>
+
+
+  <!-- =====================================================
+       GOOGLE FONT
+  ====================================================== -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+
+
+  <!-- =====================================================
+       CSS
+  ====================================================== -->
+
+  <style>
+    /* =====================================================
+       ROOT
+    ====================================================== */
+
+    :root {
+
+      --green: #00C896;
+      --green-dark: #00A77D;
+
+      --white: #FFFFFF;
+
+      --navy: #001B2E;
+      --navy-2: #00243D;
+      --navy-3: #06324B;
+
+      --muted: #AFC2D0;
+
+      --border:
+        rgba(255, 255, 255, .09);
+
+      --green-border:
+        rgba(0, 200, 150, .22);
+
+      --container: 1180px;
+
+      --radius: 22px;
+
+    }
+
+
+    /* =====================================================
+       RESET
+    ====================================================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+    body {
+
+      font-family:
+        "Inter",
+        sans-serif;
+
+      background:
+        var(--navy);
+
+      color:
+        var(--white);
+
+      line-height: 1.6;
+
+      overflow-x: hidden;
+
+    }
+
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+
+    .container {
+
+      width:
+        min(calc(100% - 40px),
+          var(--container));
+
+      margin-inline: auto;
+
+    }
+
+
+    /* =====================================================
+       GLOBAL BACKGROUND
+    ====================================================== */
+
+    .page-glow {
+
+      position: fixed;
+
+      width: 500px;
+      height: 500px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(0, 200, 150, .035);
+
+      filter:
+        blur(100px);
+
+      pointer-events: none;
+
+      z-index: -2;
+
+    }
+
+
+    .glow-left {
+
+      left: -300px;
+      top: 300px;
+
+    }
+
+
+    .glow-right {
+
+      right: -300px;
+      top: 1000px;
+
+    }
+
+
+    /* =====================================================
+       NAVBAR
+    ====================================================== */
+
+    .navbar {
+
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+
+      z-index: 1000;
+
+      border-bottom:
+        1px solid transparent;
+
+      transition:
+        .35s ease;
+
+    }
+
+
+    .navbar.scrolled {
+
+      background:
+        rgba(0, 27, 46, .90);
+
+      backdrop-filter:
+        blur(20px);
+
+      border-color:
+        var(--border);
+
+    }
+
+
+    .nav-inner {
+
+      height: 78px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+    }
+
+
+    .logo {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      font-family:
+        "Poppins",
+        sans-serif;
+
+      font-weight: 800;
+
+      font-size: 21px;
+
+      letter-spacing: -.5px;
+
+    }
+
+
+    .logo-mark {
+
+      width: 36px;
+      height: 36px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 11px;
+
+      background:
+        var(--green);
+
+      color:
+        var(--navy);
+
+      font-size: 16px;
+
+      box-shadow:
+        0 0 30px rgba(0, 200, 150, .18);
+
+    }
+
+
+    .logo span {
+      color:
+        var(--green);
+    }
+
+
+    .nav-links {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 30px;
+
+    }
+
+
+    .nav-links a {
+
+      color:
+        var(--muted);
+
+      font-size: 12px;
+
+      font-weight: 600;
+
+      transition:
+        color .25s ease;
+
+    }
+
+
+    .nav-links a:hover,
+    .nav-links a.active {
+
+      color:
+        var(--white);
+
+    }
+
+
+    .nav-links a.active {
+      color:
+        var(--green);
+    }
+
+
+    .nav-cta {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      padding:
+        11px 17px;
+
+      border-radius: 11px;
+
+      background:
+        var(--green);
+
+      color:
+        var(--navy) !important;
+
+      font-weight: 800 !important;
+
+    }
+
+
+    .nav-cta:hover {
+
+      background:
+        var(--green-dark);
+
+    }
+
+
+    .menu-btn {
+
+      display: none;
+
+      width: 42px;
+      height: 42px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 11px;
+
+      background:
+        rgba(255, 255, 255, .04);
+
+      color:
+        var(--white);
+
+      cursor: pointer;
+
+    }
+
+
+    /* =====================================================
+       HERO
+    ====================================================== */
+
+    .hero {
+
+      position: relative;
+
+      min-height:
+        780px;
+
+      display: flex;
+
+      align-items: center;
+
+      padding:
+        150px 0 100px;
+
+      overflow: hidden;
+
+      background:
+
+        radial-gradient(circle at 75% 35%,
+          rgba(0, 200, 150, .10),
+          transparent 28%),
+
+        linear-gradient(180deg,
+          var(--navy),
+          var(--navy));
+
+    }
+
+
+    .hero-grid {
+
+      position: relative;
+
+      z-index: 2;
+
+      display: grid;
+
+      grid-template-columns:
+        1.05fr .95fr;
+
+      gap: 80px;
+
+      align-items: center;
+
+    }
+
+
+    .hero-grid-lines {
+
+      position: absolute;
+
+      inset: 0;
+
+      opacity: .17;
+
+      background-image:
+
+        linear-gradient(rgba(175, 194, 208, .045) 1px,
+          transparent 1px),
+
+        linear-gradient(90deg,
+          rgba(175, 194, 208, .045) 1px,
+          transparent 1px);
+
+      background-size:
+        55px 55px;
+
+      mask-image:
+        linear-gradient(to bottom,
+          black,
+          transparent);
+
+    }
+
+
+    .hero-orb {
+
+      position: absolute;
+
+      border-radius: 50%;
+
+      pointer-events: none;
+
+      animation:
+        floatOrb 8s ease-in-out infinite;
+
+    }
+
+
+    .orb-1 {
+
+      width: 330px;
+      height: 330px;
+
+      right: 3%;
+      top: 130px;
+
+      background:
+        rgba(0, 200, 150, .07);
+
+      filter:
+        blur(4px);
+
+    }
+
+
+    .orb-2 {
+
+      width: 180px;
+      height: 180px;
+
+      left: 5%;
+      bottom: 40px;
+
+      background:
+        rgba(0, 200, 150, .045);
+
+      animation-delay:
+        -3s;
+
+    }
+
+
+    @keyframes floatOrb {
+
+      0%,
+      100% {
+        transform:
+          translateY(0);
+      }
+
+      50% {
+        transform:
+          translateY(-28px);
+      }
+
+    }
+
+
+    .eyebrow {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      padding:
+        7px 12px;
+
+      border:
+        1px solid var(--green-border);
+
+      border-radius:
+        100px;
+
+      background:
+        rgba(0, 200, 150, .065);
+
+      color:
+        var(--green);
+
+      font-size:
+        10px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        1px;
+
+      text-transform:
+        uppercase;
+
+    }
+
+
+    .eyebrow-dot {
+
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background:
+        var(--green);
+
+      box-shadow:
+        0 0 15px var(--green);
+
+      animation:
+        pulse 2s infinite;
+
+    }
+
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform:
+          scale(1);
+
+        opacity: 1;
+      }
+
+      50% {
+        transform:
+          scale(1.55);
+
+        opacity: .55;
+      }
+
+    }
+
+
+    .hero h1 {
+
+      max-width:
+        720px;
+
+      margin:
+        20px 0 25px;
+
+      font-family:
+        "Poppins",
+        sans-serif;
+
+      font-size:
+        clamp(43px,
+          5.3vw,
+          70px);
+
+      line-height:
+        1.04;
+
+      letter-spacing:
+        -3px;
+
+    }
+
+
+    .hero h1 span {
+
+      display:
+        inline-block;
+
+      color:
+        var(--green);
+
+      animation:
+        greenGlow 3s ease-in-out infinite;
+
+    }
+
+
+    @keyframes greenGlow {
+
+      0%,
+      100% {
+        text-shadow:
+          0 0 0 rgba(0, 200, 150, 0);
+      }
+
+      50% {
+        text-shadow:
+          0 0 35px rgba(0, 200, 150, .20);
+      }
+
+    }
+
+
+    .hero-description {
+
+      max-width:
+        660px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        15px;
+
+      line-height:
+        1.9;
+
+      margin-bottom:
+        31px;
+
+    }
+
+
+    .hero-actions {
+
+      display:
+        flex;
+
+      gap: 12px;
+
+      flex-wrap:
+        wrap;
+
+    }
+
+
+    .btn {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      gap: 10px;
+
+      min-height:
+        50px;
+
+      padding:
+        0 20px;
+
+      border-radius:
+        12px;
+
+      font-size:
+        12px;
+
+      font-weight:
+        800;
+
+      transition:
+        .3s ease;
+
+    }
+
+
+    .btn-primary {
+
+      background:
+        var(--green);
+
+      color:
+        var(--navy);
+
+      box-shadow:
+        0 14px 35px rgba(0, 200, 150, .16);
+
+    }
+
+
+    .btn-primary:hover {
+
+      background:
+        var(--green-dark);
+
+      transform:
+        translateY(-4px);
+
+      box-shadow:
+        0 20px 45px rgba(0, 200, 150, .22);
+
+    }
+
+
+    .btn-secondary {
+
+      background:
+        rgba(255, 255, 255, .035);
+
+      border:
+        1px solid var(--border);
+
+      color:
+        var(--white);
+
+    }
+
+
+    .btn-secondary:hover {
+
+      border-color:
+        var(--green-border);
+
+      background:
+        rgba(0, 200, 150, .06);
+
+      transform:
+        translateY(-3px);
+
+    }
+
+
+    /* =====================================================
+       HERO TERMINAL
+    ====================================================== */
+
+    .terminal-wrap {
+
+      position:
+        relative;
+
+      perspective:
+        1200px;
+
+    }
+
+
+    .terminal {
+
+      position:
+        relative;
+
+      min-height:
+        450px;
+
+      padding:
+        19px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        25px;
+
+      background:
+        linear-gradient(145deg,
+          rgba(6, 50, 75, .96),
+          rgba(0, 27, 46, .96));
+
+      box-shadow:
+        0 40px 100px rgba(0, 0, 0, .32);
+
+      transform:
+        rotateY(-5deg) rotateX(2deg);
+
+      animation:
+        terminalFloat 6s ease-in-out infinite;
+
+      transition:
+        transform .5s ease;
+
+    }
+
+
+    .terminal:hover {
+
+      transform:
+        rotateY(0) rotateX(0) translateY(-5px);
+
+    }
+
+
+    @keyframes terminalFloat {
+
+      0%,
+      100% {
+        transform:
+          rotateY(-5deg) rotateX(2deg) translateY(0);
+      }
+
+      50% {
+        transform:
+          rotateY(-3deg) rotateX(1deg) translateY(-9px);
+      }
+
+    }
+
+
+    .terminal-top {
+
+      height:
+        37px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      border-bottom:
+        1px solid rgba(255, 255, 255, .07);
+
+    }
+
+
+    .terminal-dots {
+
+      display:
+        flex;
+
+      gap: 6px;
+
+    }
+
+
+    .terminal-dots i {
+
+      width: 8px;
+      height: 8px;
+
+      border-radius:
+        50%;
+
+      background:
+        var(--muted);
+
+      opacity:
+        .42;
+
+    }
+
+
+    .terminal-title {
+
+      color:
+        var(--muted);
+
+      font-size:
+        9px;
+
+    }
+
+
+    .terminal-body {
+
+      margin-top:
+        20px;
+
+      padding:
+        23px;
+
+      min-height:
+        285px;
+
+      border:
+        1px solid rgba(255, 255, 255, .06);
+
+      border-radius:
+        16px;
+
+      background:
+        rgba(0, 27, 46, .82);
+
+      font-family:
+        monospace;
+
+      font-size:
+        12px;
+
+    }
+
+
+    .terminal-line {
+
+      display:
+        flex;
+
+      gap:
+        14px;
+
+      margin-bottom:
+        15px;
+
+    }
+
+
+    .terminal-number {
+
+      width:
+        18px;
+
+      color:
+        rgba(175, 194, 208, .35);
+
+    }
+
+
+    .terminal-green {
+      color:
+        var(--green);
+    }
+
+
+    .terminal-muted {
+      color:
+        var(--muted);
+    }
+
+
+    .terminal-white {
+      color:
+        var(--white);
+    }
+
+
+    .terminal-cursor {
+
+      display:
+        inline-block;
+
+      width:
+        7px;
+
+      height:
+        15px;
+
+      margin-left:
+        32px;
+
+      background:
+        var(--green);
+
+      animation:
+        cursorBlink 1s steps(2) infinite;
+
+    }
+
+
+    @keyframes cursorBlink {
+
+      50% {
+        opacity: 0;
+      }
+
+    }
+
+
+    .terminal-badge {
+
+      position:
+        absolute;
+
+      right:
+        23px;
+
+      bottom:
+        22px;
+
+      padding:
+        13px 17px;
+
+      border-radius:
+        13px;
+
+      background:
+        var(--white);
+
+      color:
+        var(--navy);
+
+      box-shadow:
+        0 15px 40px rgba(0, 0, 0, .25);
+
+      animation:
+        badgeFloat 4s ease-in-out infinite;
+
+    }
+
+
+    @keyframes badgeFloat {
+
+      0%,
+      100% {
+        transform:
+          translateY(0);
+      }
+
+      50% {
+        transform:
+          translateY(-8px);
+      }
+
+    }
+
+
+    .terminal-badge strong {
+
+      display:
+        block;
+
+      font-family:
+        "Poppins";
+
+      font-size:
+        22px;
+
+    }
+
+
+    .terminal-badge span {
+
+      color:
+        #557080;
+
+      font-size:
+        9px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .floating-mini {
+
+      position:
+        absolute;
+
+      padding:
+        11px 14px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        13px;
+
+      background:
+        rgba(0, 27, 46, .90);
+
+      backdrop-filter:
+        blur(15px);
+
+      box-shadow:
+        0 18px 35px rgba(0, 0, 0, .25);
+
+    }
+
+
+    .mini-one {
+
+      left:
+        -35px;
+
+      top:
+        105px;
+
+      animation:
+        miniOne 4s ease-in-out infinite;
+
+    }
+
+
+    .mini-two {
+
+      right:
+        -30px;
+
+      bottom:
+        115px;
+
+      animation:
+        miniTwo 4.5s ease-in-out infinite;
+
+    }
+
+
+    .floating-mini strong,
+    .floating-mini small {
+
+      display:
+        block;
+
+    }
+
+
+    .floating-mini strong {
+
+      font-size:
+        10px;
+
+    }
+
+
+    .floating-mini small {
+
+      color:
+        var(--muted);
+
+      font-size:
+        8px;
+
+    }
+
+
+    @keyframes miniOne {
+
+      0%,
+      100% {
+        transform:
+          translateY(0);
+      }
+
+      50% {
+        transform:
+          translateY(-11px);
+      }
+
+    }
+
+
+    @keyframes miniTwo {
+
+      0%,
+      100% {
+        transform:
+          translateY(0);
+      }
+
+      50% {
+        transform:
+          translateY(11px);
+      }
+
+    }
+
+
+    /* =====================================================
+       STATS
+    ====================================================== */
+
+    .stats {
+
+      position:
+        relative;
+
+      z-index:
+        10;
+
+      margin-top:
+        -50px;
+
+    }
+
+
+    .stats-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      overflow:
+        hidden;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        20px;
+
+      background:
+        rgba(0, 36, 61, .96);
+
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, .25);
+
+    }
+
+
+    .stat {
+
+      padding:
+        28px 20px;
+
+      text-align:
+        center;
+
+      border-right:
+        1px solid var(--border);
+
+    }
+
+
+    .stat:last-child {
+      border-right:
+        0;
+    }
+
+
+    .stat-number {
+
+      display:
+        inline-block;
+
+      font-family:
+        "Poppins";
+
+      color:
+        var(--green);
+
+      font-size:
+        30px;
+
+      font-weight:
+        800;
+
+      line-height:
+        1;
+
+    }
+
+
+    .stat-label {
+
+      display:
+        block;
+
+      margin-top:
+        8px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        10px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    /* =====================================================
+       PROGRAM SECTION
+    ====================================================== */
+
+    .program {
+
+      padding:
+        120px 0;
+
+      background:
+        var(--navy);
+
+    }
+
+
+    .section-top {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        flex-end;
+
+      gap:
+        40px;
+
+      margin-bottom:
+        55px;
+
+    }
+
+
+    .section-kicker {
+
+      color:
+        var(--green);
+
+      font-size:
+        10px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        2px;
+
+      margin-bottom:
+        13px;
+
+    }
+
+
+    .section-title {
+
+      max-width:
+        650px;
+
+      font-family:
+        "Poppins";
+
+      font-size:
+        clamp(32px,
+          4vw,
+          49px);
+
+      line-height:
+        1.12;
+
+      letter-spacing:
+        -1.5px;
+
+    }
+
+
+    .section-description {
+
+      max-width:
+        650px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        14px;
+
+      line-height:
+        1.9;
+
+      margin-top:
+        15px;
+
+    }
+
+
+    .program-link {
+
+      white-space:
+        nowrap;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        8px;
+
+      padding:
+        11px 15px;
+
+      border:
+        1px solid var(--green-border);
+
+      border-radius:
+        11px;
+
+      color:
+        var(--green);
+
+      font-size:
+        11px;
+
+      font-weight:
+        800;
+
+      transition:
+        .3s ease;
+
+    }
+
+
+    .program-link:hover {
+
+      background:
+        rgba(0, 200, 150, .08);
+
+      transform:
+        translateY(-3px);
+
+    }
+
+
+    .phases {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap:
+        12px;
+
+    }
+
+
+    .phase {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        16px;
+
+      padding:
+        18px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        15px;
+
+      background:
+        rgba(255, 255, 255, .025);
+
+      transition:
+        .35s ease;
+
+    }
+
+
+    .phase:hover {
+
+      transform:
+        translateX(7px);
+
+      border-color:
+        var(--green-border);
+
+      background:
+        rgba(0, 200, 150, .035);
+
+    }
+
+
+    .phase-number {
+
+      width:
+        45px;
+
+      height:
+        45px;
+
+      flex-shrink:
+        0;
+
+      display:
+        grid;
+
+      place-items:
+        center;
+
+      border-radius:
+        12px;
+
+      background:
+        rgba(0, 200, 150, .08);
+
+      color:
+        var(--green);
+
+      font-family:
+        "Poppins";
+
+      font-size:
+        11px;
+
+      font-weight:
+        800;
+
+    }
+
+
+    .phase h3 {
+
+      font-family:
+        "Poppins";
+
+      font-size:
+        14px;
+
+    }
+
+
+    .phase p {
+
+      margin-top:
+        2px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        10px;
+
+    }
+
+
+    /* =====================================================
+       WHY SECTION
+    ====================================================== */
+
+    .why {
+
+      padding:
+        115px 0;
+
+      background:
+        var(--navy-2);
+
+    }
+
+
+    .why-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        .95fr 1.05fr;
+
+      gap:
+        85px;
+
+      align-items:
+        center;
+
+    }
+
+
+    .why-text p {
+
+      max-width:
+        650px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        14px;
+
+      line-height:
+        1.9;
+
+      margin-top:
+        17px;
+
+    }
+
+
+    .why-visual {
+
+      position:
+        relative;
+
+      min-height:
+        430px;
+
+      padding:
+        35px;
+
+      overflow:
+        hidden;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        25px;
+
+      background:
+        linear-gradient(145deg,
+          var(--navy-3),
+          var(--navy));
+
+    }
+
+
+    .why-visual::before {
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        260px;
+
+      height:
+        260px;
+
+      right:
+        -80px;
+
+      top:
+        -80px;
+
+      border-radius:
+        50%;
+
+      background:
+        rgba(0, 200, 150, .08);
+
+      filter:
+        blur(20px);
+
+    }
+
+
+    .why-big {
+
+      position:
+        absolute;
+
+      left:
+        30px;
+
+      bottom:
+        20px;
+
+      font-family:
+        "Poppins";
+
+      font-size:
+        130px;
+
+      line-height:
+        1;
+
+      color:
+        rgba(0, 200, 150, .075);
+
+      font-weight:
+        800;
+
+    }
+
+
+    .why-card {
+
+      position:
+        relative;
+
+      z-index:
+        2;
+
+      padding:
+        25px;
+
+      border:
+        1px solid rgba(255, 255, 255, .08);
+
+      border-radius:
+        18px;
+
+      background:
+        rgba(0, 27, 46, .72);
+
+      margin-bottom:
+        13px;
+
+      transition:
+        .35s ease;
+
+    }
+
+
+    .why-card:hover {
+
+      transform:
+        translateX(7px);
+
+      border-color:
+        var(--green-border);
+
+    }
+
+
+    .why-card-number {
+
+      color:
+        var(--green);
+
+      font-size:
+        10px;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        1px;
+
+    }
+
+
+    .why-card h3 {
+
+      margin-top:
+        5px;
+
+      font-family:
+        "Poppins";
+
+      font-size:
+        16px;
+
+    }
+
+
+    .why-card p {
+
+      color:
+        var(--muted);
+
+      font-size:
+        11px;
+
+      line-height:
+        1.7;
+
+      margin-top:
+        5px;
+
+    }
+
+
+    /* =====================================================
+       VALUES
+    ====================================================== */
+
+    .values {
+
+      padding:
+        115px 0;
+
+      background:
+        var(--navy);
+
+    }
+
+
+    .values-heading {
+
+      text-align:
+        center;
+
+      margin:
+        0 auto 55px;
+
+    }
+
+
+    .values-heading .section-description {
+
+      margin-left:
+        auto;
+
+      margin-right:
+        auto;
+
+    }
+
+
+    .values-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap:
+        15px;
+
+    }
+
+
+    .value {
+
+      position:
+        relative;
+
+      overflow:
+        hidden;
+
+      min-height:
+        300px;
+
+      padding:
+        27px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        20px;
+
+      background:
+        rgba(255, 255, 255, .025);
+
+      transition:
+        .4s ease;
+
+    }
+
+
+    .value::after {
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        130px;
+
+      height:
+        130px;
+
+      right:
+        -60px;
+
+      top:
+        -60px;
+
+      border-radius:
+        50%;
+
+      background:
+        rgba(0, 200, 150, .055);
+
+      transition:
+        .5s ease;
+
+    }
+
+
+    .value:hover {
+
+      transform:
+        translateY(-8px);
+
+      border-color:
+        var(--green-border);
+
+    }
+
+
+    .value:hover::after {
+
+      transform:
+        scale(2.2);
+
+    }
+
+
+    .value-icon {
+
+      width:
+        48px;
+
+      height:
+        48px;
+
+      display:
+        grid;
+
+      place-items:
+        center;
+
+      border-radius:
+        13px;
+
+      background:
+        rgba(0, 200, 150, .09);
+
+      color:
+        var(--green);
+
+      font-size:
+        20px;
+
+      margin-bottom:
+        25px;
+
+    }
+
+
+    .value h3 {
+
+      font-family:
+        "Poppins";
+
+      font-size:
+        16px;
+
+      margin-bottom:
+        9px;
+
+    }
+
+
+    .value p {
+
+      color:
+        var(--muted);
+
+      font-size:
+        11px;
+
+      line-height:
+        1.8;
+
+    }
+
+
+    .value-arrow {
+
+      position:
+        absolute;
+
+      left:
+        27px;
+
+      bottom:
+        24px;
+
+      color:
+        var(--green);
+
+      transition:
+        .3s ease;
+
+    }
+
+
+    .value:hover .value-arrow {
+
+      transform:
+        translateX(7px);
+
+    }
+
+
+    /* =====================================================
+       FOUNDER
+    ====================================================== */
+
+    .founder {
+
+      padding:
+        110px 0;
+
+      background:
+        var(--navy-2);
+
+    }
+
+
+    .founder-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        .75fr 1.25fr;
+
+      gap:
+        75px;
+
+      align-items:
+        center;
+
+    }
+
+
+    .founder-photo {
+
+      position:
+        relative;
+
+      min-height:
+        430px;
+
+      overflow:
+        hidden;
+
+      display:
+        grid;
+
+      place-items:
+        center;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        25px;
+
+      background:
+        linear-gradient(145deg,
+          var(--navy-3),
+          var(--navy));
+
+    }
+
+
+    .founder-photo::before {
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        260px;
+
+      height:
+        260px;
+
+      border-radius:
+        50%;
+
+      background:
+        rgba(0, 200, 150, .08);
+
+      filter:
+        blur(25px);
+
+    }
+
+
+    .founder-initial {
+
+      position:
+        relative;
+
+      z-index:
+        2;
+
+      font-family:
+        "Poppins";
+
+      font-size:
+        170px;
+
+      line-height:
+        1;
+
+      font-weight:
+        800;
+
+      color:
+        rgba(0, 200, 150, .16);
+
+    }
+
+
+    .founder-label {
+
+      position:
+        absolute;
+
+      left:
+        20px;
+
+      bottom:
+        20px;
+
+      right:
+        20px;
+
+      padding:
+        15px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        14px;
+
+      background:
+        rgba(0, 27, 46, .88);
+
+      backdrop-filter:
+        blur(15px);
+
+    }
+
+
+    .founder-label strong {
+
+      display:
+        block;
+
+      font-size:
+        12px;
+
+    }
+
+
+    .founder-label span {
+
+      color:
+        var(--muted);
+
+      font-size:
+        10px;
+
+    }
+
+
+    .founder-content h2 {
+
+      margin-top:
+        8px;
+
+      font-family:
+        "Poppins";
+
+      font-size:
+        clamp(32px,
+          4vw,
+          48px);
+
+      line-height:
+        1.1;
+
+      letter-spacing:
+        -1.5px;
+
+    }
+
+
+    .founder-content h2 span {
+
+      color:
+        var(--green);
+
+    }
+
+
+    .founder-quote {
+
+      margin-top:
+        20px;
+
+      color:
+        var(--white);
+
+      font-size:
+        15px;
+
+      font-weight:
+        600;
+
+      line-height:
+        1.8;
+
+    }
+
+
+    .founder-content>p {
+
+      margin-top:
+        16px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        13px;
+
+      line-height:
+        1.9;
+
+    }
+
+
+    .founder-stats {
+
+      display:
+        flex;
+
+      gap:
+        35px;
+
+      margin-top:
+        28px;
+
+      padding-top:
+        22px;
+
+      border-top:
+        1px solid var(--border);
+
+    }
+
+
+    .founder-stat strong {
+
+      display:
+        block;
+
+      color:
+        var(--green);
+
+      font-family:
+        "Poppins";
+
+      font-size:
+        24px;
+
+    }
+
+
+    .founder-stat span {
+
+      color:
+        var(--muted);
+
+      font-size:
+        9px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    /* =====================================================
+       JOURNEY
+    ====================================================== */
+
+    .journey {
+
+      padding:
+        115px 0;
+
+      background:
+        var(--navy);
+
+    }
+
+
+    .journey-heading {
+
+      text-align:
+        center;
+
+      margin-bottom:
+        65px;
+
+    }
+
+
+    .timeline {
+
+      position:
+        relative;
+
+      max-width:
+        850px;
+
+      margin:
+        auto;
+
+    }
+
+
+    .timeline::before {
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      left:
+        50%;
+
+      top:
+        0;
+
+      bottom:
+        0;
+
+      width:
+        1px;
+
+      background:
+        linear-gradient(to bottom,
+          transparent,
+          var(--green-border),
+          transparent);
+
+    }
+
+
+    .timeline-item {
+
+      position:
+        relative;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        55px;
+
+      margin-bottom:
+        45px;
+
+    }
+
+
+    .timeline-item:last-child {
+      margin-bottom:
+        0;
+    }
+
+
+    .timeline-item:nth-child(even) .timeline-content {
+
+      grid-column:
+        2;
+
+      grid-row:
+        1;
+
+    }
+
+
+    .timeline-item:nth-child(even) .timeline-year {
+
+      grid-column:
+        1;
+
+      grid-row:
+        1;
+
+      text-align:
+        right;
+
+    }
+
+
+    .timeline-content {
+
+      padding:
+        22px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        16px;
+
+      background:
+        rgba(255, 255, 255, .025);
+
+      transition:
+        .35s ease;
+
+    }
+
+
+    .timeline-content:hover {
+
+      transform:
+        translateY(-5px);
+
+      border-color:
+        var(--green-border);
+
+    }
+
+
+    .timeline-year {
+
+      align-self:
+        center;
+
+      color:
+        var(--green);
+
+      font-family:
+        "Poppins";
+
+      font-size:
+        28px;
+
+      font-weight:
+        800;
+
+    }
+
+
+    .timeline-content h3 {
+
+      font-family:
+        "Poppins";
+
+      font-size:
+        16px;
+
+      margin-bottom:
+        6px;
+
+    }
+
+
+    .timeline-content p {
+
+      color:
+        var(--muted);
+
+      font-size:
+        11px;
+
+      line-height:
+        1.8;
+
+    }
+
+
+    .timeline-dot {
+
+      position:
+        absolute;
+
+      left:
+        50%;
+
+      top:
+        50%;
+
+      width:
+        11px;
+
+      height:
+        11px;
+
+      transform:
+        translate(-50%, -50%);
+
+      border:
+        3px solid var(--navy);
+
+      border-radius:
+        50%;
+
+      background:
+        var(--green);
+
+      box-shadow:
+        0 0 0 5px rgba(0, 200, 150, .08);
+
+    }
+
+
+    /* =====================================================
+       FINAL CTA
+    ====================================================== */
+
+    .final-cta {
+
+      padding:
+        100px 0;
+
+      background:
+        var(--navy-2);
+
+      overflow:
+        hidden;
+
+    }
+
+
+    .cta-box {
+
+      position:
+        relative;
+
+      overflow:
+        hidden;
+
+      padding:
+        75px 30px;
+
+      text-align:
+        center;
+
+      border:
+        1px solid var(--green-border);
+
+      border-radius:
+        27px;
+
+      background:
+        linear-gradient(145deg,
+          var(--navy-3),
+          var(--navy));
+
+    }
+
+
+    .cta-box::before {
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      width:
+        350px;
+
+      height:
+        350px;
+
+      left:
+        50%;
+
+      top:
+        50%;
+
+      transform:
+        translate(-50%, -50%);
+
+      border-radius:
+        50%;
+
+      background:
+        rgba(0, 200, 150, .07);
+
+      filter:
+        blur(65px);
+
+      animation:
+        ctaPulse 6s ease-in-out infinite;
+
+    }
+
+
+    @keyframes ctaPulse {
+
+      0%,
+      100% {
+        transform:
+          translate(-50%, -50%) scale(1);
+      }
+
+      50% {
+        transform:
+          translate(-50%, -50%) scale(1.2);
+      }
+
+    }
+
+
+    .cta-content {
+
+      position:
+        relative;
+
+      z-index:
+        2;
+
+    }
+
+
+    .cta-box h2 {
+
+      max-width:
+        780px;
+
+      margin:
+        7px auto 15px;
+
+      font-family:
+        "Poppins";
+
+      font-size:
+        clamp(32px,
+          4vw,
+          52px);
+
+      line-height:
+        1.1;
+
+      letter-spacing:
+        -1.5px;
+
+    }
+
+
+    .cta-box h2 span {
+
+      color:
+        var(--green);
+
+    }
+
+
+    .cta-box p {
+
+      max-width:
+        620px;
+
+      margin:
+        auto;
+
+      color:
+        var(--muted);
+
+      font-size:
+        14px;
+
+      line-height:
+        1.8;
+
+    }
+
+
+    .cta-buttons {
+
+      display:
+        flex;
+
+      justify-content:
+        center;
+
+      gap:
+        12px;
+
+      margin-top:
+        28px;
+
+      flex-wrap:
+        wrap;
+
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ====================================================== */
+
+    footer {
+
+      background:
+        var(--navy);
+
+      border-top:
+        1px solid var(--border);
+
+      padding:
+        70px 0 25px;
+
+    }
+
+
+    .footer-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1.4fr repeat(3, 1fr);
+
+      gap:
+        45px;
+
+      padding-bottom:
+        55px;
+
+    }
+
+
+    .footer-brand p {
+
+      max-width:
+        330px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        11px;
+
+      line-height:
+        1.8;
+
+      margin-top:
+        14px;
+
+    }
+
+
+    .socials {
+
+      display:
+        flex;
+
+      gap:
+        8px;
+
+      margin-top:
+        20px;
+
+    }
+
+
+    .social {
+
+      width:
+        34px;
+
+      height:
+        34px;
+
+      display:
+        grid;
+
+      place-items:
+        center;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        9px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        10px;
+
+      transition:
+        .3s ease;
+
+    }
+
+
+    .social:hover {
+
+      color:
+        var(--green);
+
+      border-color:
+        var(--green-border);
+
+      transform:
+        translateY(-3px);
+
+    }
+
+
+    .footer-column h4 {
+
+      font-family:
+        "Poppins";
+
+      font-size:
+        12px;
+
+      margin-bottom:
+        16px;
+
+    }
+
+
+    .footer-column a {
+
+      display:
+        block;
+
+      color:
+        var(--muted);
+
+      font-size:
+        10px;
+
+      margin-bottom:
+        10px;
+
+      transition:
+        .25s ease;
+
+    }
+
+
+    .footer-column a:hover {
+
+      color:
+        var(--green);
+
+      transform:
+        translateX(3px);
+
+    }
+
+
+    .footer-bottom {
+
+      padding-top:
+        20px;
+
+      border-top:
+        1px solid var(--border);
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      gap:
+        15px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        9px;
+
+    }
+
+
+    /* =====================================================
+       SCROLL ANIMATION
+    ====================================================== */
+
+    .reveal {
+
+      opacity:
+        0;
+
+      transform:
+        translateY(35px);
+
+      transition:
+        opacity .8s ease,
+        transform .8s cubic-bezier(.22, 1, .36, 1);
+
+    }
+
+
+    .reveal-left {
+
+      opacity:
+        0;
+
+      transform:
+        translateX(-45px);
+
+      transition:
+        opacity .8s ease,
+        transform .8s cubic-bezier(.22, 1, .36, 1);
+
+    }
+
+
+    .reveal-right {
+
+      opacity:
+        0;
+
+      transform:
+        translateX(45px);
+
+      transition:
+        opacity .8s ease,
+        transform .8s cubic-bezier(.22, 1, .36, 1);
+
+    }
+
+
+    .visible {
+
+      opacity:
+        1;
+
+      transform:
+        translate3d(0, 0, 0);
+
+    }
+
+
+    .value:nth-child(2),
+    .phase:nth-child(2) {
+
+      transition-delay:
+        .08s;
+
+    }
+
+
+    .value:nth-child(3),
+    .phase:nth-child(3) {
+
+      transition-delay:
+        .16s;
+
+    }
+
+
+    .value:nth-child(4),
+    .phase:nth-child(4) {
+
+      transition-delay:
+        .24s;
+
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ====================================================== */
+
+    @media (max-width: 1050px) {
+
+      .hero-grid {
+
+        grid-template-columns:
+          1fr;
+
+        gap:
+          55px;
+
+      }
+
+
+      .terminal {
+
+        max-width:
+          720px;
+
+        margin:
+          auto;
+
+      }
+
+
+      .why-grid {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .values-grid {
+
+        grid-template-columns:
+          repeat(2, 1fr);
+
+      }
+
+
+      .founder-grid {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .founder-photo {
+
+        max-width:
+          600px;
+
+        margin:
+          auto;
+
+      }
+
+    }
+
+
+    @media (max-width: 850px) {
+
+      .nav-links {
+
+        position:
+          absolute;
+
+        top:
+          78px;
+
+        left:
+          20px;
+
+        right:
+          20px;
+
+        display:
+          none;
+
+        flex-direction:
+          column;
+
+        align-items:
+          stretch;
+
+        gap:
+          4px;
+
+        padding:
+          14px;
+
+        border:
+          1px solid var(--border);
+
+        border-radius:
+          16px;
+
+        background:
+          rgba(0, 27, 46, .97);
+
+        backdrop-filter:
+          blur(20px);
+
+      }
+
+
+      .nav-links.open {
+        display:
+          flex;
+      }
+
+
+      .nav-links a {
+
+        padding:
+          12px;
+
+      }
+
+
+      .nav-cta {
+
+        text-align:
+          center;
+
+      }
+
+
+      .menu-btn {
+
+        display:
+          block;
+
+      }
+
+
+      .footer-grid {
+
+        grid-template-columns:
+          repeat(2, 1fr);
+
+      }
+
+    }
+
+
+    @media (max-width: 700px) {
+
+      .container {
+
+        width:
+          min(calc(100% - 30px),
+            var(--container));
+
+      }
+
+
+      .hero {
+
+        min-height:
+          auto;
+
+        padding:
+          125px 0 90px;
+
+      }
+
+
+      .hero h1 {
+
+        font-size:
+          42px;
+
+        letter-spacing:
+          -2px;
+
+      }
+
+
+      .hero-description {
+
+        font-size:
+          13px;
+
+      }
+
+
+      .hero-actions {
+
+        display:
+          grid;
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .btn {
+
+        width:
+          100%;
+
+      }
+
+
+      .terminal {
+
+        min-height:
+          400px;
+
+        padding:
+          15px;
+
+        transform:
+          none;
+
+      }
+
+
+      .terminal:hover {
+
+        transform:
+          none;
+
+      }
+
+
+      .terminal-body {
+
+        padding:
+          17px;
+
+      }
+
+
+      .terminal-line {
+
+        gap:
+          8px;
+
+        font-size:
+          9px;
+
+        margin-bottom:
+          12px;
+
+      }
+
+
+      .mini-one {
+
+        left:
+          5px;
+
+      }
+
+
+      .mini-two {
+
+        right:
+          5px;
+
+      }
+
+
+      .stats {
+
+        margin-top:
+          -25px;
+
+      }
+
+
+      .stats-grid {
+
+        grid-template-columns:
+          repeat(2, 1fr);
+
+      }
+
+
+      .stat {
+
+        padding:
+          22px 10px;
+
+        border-bottom:
+          1px solid var(--border);
+
+      }
+
+
+      .stat:nth-child(2) {
+
+        border-right:
+          0;
+
+      }
+
+
+      .stat:nth-child(3),
+      .stat:nth-child(4) {
+
+        border-bottom:
+          0;
+
+      }
+
+
+      .section-top {
+
+        display:
+          block;
+
+      }
+
+
+      .program-link {
+
+        margin-top:
+          20px;
+
+      }
+
+
+      .phases {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .values-grid {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .why-visual {
+
+        min-height:
+          390px;
+
+        padding:
+          20px;
+
+      }
+
+
+      .why-big {
+
+        font-size:
+          100px;
+
+      }
+
+
+      .founder-stats {
+
+        gap:
+          22px;
+
+      }
+
+
+      .timeline::before {
+
+        left:
+          10px;
+
+      }
+
+
+      .timeline-item,
+      .timeline-item:nth-child(even) {
+
+        display:
+          block;
+
+        padding-left:
+          35px;
+
+        margin-bottom:
+          30px;
+
+      }
+
+
+      .timeline-item:nth-child(even) .timeline-content {
+
+        display:
+          block;
+
+      }
+
+
+      .timeline-year,
+      .timeline-item:nth-child(even) .timeline-year {
+
+        text-align:
+          left;
+
+        margin-bottom:
+          10px;
+
+        font-size:
+          24px;
+
+      }
+
+
+      .timeline-dot {
+
+        left:
+          10px;
+
+        top:
+          15px;
+
+        transform:
+          translateX(-50%);
+
+      }
+
+
+      .cta-buttons {
+
+        display:
+          grid;
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .footer-grid {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .footer-bottom {
+
+        flex-direction:
+          column;
+
+      }
+
+    }
+
+
+    @media (max-width: 450px) {
+
+      .hero h1 {
+
+        font-size:
+          37px;
+
+      }
+
+
+      .hero {
+
+        padding-top:
+          110px;
+
+      }
+
+
+      .terminal {
+
+        min-height:
+          365px;
+
+      }
+
+
+      .terminal-badge {
+
+        right:
+          15px;
+
+        bottom:
+          15px;
+
+      }
+
+
+      .floating-mini {
+
+        padding:
+          8px 10px;
+
+      }
+
+
+      .mini-one {
+
+        top:
+          90px;
+
+      }
+
+
+      .mini-two {
+
+        bottom:
+          90px;
+
+      }
+
+
+      .stat-number {
+
+        font-size:
+          25px;
+
+      }
+
+
+      .section-title {
+
+        font-size:
+          31px;
+
+      }
+
+
+      .founder-photo {
+
+        min-height:
+          350px;
+
+      }
+
+
+      .founder-initial {
+
+        font-size:
+          130px;
+
+      }
+
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+
+        animation-duration:
+          .01ms !important;
+
+        animation-iteration-count:
+          1 !important;
+
+        transition-duration:
+          .01ms !important;
+
+        scroll-behavior:
+          auto !important;
+
+      }
+
+    }
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       BACKGROUND GLOWS
+  ====================================================== -->
+
+  <div class="page-glow glow-left"></div>
+  <div class="page-glow glow-right"></div>
+
+
+  <!-- =====================================================
+       NAVBAR
+  ====================================================== -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#home">
+        <img src="./Images/LOGO.jpeg" alt="Caabi Academy Logo">
+        <div class="brand-text">
+          <strong>CAABI</strong>
+          <span>ACADEMY</span>
+        </div>
+      </a>
+      <button class="menu" id="menuBtn" aria-label="Menu">☰</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="INDEX.HTML">Home</a>
+        <a href="Course.html">Courses</a>
+        <a href="Ambassador.html">Ambassador</a>
+        <a href="League.html">League</a>
+        <a href="Blog.html">Blog</a>
+        <a href="Community.html">Mentorship</a>
+        <a href="About.html" class="Active">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="btn btn-ghost" id="loginBtn">Login</button>
+        <button class="btn btn-primary" id="signupBtn">Bilow Hadda</button>
+      </div>
+    </div>
+  </header>
+  <style>
+    /* =====================================================
+   CAABI ACADEMY NAVBAR
+   Colors:
+   Green  #00C896
+   White  #FFFFFF
+   Navy   #001B2E
+===================================================== */
+
+    :root {
+      --green: #00C896;
+      --green-dark: #00A77D;
+      --white: #FFFFFF;
+
+      --navy: #001B2E;
+      --navy-2: #00243D;
+
+      --text: #FFFFFF;
+      --muted: #AFC2D0;
+
+      --border: rgba(255, 255, 255, 0.10);
+
+      --container: 1180px;
+    }
+
+
+    /* =========================
+   NAVBAR
+========================= */
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+
+      width: 100%;
+
+      background: rgba(0, 27, 46, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+      transition: all 0.3s ease;
+    }
+
+
+    /* =========================
+   CONTAINER
+========================= */
+
+    .nav .container {
+      width: min(100% - 40px, var(--container));
+      margin: 0 auto;
+    }
+
+    .nav-inner {
+      min-height: 78px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 25px;
+    }
+
+
+    /* =========================
+   LOGO
+========================= */
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+
+      gap: 11px;
+
+      text-decoration: none;
+
+      flex-shrink: 0;
+    }
+
+    .brand img {
+      width: 45px;
+      height: 45px;
+
+      object-fit: cover;
+
+      border-radius: 11px;
+
+      border: 1px solid rgba(0, 200, 150, 0.25);
+
+      background: #ffffff;
+
+      transition: all 0.3s ease;
+    }
+
+    .brand:hover img {
+      transform: rotate(-3deg) scale(1.05);
+
+      border-color: var(--green);
+
+      box-shadow:
+        0 0 0 4px rgba(0, 200, 150, 0.08),
+        0 8px 25px rgba(0, 200, 150, 0.15);
+    }
+
+
+    /* =========================
+   BRAND TEXT
+========================= */
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+
+      line-height: 1;
+    }
+
+    .brand-text strong {
+      color: var(--white);
+
+      font-size: 18px;
+      font-weight: 800;
+
+      letter-spacing: 1px;
+    }
+
+    .brand-text span {
+      margin-top: 4px;
+
+      color: var(--green);
+
+      font-size: 8px;
+      font-weight: 800;
+
+      letter-spacing: 3px;
+    }
+
+
+    /* =========================
+   NAV LINKS
+========================= */
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+
+      gap: 4px;
+
+      margin-left: auto;
+      margin-right: 5px;
+    }
+
+    .nav-links a {
+      position: relative;
+
+      display: inline-flex;
+      align-items: center;
+
+      min-height: 42px;
+
+      padding: 0 11px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+      font-weight: 600;
+
+      text-decoration: none;
+
+      border-radius: 9px;
+
+      transition:
+        color 0.25s ease,
+        background 0.25s ease;
+    }
+
+
+    /* Hover */
+
+    .nav-links a:hover {
+      color: var(--white);
+
+      background: rgba(0, 200, 150, 0.07);
+    }
+
+
+    /* Active */
+
+    .nav-links a.Active,
+    .nav-links a.active {
+      color: var(--green);
+
+      background: rgba(0, 200, 150, 0.09);
+    }
+
+
+    /* Active underline */
+
+    .nav-links a.Active::after,
+    .nav-links a.active::after {
+      content: "";
+
+      position: absolute;
+
+      left: 50%;
+      bottom: 3px;
+
+      width: 18px;
+      height: 2px;
+
+      transform: translateX(-50%);
+
+      background: var(--green);
+
+      border-radius: 20px;
+    }
+
+
+    /* =========================
+   NAV ACTIONS
+========================= */
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+
+      gap: 9px;
+
+      flex-shrink: 0;
+    }
+
+
+    /* =========================
+   BUTTON BASE
+========================= */
+
+    .nav-actions .btn {
+      height: 42px;
+
+      padding: 0 17px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 10px;
+
+      border: 1px solid transparent;
+
+      font-size: 13px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition: all 0.25s ease;
+    }
+
+
+    /* =========================
+   LOGIN BUTTON
+========================= */
+
+    .nav-actions .btn-ghost {
+      color: var(--white);
+
+      background: transparent;
+
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .nav-actions .btn-ghost:hover {
+      color: var(--green);
+
+      border-color: rgba(0, 200, 150, 0.4);
+
+      background: rgba(0, 200, 150, 0.07);
+
+      transform: translateY(-1px);
+    }
+
+
+    /* =========================
+   SIGNUP BUTTON
+========================= */
+
+    .nav-actions .btn-primary {
+      color: var(--navy);
+
+      background: var(--green);
+
+      border-color: var(--green);
+
+      box-shadow:
+        0 8px 22px rgba(0, 200, 150, 0.15);
+    }
+
+    .nav-actions .btn-primary:hover {
+      background: #10D5A5;
+
+      border-color: #10D5A5;
+
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 12px 28px rgba(0, 200, 150, 0.25);
+    }
+
+    .nav-actions .btn:active {
+      transform: translateY(0);
+    }
+
+
+    /* =========================
+   MOBILE MENU BUTTON
+========================= */
+
+    .menu {
+      display: none;
+
+      width: 43px;
+      height: 43px;
+
+      align-items: center;
+      justify-content: center;
+
+      color: var(--white);
+
+      background: rgba(255, 255, 255, 0.04);
+
+      border: 1px solid rgba(255, 255, 255, 0.10);
+
+      border-radius: 10px;
+
+      font-size: 22px;
+
+      cursor: pointer;
+
+      transition: all 0.25s ease;
+    }
+
+    .menu:hover {
+      color: var(--green);
+
+      border-color: rgba(0, 200, 150, 0.4);
+
+      background: rgba(0, 200, 150, 0.08);
+    }
+
+
+    /* =====================================================
+   TABLET
+===================================================== */
+
+    @media (max-width: 1050px) {
+
+      .nav-links {
+        gap: 0;
+      }
+
+      .nav-links a {
+        padding: 0 8px;
+        font-size: 12px;
+      }
+
+      .nav-actions .btn {
+        padding: 0 13px;
+      }
+
+    }
+
+
+    /* =====================================================
+   MOBILE
+===================================================== */
+
+    @media (max-width: 850px) {
+
+      .nav .container {
+        width: min(100% - 28px, var(--container));
+      }
+
+      .nav-inner {
+        min-height: 70px;
+      }
+
+
+      /* Hide desktop links */
+
+      .nav-links {
+        position: absolute;
+
+        top: calc(100% + 8px);
+
+        left: 14px;
+        right: 14px;
+
+        display: flex;
+
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 5px;
+
+        padding: 12px;
+
+        background: rgba(0, 27, 46, 0.98);
+
+        border: 1px solid rgba(255, 255, 255, 0.10);
+
+        border-radius: 17px;
+
+        box-shadow:
+          0 20px 50px rgba(0, 0, 0, 0.35);
+
+        backdrop-filter: blur(20px);
+
+        opacity: 0;
+        visibility: hidden;
+
+        transform: translateY(-10px);
+
+        transition:
+          opacity 0.25s ease,
+          visibility 0.25s ease,
+          transform 0.25s ease;
+      }
+
+
+      /* Open menu */
+
+      .nav-links.open {
+        opacity: 1;
+
+        visibility: visible;
+
+        transform: translateY(0);
+      }
+
+
+      .nav-links a {
+        width: 100%;
+
+        min-height: 46px;
+
+        padding: 0 15px;
+
+        justify-content: flex-start;
+
+        font-size: 14px;
+
+        border-radius: 10px;
+      }
+
+
+      .nav-links a:hover {
+        background: rgba(0, 200, 150, 0.08);
+      }
+
+
+      /* Remove desktop underline */
+
+      .nav-links a.Active::after,
+      .nav-links a.active::after {
+        display: none;
+      }
+
+
+      /* Menu */
+
+      .menu {
+        display: flex;
+
+        order: 3;
+      }
+
+
+      /* Actions */
+
+      .nav-actions {
+        margin-left: auto;
+      }
+
+
+      .nav-actions .btn {
+        height: 40px;
+
+        padding: 0 13px;
+
+        font-size: 12px;
+      }
+
+    }
+
+
+    /* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+    @media (max-width: 560px) {
+
+      .brand img {
+        width: 40px;
+        height: 40px;
+
+        border-radius: 10px;
+      }
+
+      .brand-text strong {
+        font-size: 16px;
+      }
+
+      .brand-text span {
+        font-size: 7px;
+        letter-spacing: 2.5px;
+      }
+
+
+      .nav-actions {
+        display: none;
+      }
+
+
+      .menu {
+        margin-left: auto;
+      }
+
+    }
+
+
+    /* =====================================================
+   EXTRA SMALL
+===================================================== */
+
+    @media (max-width: 360px) {
+
+      .brand-text {
+        display: none;
+      }
+
+      .brand img {
+        width: 41px;
+        height: 41px;
+      }
+
+    }
+  </style>
+
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <main>
+
+    <section class="hero">
+
+      <div class="hero-grid-lines"></div>
+
+      <div class="hero-orb orb-1"></div>
+      <div class="hero-orb orb-2"></div>
+
+
+      <div class="container">
+
+        <div class="hero-grid">
+
+
+          <!-- HERO CONTENT -->
+
+          <div class="hero-content reveal-left">
+
+            <div class="eyebrow">
+
+              <span class="eyebrow-dot"></span>
+
+              Ku saabsan Caabi Academy
+
+            </div>
+
+
+            <h1>
+
+              Software engineering,
+
+              <span>
+                taught in Af-Soomaali.
+              </span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+              **Caabi Academy** waa Academy Af-Soomaali ah oo
+              kaa caawinaysa inaad ka bilowdo **eber**,
+              baratana **Programming, Web Development, AI,**
+              ilaa aad ka dhisto **apps dhab ah oo aad online ku deploy-gareyso.**
+
+
+              <br><br>
+
+              7,000+ arday ayaa ku baranaya luuqadda
+              ay ku fikiraan, iyadoo ay helayaan
+              mentorship toos ah toddobaad kasta iyo
+              curriculum loogu dhisay AI tools-ka
+              maanta ay warshaduhu isticmaalaan.
+
+            </p>
+
+
+            <div class="hero-actions">
+
+              <a href="mentorship.html" class="btn btn-primary">
+                Explore the Program
+                <span>→</span>
+              </a>
+
+              <a href="#journey" class="btn btn-secondary">
+                Sheekadeenna
+                <span>↓</span>
+              </a>
+
+            </div>
+
+          </div>
+
+
+          <!-- HERO TERMINAL -->
+
+          <div class="terminal-wrap reveal-right">
+
+            <div class="terminal">
+
+
+              <div class="terminal-top">
+
+                <div class="terminal-dots">
+
+                  <i></i>
+                  <i></i>
+                  <i></i>
+
+                </div>
+
+                <span class="terminal-title">
+                  Caabi / full-stack-ai
+                </span>
+
+              </div>
+
+
+              <div class="terminal-body">
+
+
+                <div class="terminal-line">
+
+                  <span class="terminal-number">
+                    01
+                  </span>
+
+                  <span class="terminal-green">
+                    &lt;learn&gt;
+                  </span>
+
+                </div>
+
+
+                <div class="terminal-line">
+
+                  <span class="terminal-number">
+                    02
+                  </span>
+
+                  <span class="terminal-white">
+                    HTML → CSS → JavaScript
+                  </span>
+
+                </div>
+
+
+                <div class="terminal-line">
+
+                  <span class="terminal-number">
+                    03
+                  </span>
+
+                  <span class="terminal-muted">
+                    React → Node.js → MongoDB
+                  </span>
+
+                </div>
+
+
+                <div class="terminal-line">
+
+                  <span class="terminal-number">
+                    04
+                  </span>
+
+                  <span class="terminal-green">
+                    AI Engineering
+                  </span>
+
+                </div>
+
+
+                <div class="terminal-line">
+
+                  <span class="terminal-number">
+                    05
+                  </span>
+
+                  <span class="terminal-muted">
+                    RAG → Agents → AI Apps
+                  </span>
+
+                </div>
+
+
+                <div class="terminal-line">
+
+                  <span class="terminal-number">
+                    06
+                  </span>
+
+                  <span class="terminal-green">
+                    Claude Code
+                  </span>
+
+                </div>
+
+
+                <div class="terminal-line">
+
+                  <span class="terminal-number">
+                    07
+                  </span>
+
+                  <span class="terminal-green">
+                    &lt;/learn&gt;
+                  </span>
+
+                </div>
+
+
+                <span class="terminal-cursor"></span>
+
+
+              </div>
+
+
+              <div class="terminal-badge">
+
+                <strong>
+                  32
+                </strong>
+
+                <span>
+                  Weeks to AI Engineer
+                </span>
+
+              </div>
+
+
+            </div>
+
+
+            <div class="floating-mini mini-one">
+
+              <strong>
+                100% Af-Soomaali
+              </strong>
+
+              <small>
+                Learn in your language
+              </small>
+
+            </div>
+
+
+            <div class="floating-mini mini-two">
+
+              <strong>
+                10 Phases
+              </strong>
+
+              <small>
+                Foundation → AI
+              </small>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         STATS
+    ==================================================== -->
+
+    <section class="stats">
+
+      <div class="container">
+
+        <div class="stats-grid">
+
+          <div class="stat reveal">
+
+            <span class="stat-number counter" data-target="150">
+            </span>
+
+            <span class="stat-label">
+              Students enrolled
+            </span>
+
+          </div>
+
+
+          <div class="stat reveal">
+
+            <span class="stat-number counter" data-target="10">
+              0
+            </span>
+
+            <span class="stat-label">
+              Phases, HTML to AI
+            </span>
+
+          </div>
+
+
+          <div class="stat reveal">
+
+            <span class="stat-number counter" data-target="125">
+              0
+            </span>
+
+            <span class="stat-label">
+              Hours of video
+            </span>
+
+          </div>
+
+
+          <div class="stat reveal">
+
+            <span class="stat-number counter" data-target="6">
+              0
+            </span>
+
+            <span class="stat-label">
+              AI apps you ship
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         PROGRAM
+    ==================================================== -->
+
+    <section class="program">
+
+      <div class="container">
+
+
+        <div class="section-top reveal">
+
+          <div>
+
+            <div class="section-kicker">
+              WHAT WE DO
+            </div>
+
+            <h2 class="section-title">
+              One program.
+              Ten phases.
+            </h2>
+
+            <p class="section-description">
+
+              Full Stack AI Engineer mentorship waa
+              laf-dhabarta Dugsiiye: 10 phases oo
+              socda 32 toddobaad, qiyaastii 8 bilood,
+              laga bilaabo aasaaska ilaa AI Engineering.
+
+              Cashar kasta wuxuu ku dhammaadaa project
+              dhab ah oo aad dhisto.
+
+            </p>
+
+          </div>
+
+
+          <a href="mentorship.html" class="program-link">
+            Explore the program →
+          </a>
+
+        </div>
+
+
+        <div class="phases">
+
+
+          <div class="phase reveal">
+
+            <div class="phase-number">
+              01
+            </div>
+
+            <div>
+
+              <h3>
+                HTML, CSS, Tailwind & GitHub
+              </h3>
+
+              <p>
+                Foundations
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="phase reveal">
+
+            <div class="phase-number">
+              02
+            </div>
+
+            <div>
+
+              <h3>
+                Modern JavaScript
+              </h3>
+
+              <p>
+                Programming fundamentals
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="phase reveal">
+
+            <div class="phase-number">
+              03
+            </div>
+
+            <div>
+
+              <h3>
+                React
+              </h3>
+
+              <p>
+                Modern frontend
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="phase reveal">
+
+            <div class="phase-number">
+              04
+            </div>
+
+            <div>
+
+              <h3>
+                MongoDB & NoSQL
+              </h3>
+
+              <p>
+                Database engineering
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="phase reveal">
+
+            <div class="phase-number">
+              05
+            </div>
+
+            <div>
+
+              <h3>
+                Node.js & Express
+              </h3>
+
+              <p>
+                Backend development
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="phase reveal">
+
+            <div class="phase-number">
+              06
+            </div>
+
+            <div>
+
+              <h3>
+                MERN Stack
+              </h3>
+
+              <p>
+                Full-stack applications
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="phase reveal">
+
+            <div class="phase-number">
+              07
+            </div>
+
+            <div>
+
+              <h3>
+                TypeScript
+              </h3>
+
+              <p>
+                Production-grade JavaScript
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="phase reveal">
+
+            <div class="phase-number">
+              08
+            </div>
+
+            <div>
+
+              <h3>
+                Next.js
+              </h3>
+
+              <p>
+                Modern full-stack web
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="phase reveal">
+
+            <div class="phase-number">
+              09
+            </div>
+
+            <div>
+
+              <h3>
+                AI Engineering
+              </h3>
+
+              <p>
+                RAG, chatbots & AI systems
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="phase reveal">
+
+            <div class="phase-number">
+              10
+            </div>
+
+            <div>
+
+              <h3>
+                Agentic Coding with Claude Code
+              </h3>
+
+              <p>
+                AI-native development
+              </p>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         WHY WE EXIST
+    ==================================================== -->
+
+    <section class="why">
+
+      <div class="container">
+
+        <div class="why-grid">
+
+
+          <div class="why-text reveal-left">
+
+            <div class="section-kicker">
+              WHY WE EXIST
+            </div>
+
+            <h2 class="section-title">
+              We rebuilt the school
+              for the AI era.
+            </h2>
+
+
+            <p>
+
+              Most coding programs still teach the
+              old way: months of syntax memorization
+              before you build anything real.
+
+            </p>
+
+
+            <p>
+
+              The industry moved on. Modern engineers
+              work with AI tools like Claude Code and
+              Cursor, and they ship faster than the
+              curriculum most schools still sell.
+
+            </p>
+
+
+            <p>
+
+              **Caabi Academy waxaa loo dhisay jiilka cusub ee developers-ka. Full Stack AI Engineer program-ku wuxuu socdaa 32 toddobaad, 10 
+              phases, wuxuuna isku daraa coding, AI, Af-Soomaali iyo live mentorship toddobaad kasta.**
+
+
+            </p>
+
+
+            <p>
+
+              Natiijadu waa arday qalin-jabiya iyagoo
+              haysta apps deployed ah iyo AI-engineering
+              skills ay xitaa developers badan oo shaqeeya
+              aysan weli si qoto dheer u lahayn.
+
+            </p>
+
+          </div>
+
+
+          <div class="why-visual reveal-right">
+
+            <div class="why-big">
+              AI
+            </div>
+
+
+            <div class="why-card">
+
+              <div class="why-card-number">
+                01 — BUILD
+              </div>
+
+              <h3>
+                Real projects
+              </h3>
+
+              <p>
+                Phase kasta wuxuu ku dhammaadaa
+                project dhab ah oo aad dhisto.
+              </p>
+
+            </div>
+
+
+            <div class="why-card">
+
+              <div class="why-card-number">
+                02 — LEARN
+              </div>
+
+              <h3>
+                AI-native curriculum
+              </h3>
+
+              <p>
+                Claude Code, Cursor iyo agentic
+                workflows ayaa qayb ka ah barashada.
+              </p>
+
+            </div>
+
+
+            <div class="why-card">
+
+              <div class="why-card-number">
+                03 — SHIP
+              </div>
+
+              <h3>
+                Deploy your work
+              </h3>
+
+              <p>
+                Waxaad ka qalin-jabineysaa adigoo
+                haysta apps ay employers-ku furi karaan.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         VALUES
+    ==================================================== -->
+
+
+    <!-- ===================================================
+         FOUNDER
+    ==================================================== -->
+
+    <section class="founder">
+
+      <div class="container">
+
+        <div class="founder-grid">
+
+
+          <div class="founder-photo reveal-left">
+
+            <div class="founder-initial">
+              <img src="./Images/IMAGE SUQAAR.jpeg" alt="">
+            </div>
+
+
+            <div class="founder-label">
+
+              <strong>
+                Founder & Lead Instructor
+              </strong>
+
+              <span>
+                Suhayb Mohamed
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="founder-content reveal-right">
+
+            <div class="section-kicker">
+              MEET THE FOUNDER
+            </div>
+
+
+            <h2>
+
+              Suhayb
+              <span>Mohamed.</span>
+
+            </h2>
+
+
+            <p class="founder-quote">
+
+              “Suhayb wuxuu baraa waxa uu dhab ahaan
+              isticmaalo marka uu software dhisayo.
+              Ma aha theory keliya, mana aha slides
+              shan sano jir ah.”
+
+            </p>
+
+
+            <p>
+
+              11 sano ayuu code qorayay, welina toddobaad
+              kasta wuxuu ku jiraa dhismaha software.
+              Workflow kasta oo Caabi Academy lagu baro waa
+              workflow uu isagu isticmaalo.
+
+              <br><br>
+
+              Wuxuu cohort kasta si toos ah ugu baraa
+              Af-Soomaali, isagoo diiradda saaraya
+              xirfad aad isticmaali karto, ma aha
+              knowledge aad imtixaan ku dhaafto oo keliya.
+
+            </p>
+
+
+            <div class="founder-stats">
+
+
+              <div class="founder-stat">
+
+                <strong>
+                  4yrs
+                </strong>
+
+                <span>
+                  Engineering
+                </span>
+
+              </div>
+
+
+              <div class="founder-stat">
+
+                <strong>
+                  150+
+                </strong>
+
+                <span>
+                  Students mentored
+                </span>
+
+              </div>
+
+
+            </div>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         JOURNEY
+    ==================================================== -->
+
+    <section class="journey" id="journey">
+
+      <div class="container">
+
+
+        <div class="journey-heading reveal">
+
+          <div class="section-kicker">
+            OUR JOURNEY
+          </div>
+
+          <h2 class="section-title">
+            From one idea to
+            7,000+ students.
+          </h2>
+
+          <p class="section-description" style="margin-left:auto;margin-right:auto;">
+
+            Caabi  wuxuu ka bilaabmay hal fikrad:
+            Soomaalidu waxay mudan yihiin waxbarasho
+            tech oo heer caalami ah, kuna baxda
+            luuqaddooda.
+
+          </p>
+
+        </div>
+
+
+        <div class="timeline">
+
+
+          <div class="timeline-item reveal">
+
+            <div class="timeline-content">
+
+              <h3>
+                The beginning
+              </h3>
+
+              <p>
+
+                Caabi  wuxuu ka bilaabmay hal fikrad:
+                Somali speakers deserve world-class
+                tech education in their own language.
+
+              </p>
+
+            </div>
+
+            <div class="timeline-year">
+              2019
+            </div>
+
+            <span class="timeline-dot"></span>
+
+          </div>
+
+
+          <div class="timeline-item reveal">
+
+            <div class="timeline-content">
+
+              <h3>
+                First 1,000 students
+              </h3>
+
+              <p>
+
+                Arday ka yimid Muqdisho ilaa Minneapolis
+                ayaa bilaabay inay coding ku bartaan
+                Af-Soomaali. Community-gu wuxuu caddeeyay
+                in baahidu dhab tahay.
+
+              </p>
+
+            </div>
+
+            <div class="timeline-year">
+              2022
+            </div>
+
+            <span class="timeline-dot"></span>
+
+          </div>
+
+
+          <div class="timeline-item reveal">
+
+            <div class="timeline-content">
+
+              <h3>
+                Mentorship program launched
+              </h3>
+
+              <p>
+
+                Live weekly sessions, code reviews
+                iyo career support ayaa bilaabmay.
+                Graduates-ku waxay bilaabeen inay
+                helaan shaqooyin tech oo dhab ah.
+
+              </p>
+
+            </div>
+
+            <div class="timeline-year">
+              2023
+            </div>
+
+            <span class="timeline-dot"></span>
+
+          </div>
+
+
+          <div class="timeline-item reveal">
+
+            <div class="timeline-content">
+
+              <h3>
+                AI changed the game
+              </h3>
+
+              <p>
+
+                Curriculum-ka ayaa dib loo dhisay iyadoo
+                AI laga dhigay core. Claude Code, Cursor
+                iyo agentic development waxay noqdeen
+                qayb muhiim ah oo barashada ah.
+
+              </p>
+
+            </div>
+
+            <div class="timeline-year">
+              2025
+            </div>
+
+            <span class="timeline-dot"></span>
+
+          </div>
+
+
+          <div class="timeline-item reveal">
+
+            <div class="timeline-content">
+
+              <h3>
+                Full Stack AI Engineer
+              </h3>
+
+              <p>
+
+                Flagship program-ku wuxuu gaaray 10 phases
+                iyo 125+ saacadood, isagoo ku dhammaanaya
+                agentic-coding capstone oo Claude Code ah.
+
+              </p>
+
+            </div>
+
+            <div class="timeline-year">
+              2026
+            </div>
+
+            <span class="timeline-dot"></span>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         FINAL CTA
+    ==================================================== -->
+
+    <section class="final-cta">
+
+      <div class="container">
+
+        <div class="cta-box reveal">
+
+          <div class="cta-content">
+
+            <div class="section-kicker">
+              YOUR NEXT CHAPTER
+            </div>
+
+
+            <h2>
+
+              32 weeks from now,
+              you could be a
+              <span>
+                Full Stack AI Engineer.
+              </span>
+
+            </h2>
+
+
+            <p>
+
+              10 phases. Real shipped apps.
+              Claude Code iyo AI tools-ka ay warshaduhu
+              maanta isticmaalaan.
+
+              Dhammaantood ku baro Af-Soomaali.
+
+            </p>
+
+
+            <div class="cta-buttons">
+
+              <a href="mentorship.html" class="btn btn-primary">
+                Start Your 32 Weeks
+                <span>→</span>
+              </a>
+
+
+              <a href="courses.html" class="btn btn-secondary">
+                Explore Courses
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+
+          <a class="brand" href="INDEX.HTML">
+
+            <img
+              src="./Images/LOGO.jpeg"
+              alt="Caabi Academy Logo"
+            >
+
+            <div class="brand-text">
+              <strong>CAABI</strong>
+              <span>ACADEMY</span>
+            </div>
+
+          </a>
+
+          <p>
+            Baro xirfadaha technology-ga ee mustaqbalka.
+            Programming, AI, Web Development iyo Design
+            oo lagu baranayo Af-Soomaali.
+          </p>
+
+          <div class="socials">
+
+            <a href="#" aria-label="YouTube">YT</a>
+            <a href="#" aria-label="GitHub">GH</a>
+            <a href="#" aria-label="WhatsApp">WA</a>
+            <a href="#" aria-label="Facebook">FB</a>
+            <a href="#" aria-label="LinkedIn">IN</a>
+
+          </div>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h3>Product</h3>
+
+          <a href="Course.html">Courses</a>
+          <a href="Mentorship.html">Mentorship</a>
+          <a href="Blog.html">Blog</a>
+          <a href="Community.html">Community</a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h3>Company</h3>
+
+          <a href="About.html">About Us</a>
+          <a href="Contact.html">Contact</a>
+          <a href="Ambassador.html">Ambassador</a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h3>Legal</h3>
+
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+          <a href="#">Refund Policy</a>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span>
+          © 2026 Caabi Academy. All rights reserved.
+        </span>
+
+        <span>
+          Proudly built in Somalia
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script>
+
+
+    /* =====================================================
+       NAVBAR SCROLL
+    ====================================================== */
+
+    const navbar =
+      document.getElementById("navbar");
+
+
+    window.addEventListener(
+      "scroll",
+      () => {
+
+        if (window.scrollY > 30) {
+
+          navbar.classList.add(
+            "scrolled"
+          );
+
+        } else {
+
+          navbar.classList.remove(
+            "scrolled"
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       MOBILE MENU
+    ====================================================== */
+
+    const menuBtn =
+      document.getElementById("menuBtn");
+
+    const navLinks =
+      document.getElementById("navLinks");
+
+
+    menuBtn.addEventListener(
+      "click",
+      () => {
+
+        navLinks.classList.toggle(
+          "open"
+        );
+
+      }
+    );
+
+
+    navLinks
+      .querySelectorAll("a")
+      .forEach(link => {
+
+        link.addEventListener(
+          "click",
+          () => {
+
+            navLinks.classList.remove(
+              "open"
+            );
+
+          }
+        );
+
+      });
+
+
+    /* =====================================================
+       SCROLL REVEAL
+    ====================================================== */
+
+    const revealElements =
+      document.querySelectorAll(
+        ".reveal, .reveal-left, .reveal-right"
+      );
+
+
+    const revealObserver =
+      new IntersectionObserver(
+        (entries, observer) => {
+
+          entries.forEach(
+            entry => {
+
+              if (
+                entry.isIntersecting
+              ) {
+
+                entry.target.classList.add(
+                  "visible"
+                );
+
+                observer.unobserve(
+                  entry.target
+                );
+
+              }
+
+            }
+          );
+
+        },
+        {
+          threshold: .12
+        }
+      );
+
+
+    revealElements.forEach(
+      element => {
+
+        revealObserver.observe(
+          element
+        );
+
+      }
+    );
+
+
+    /* =====================================================
+       COUNTER ANIMATION
+    ====================================================== */
+
+    const counters =
+      document.querySelectorAll(
+        ".counter"
+      );
+
+
+    let countersStarted = false;
+
+
+    function startCounters() {
+
+      if (countersStarted)
+        return;
+
+      countersStarted = true;
+
+
+      counters.forEach(
+        counter => {
+
+          const target =
+            Number(
+              counter.dataset.target
+            );
+
+          const duration =
+            1700;
+
+          const start =
+            performance.now();
+
+
+          function update(time) {
+
+            const progress =
+              Math.min(
+                (time - start) /
+                duration,
+                1
+              );
+
+
+            const eased =
+              1 -
+              Math.pow(
+                1 - progress,
+                3
+              );
+
+
+            const value =
+              Math.floor(
+                target * eased
+              );
+
+
+            if (
+              target >= 1000
+            ) {
+
+              counter.textContent =
+                value.toLocaleString() + "+";
+
+            } else {
+
+              counter.textContent =
+                value;
+
+            }
+
+
+            if (
+              progress < 1
+            ) {
+
+              requestAnimationFrame(
+                update
+              );
+
+            }
+
+          }
+
+
+          requestAnimationFrame(
+            update
+          );
+
+        }
+      );
+
+    }
+
+
+    const statsSection =
+      document.querySelector(
+        ".stats"
+      );
+
+
+    const statsObserver =
+      new IntersectionObserver(
+        entries => {
+
+          if (
+            entries[0].isIntersecting
+          ) {
+
+            startCounters();
+
+            statsObserver.disconnect();
+
+          }
+
+        },
+        {
+          threshold: .25
+        }
+      );
+
+
+    statsObserver.observe(
+      statsSection
+    );
+
+
+    /* =====================================================
+       SMOOTH ANCHOR
+    ====================================================== */
+
+    document
+      .querySelectorAll(
+        'a[href^="#"]'
+      )
+      .forEach(link => {
+
+        link.addEventListener(
+          "click",
+          event => {
+
+            const id =
+              link.getAttribute(
+                "href"
+              );
+
+
+            const target =
+              document.querySelector(
+                id
+              );
+
+
+            if (!target)
+              return;
+
+
+            event.preventDefault();
+
+
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+
+          }
+        );
+
+      });
+
+
+    /* =====================================================
+       TERMINAL PARALLAX
+    ====================================================== */
+
+    const terminal =
+      document.querySelector(
+        ".terminal"
+      );
+
+
+    if (
+      terminal &&
+      window.innerWidth > 1050
+    ) {
+
+      terminal.addEventListener(
+        "mousemove",
+        event => {
+
+          const rect =
+            terminal.getBoundingClientRect();
+
+
+          const x =
+            event.clientX -
+            rect.left;
+
+
+          const y =
+            event.clientY -
+            rect.top;
+
+
+          const rotateY =
+            ((x / rect.width) - .5) * 7;
+
+
+          const rotateX =
+            ((y / rect.height) - .5) * -6;
+
+
+          terminal.style.animation =
+            "none";
+
+
+          terminal.style.transform =
+            `
+              rotateY(${rotateY}deg)
+              rotateX(${rotateX}deg)
+              translateY(-4px)
+            `;
+
+        }
+      );
+
+
+      terminal.addEventListener(
+        "mouseleave",
+        () => {
+
+          terminal.style.animation =
+            "terminalFloat 6s ease-in-out infinite";
+
+          terminal.style.transform =
+            "";
+
+        }
+      );
+
+    }
+
+
+    /* =====================================================
+       CURRENT YEAR
+    ====================================================== */
+
+    const year =
+      document.querySelector(
+        ".footer-bottom span"
+      );
+
+
+    if (year) {
+
+      year.innerHTML =
+        `© ${new Date().getFullYear()} Dugsiiye. All rights reserved.`;
+
+    }
+
+
+  </script>
+
+
+</body>
+
+</html>
